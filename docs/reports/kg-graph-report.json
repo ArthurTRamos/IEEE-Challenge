@@ -1,0 +1,5292 @@
+{
+  "scope": "Local CPU diagnostic on public questions. No answer references, evidence relevance labels, LLM or H100 evaluation. Synthetic: one canonical KG label per chunk. These are not scientific document passages.",
+  "mode": "graph",
+  "counts": {
+    "edges": 60021,
+    "nodes": 8342
+  },
+  "input_hashes": {
+    "domain_kg.ttl": "2f521a6bf38a0c8981fcddf430361504419906f35b8d5e78592d11f0bffa3beb",
+    "kg_rag_chunks.jsonl": "9ae2663de7b9d3e941606360e57a3610e750226e28db3f553fdf1f62819105e7"
+  },
+  "artifact_bytes": 14221041,
+  "load_seconds": 0.2559769489962491,
+  "matcher_build_seconds": 0.19334269800310722,
+  "process_peak_rss_mib_linux": 150.58984375,
+  "median_query_ms": 0.07809999806340784,
+  "max_query_ms": 0.40702000114833936,
+  "questions_with_entities": 17,
+  "question_count": 25,
+  "results": [
+    {
+      "id": 1,
+      "question": "Both OTR and scintillation are proposed for experimental beam imaging diagnostics, but they produce photons by different mechanisms. Which physical process does scintillation require that OTR does not?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Scintillation_(physics)",
+          "label": "Scintillation (physics)"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Transition_radiation",
+          "label": "Transition radiation"
+        }
+      ],
+      "mentions_chunk_ids": [
+        6627,
+        7683
+      ],
+      "graph_chunk_ids": [
+        6627,
+        7683,
+        7684,
+        6328,
+        784,
+        1907,
+        493,
+        4368,
+        7591,
+        5572,
+        955,
+        5083,
+        6170,
+        3123,
+        6598
+      ],
+      "new_chunk_ids": [
+        493,
+        784,
+        955,
+        1907,
+        3123,
+        4368,
+        5083,
+        5572,
+        6170,
+        6328,
+        6598,
+        7591,
+        7684
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Scintillation_(physics)",
+        "http://dbpedia.org/resource/Transition_radiation"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Birks'_law",
+          "weight": 0.5024479685122735,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.5024479685122735
+            }
+          ],
+          "label": "Birks' law"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Transition_radiation_detector",
+          "weight": 0.8196912078086389,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Transition_radiation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.8196912078086389
+            }
+          ],
+          "label": "Transition radiation detector"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Autoradiograph",
+          "weight": 0.3552843657284334,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3552843657284334
+            }
+          ],
+          "label": "Autoradiograph"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Relativistic_particle",
+          "weight": 0.6480227986724238,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Transition_radiation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.6480227986724238
+            }
+          ],
+          "label": "Relativistic particle"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Luminescence",
+          "weight": 0.29008846987434167,
+          "degree": 11,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.29008846987434167
+            }
+          ],
+          "label": "Luminescence"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Time_projection_chamber",
+          "weight": 0.2685697361219298,
+          "degree": 13,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2685697361219298
+            }
+          ],
+          "label": "Time projection chamber"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Bubble_fusion",
+          "weight": 0.25946301525117116,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.25946301525117116
+            }
+          ],
+          "label": "Bubble fusion"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutrino_detector",
+          "weight": 0.23053893885603222,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23053893885603222
+            }
+          ],
+          "label": "Neutrino detector"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radioanalytical_chemistry",
+          "weight": 0.23053893885603222,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23053893885603222
+            }
+          ],
+          "label": "Radioanalytical chemistry"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Dielectric",
+          "weight": 0.3821829962769331,
+          "degree": 22,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Transition_radiation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3821829962769331
+            }
+          ],
+          "label": "Dielectric"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Scattering_theory",
+          "weight": 0.19707630738531812,
+          "degree": 25,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Scintillation_(physics)",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.19707630738531812
+            }
+          ],
+          "label": "Scattering theory"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Particle_beam",
+          "weight": 0.2618407516027176,
+          "degree": 48,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Transition_radiation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2618407516027176
+            }
+          ],
+          "label": "Particle beam"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Hadron",
+          "weight": 0.2222699862248191,
+          "degree": 67,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Transition_radiation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2222699862248191
+            }
+          ],
+          "label": "Hadron"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 6627,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Scintillation_(physics)"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Scintillation_(physics)"
+        },
+        {
+          "chunk_id": 7683,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Transition_radiation"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Transition_radiation"
+        },
+        {
+          "chunk_id": 7684,
+          "score": 0.8196912078086389,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Transition_radiation_detector"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Transition_radiation_detector"
+        },
+        {
+          "chunk_id": 6328,
+          "score": 0.6480227986724238,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Relativistic_particle"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Relativistic_particle"
+        },
+        {
+          "chunk_id": 784,
+          "score": 0.5024479685122735,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Birks'_law"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Birks'_law"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What does a \"destructive\" beam diagnostic do to the beam it measures?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 3,
+      "question": "What would be the radioactive decay constant of Be7 if we round its half life in days to the nearest integer?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Half-life",
+          "label": "Half-life"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Radioactive_decay",
+          "label": "Radioactive decay"
+        }
+      ],
+      "mentions_chunk_ids": [
+        712,
+        3137,
+        6161
+      ],
+      "graph_chunk_ids": [
+        712,
+        3137,
+        6161,
+        1794,
+        6921,
+        2981,
+        3406,
+        1593,
+        3725,
+        713,
+        3727,
+        1591,
+        847,
+        6392,
+        750,
+        5233,
+        1865,
+        914,
+        1002,
+        2821,
+        347,
+        2030,
+        2243,
+        6510,
+        6183
+      ],
+      "new_chunk_ids": [
+        347,
+        713,
+        750,
+        847,
+        914,
+        1002,
+        1591,
+        1593,
+        1794,
+        1865,
+        2030,
+        2243,
+        2821,
+        2981,
+        3406,
+        3725,
+        3727,
+        5233,
+        6183,
+        6392,
+        6510,
+        6921
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Beryllium-7",
+        "http://dbpedia.org/resource/Half-life",
+        "http://dbpedia.org/resource/Radioactive_decay"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Decay_correction",
+          "weight": 0.6172413296890429,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3314125885640834
+            },
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.28582874112495954
+            }
+          ],
+          "label": "Decay correction"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Glottochronology",
+          "weight": 0.36900331808146647,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.36900331808146647
+            }
+          ],
+          "label": "Glottochronology"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Hydrogen-5",
+          "weight": 0.36900331808146647,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.36900331808146647
+            }
+          ],
+          "label": "Hydrogen-5"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isotope_effect_on_lipid_peroxidation",
+          "weight": 0.3314125885640834,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3314125885640834
+            }
+          ],
+          "label": "Isotope effect on lipid peroxidation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Nuclear_fallout_effects_on_an_ecosystem",
+          "weight": 0.28582874112495954,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.28582874112495954
+            }
+          ],
+          "label": "Nuclear fallout effects on an ecosystem"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Application_of_silicon-germanium_thermoelectrics_in_space_exploration",
+          "weight": 0.26092474849574154,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26092474849574154
+            }
+          ],
+          "label": "Application of silicon-germanium thermoelectrics in space exploration"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Bomb_pulse",
+          "weight": 0.3025369176628786,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3025369176628786
+            }
+          ],
+          "label": "Bomb pulse"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Doramad_Radioactive_Toothpaste",
+          "weight": 0.26092474849574154,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26092474849574154
+            }
+          ],
+          "label": "Doramad Radioactive Toothpaste"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Emission_channeling",
+          "weight": 0.26092474849574154,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26092474849574154
+            }
+          ],
+          "label": "Emission channeling"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Rhenium–osmium_dating",
+          "weight": 0.3025369176628786,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3025369176628786
+            }
+          ],
+          "label": "Rhenium–osmium dating"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Depleted_zinc_oxide",
+          "weight": 0.28009475929552646,
+          "degree": 6,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.28009475929552646
+            }
+          ],
+          "label": "Depleted zinc oxide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Rutherford_(unit)",
+          "weight": 0.24156937668545528,
+          "degree": 6,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Radioactive_decay",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24156937668545528
+            }
+          ],
+          "label": "Rutherford (unit)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Branching_fraction",
+          "weight": 0.2620046562786939,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2620046562786939
+            }
+          ],
+          "label": "Branching fraction"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/CD_V-700",
+          "weight": 0.2620046562786939,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2620046562786939
+            }
+          ],
+          "label": "CD V-700"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Gallium-68_generator",
+          "weight": 0.2620046562786939,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Half-life",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2620046562786939
+            }
+          ],
+          "label": "Gallium-68 generator"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Solar_neutrino",
+          "weight": 0.4872209104725552,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.4872209104725552
+            }
+          ],
+          "label": "Solar neutrino"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmogenic_nuclide",
+          "weight": 0.35040681943182916,
+          "degree": 28,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.35040681943182916
+            }
+          ],
+          "label": "Cosmogenic nuclide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Beryllium-8",
+          "weight": 0.3284842708298123,
+          "degree": 32,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3284842708298123
+            }
+          ],
+          "label": "Beryllium-8"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isotopes_of_beryllium",
+          "weight": 0.31896095748654096,
+          "degree": 34,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.31896095748654096
+            }
+          ],
+          "label": "Isotopes of beryllium"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmic_ray_spallation",
+          "weight": 0.31449974536403685,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.31449974536403685
+            }
+          ],
+          "label": "Cosmic ray spallation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Big_Bang_nucleosynthesis",
+          "weight": 0.30216158158387935,
+          "degree": 38,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.30216158158387935
+            }
+          ],
+          "label": "Big Bang nucleosynthesis"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radiometric_dating",
+          "weight": 0.23227345541687866,
+          "degree": 65,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23227345541687866
+            }
+          ],
+          "label": "Radiometric dating"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 712,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Beryllium-7"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Beryllium-7"
+        },
+        {
+          "chunk_id": 3137,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Half-life"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Half-life"
+        },
+        {
+          "chunk_id": 6161,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Radioactive_decay"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Radioactive_decay"
+        },
+        {
+          "chunk_id": 1794,
+          "score": 0.6172413296890429,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Decay_correction"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Decay_correction"
+        },
+        {
+          "chunk_id": 6921,
+          "score": 0.4872209104725552,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Solar_neutrino"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Solar_neutrino"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "At what point in time does Be7 stop being the main source of activity in the Heat Exchanger of DONES?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Heat_exchanger",
+          "label": "Heat exchanger"
+        }
+      ],
+      "mentions_chunk_ids": [
+        712,
+        3196
+      ],
+      "graph_chunk_ids": [
+        712,
+        3196,
+        6921,
+        2270,
+        3042,
+        6919,
+        1593,
+        713,
+        3727,
+        1591,
+        750,
+        2049,
+        7630,
+        522,
+        954,
+        2616,
+        6183,
+        6161
+      ],
+      "new_chunk_ids": [
+        522,
+        713,
+        750,
+        954,
+        1591,
+        1593,
+        2049,
+        2270,
+        2616,
+        3042,
+        3727,
+        6161,
+        6183,
+        6919,
+        6921,
+        7630
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Beryllium-7",
+        "http://dbpedia.org/resource/Heat_exchanger"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Enhanced_heat_transfer",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Enhanced heat transfer"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Grate_heater",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Grate heater"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Solar_controller",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Solar controller"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Downhole_heat_exchanger",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Downhole heat exchanger"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Toroidal_expansion_joint",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Toroidal expansion joint"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Back_boiler",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Back boiler"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Bubble_column_reactor",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Bubble column reactor"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Flue-gas_condensation",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Flue-gas condensation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Solar_neutrino",
+          "weight": 0.46159035314330277,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.46159035314330277
+            }
+          ],
+          "label": "Solar neutrino"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmogenic_nuclide",
+          "weight": 0.3319734519778385,
+          "degree": 28,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3319734519778385
+            }
+          ],
+          "label": "Cosmogenic nuclide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Beryllium-8",
+          "weight": 0.3112041526035741,
+          "degree": 32,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3112041526035741
+            }
+          ],
+          "label": "Beryllium-8"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isotopes_of_beryllium",
+          "weight": 0.3021818190486546,
+          "degree": 34,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3021818190486546
+            }
+          ],
+          "label": "Isotopes of beryllium"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmic_ray_spallation",
+          "weight": 0.297955291749002,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.297955291749002
+            }
+          ],
+          "label": "Cosmic ray spallation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Big_Bang_nucleosynthesis",
+          "weight": 0.28626618470534276,
+          "degree": 38,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.28626618470534276
+            }
+          ],
+          "label": "Big Bang nucleosynthesis"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radiometric_dating",
+          "weight": 0.22005456663940037,
+          "degree": 65,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.22005456663940037
+            }
+          ],
+          "label": "Radiometric dating"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radioactive_decay",
+          "weight": 0.12278192071841726,
+          "degree": 211,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.12278192071841726
+            }
+          ],
+          "label": "Radioactive decay"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 712,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Beryllium-7"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Beryllium-7"
+        },
+        {
+          "chunk_id": 3196,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Heat_exchanger"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Heat_exchanger"
+        },
+        {
+          "chunk_id": 6921,
+          "score": 0.46159035314330277,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Solar_neutrino"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Solar_neutrino"
+        },
+        {
+          "chunk_id": 2270,
+          "score": 0.34555809982973135,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Enhanced_heat_transfer"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Enhanced_heat_transfer"
+        },
+        {
+          "chunk_id": 3042,
+          "score": 0.34555809982973135,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Grate_heater"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Grate_heater"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "How are the inventories of Be7 and Tritium calculated for DONES Li loop?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Tritium",
+          "label": "Tritium"
+        }
+      ],
+      "mentions_chunk_ids": [
+        712,
+        7726
+      ],
+      "graph_chunk_ids": [
+        712,
+        7726,
+        6921,
+        3405,
+        5004,
+        7727,
+        1593,
+        713,
+        3727,
+        1591,
+        4083,
+        750,
+        493,
+        3458,
+        3712,
+        6183,
+        4943,
+        6161
+      ],
+      "new_chunk_ids": [
+        493,
+        713,
+        750,
+        1591,
+        1593,
+        3405,
+        3458,
+        3712,
+        3727,
+        4083,
+        4943,
+        5004,
+        6161,
+        6183,
+        6921,
+        7727
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Beryllium-7",
+        "http://dbpedia.org/resource/Tritium"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Hydrogen-4",
+          "weight": 0.40955869140826096,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.40955869140826096
+            }
+          ],
+          "label": "Hydrogen-4"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Natural_isotopes",
+          "weight": 0.3546882311002655,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3546882311002655
+            }
+          ],
+          "label": "Natural isotopes"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Tritium_Systems_Test_Assembly",
+          "weight": 0.3546882311002655,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3546882311002655
+            }
+          ],
+          "label": "Tritium Systems Test Assembly"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Large_Helical_Device",
+          "weight": 0.2896017279886699,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2896017279886699
+            }
+          ],
+          "label": "Large Helical Device"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Autoradiograph",
+          "weight": 0.250802453418059,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.250802453418059
+            }
+          ],
+          "label": "Autoradiograph"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Hypertriton",
+          "weight": 0.23645882073351032,
+          "degree": 8,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.23645882073351032
+            }
+          ],
+          "label": "Hypertriton"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isopycnal",
+          "weight": 0.2243245339066018,
+          "degree": 9,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2243245339066018
+            }
+          ],
+          "label": "Isopycnal"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Muonium",
+          "weight": 0.21388505092989918,
+          "degree": 10,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Tritium",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.21388505092989918
+            }
+          ],
+          "label": "Muonium"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Solar_neutrino",
+          "weight": 0.46159035314330277,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.46159035314330277
+            }
+          ],
+          "label": "Solar neutrino"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmogenic_nuclide",
+          "weight": 0.3319734519778385,
+          "degree": 28,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3319734519778385
+            }
+          ],
+          "label": "Cosmogenic nuclide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Beryllium-8",
+          "weight": 0.3112041526035741,
+          "degree": 32,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3112041526035741
+            }
+          ],
+          "label": "Beryllium-8"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isotopes_of_beryllium",
+          "weight": 0.3021818190486546,
+          "degree": 34,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3021818190486546
+            }
+          ],
+          "label": "Isotopes of beryllium"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cosmic_ray_spallation",
+          "weight": 0.297955291749002,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.297955291749002
+            }
+          ],
+          "label": "Cosmic ray spallation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Big_Bang_nucleosynthesis",
+          "weight": 0.28626618470534276,
+          "degree": 38,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.28626618470534276
+            }
+          ],
+          "label": "Big Bang nucleosynthesis"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radiometric_dating",
+          "weight": 0.22005456663940037,
+          "degree": 65,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.22005456663940037
+            }
+          ],
+          "label": "Radiometric dating"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Radioactive_decay",
+          "weight": 0.12278192071841726,
+          "degree": 211,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Beryllium-7",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.12278192071841726
+            }
+          ],
+          "label": "Radioactive decay"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 712,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Beryllium-7"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Beryllium-7"
+        },
+        {
+          "chunk_id": 7726,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Tritium"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Tritium"
+        },
+        {
+          "chunk_id": 6921,
+          "score": 0.46159035314330277,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Solar_neutrino"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Solar_neutrino"
+        },
+        {
+          "chunk_id": 3405,
+          "score": 0.40955869140826096,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Hydrogen-4"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Hydrogen-4"
+        },
+        {
+          "chunk_id": 5004,
+          "score": 0.3546882311002655,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Natural_isotopes"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Natural_isotopes"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "In the context of IFMIF-DONES, what is the approximate volumetric flow rate in the primary heat exchanger?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Heat_exchanger",
+          "label": "Heat exchanger"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Volumetric_flow_rate",
+          "label": "Volumetric flow rate"
+        }
+      ],
+      "mentions_chunk_ids": [
+        3196,
+        3645,
+        8027
+      ],
+      "graph_chunk_ids": [
+        3196,
+        3645,
+        8027,
+        5809,
+        2270,
+        3042,
+        6919,
+        5701,
+        6960,
+        1124,
+        1717,
+        2650,
+        4664,
+        7061,
+        7062,
+        2049,
+        7630,
+        6807,
+        2252,
+        6478,
+        522,
+        954,
+        2616,
+        5596,
+        3490,
+        5096,
+        4234
+      ],
+      "new_chunk_ids": [
+        522,
+        954,
+        1124,
+        1717,
+        2049,
+        2252,
+        2270,
+        2616,
+        2650,
+        3042,
+        3490,
+        4234,
+        4664,
+        5096,
+        5596,
+        5701,
+        5809,
+        6478,
+        6807,
+        6919,
+        6960,
+        7061,
+        7062,
+        7630
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Heat_exchanger",
+        "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+        "http://dbpedia.org/resource/Volumetric_flow_rate"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Enhanced_heat_transfer",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Enhanced heat transfer"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Grate_heater",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Grate heater"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Solar_controller",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Solar controller"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Downhole_heat_exchanger",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Downhole heat exchanger"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Toroidal_expansion_joint",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Toroidal expansion joint"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Back_boiler",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Back boiler"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Bubble_column_reactor",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Bubble column reactor"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Flue-gas_condensation",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Heat_exchanger",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Flue-gas condensation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cell-free_marginal_layer_model",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Cell-free marginal layer model"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cyclonic_flow_meter",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Cyclonic flow meter"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Ford_viscosity_cup",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Ford viscosity cup"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Metering_pump",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Metering pump"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Standard_cubic_centimetres_per_minute",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Standard cubic centimetres per minute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Standard_litre_per_minute",
+          "weight": 0.2982474738922037,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2982474738922037
+            }
+          ],
+          "label": "Standard litre per minute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/End_correction",
+          "weight": 0.27226144861615514,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.27226144861615514
+            }
+          ],
+          "label": "End correction"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Post_Irradiation_Examination",
+          "weight": 0.5818540174918544,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.5818540174918544
+            }
+          ],
+          "label": "Post Irradiation Examination"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Rotameter",
+          "weight": 0.27226144861615514,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Volumetric_flow_rate",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.27226144861615514
+            }
+          ],
+          "label": "Rotameter"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Plasma-facing_material",
+          "weight": 0.3359335736279874,
+          "degree": 17,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3359335736279874
+            }
+          ],
+          "label": "Plasma-facing material"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spallation_Neutron_Source",
+          "weight": 0.3269737303168065,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3269737303168065
+            }
+          ],
+          "label": "Spallation Neutron Source"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Silicon_carbide",
+          "weight": 0.27428861428608414,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.27428861428608414
+            }
+          ],
+          "label": "Silicon carbide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Paul_Scherrer_Institute",
+          "weight": 0.2375409079405802,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2375409079405802
+            }
+          ],
+          "label": "Paul Scherrer Institute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/ITER",
+          "weight": 0.19764598236923836,
+          "degree": 51,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.19764598236923836
+            }
+          ],
+          "label": "ITER"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutron_flux",
+          "weight": 0.19577251845361032,
+          "degree": 52,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.19577251845361032
+            }
+          ],
+          "label": "Neutron flux"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Linear_particle_accelerator",
+          "weight": 0.18399839609937124,
+          "degree": 59,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.18399839609937124
+            }
+          ],
+          "label": "Linear particle accelerator"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 3196,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Heat_exchanger"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Heat_exchanger"
+        },
+        {
+          "chunk_id": 3645,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+        },
+        {
+          "chunk_id": 8027,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Volumetric_flow_rate"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Volumetric_flow_rate"
+        },
+        {
+          "chunk_id": 5809,
+          "score": 0.5818540174918544,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Post_Irradiation_Examination"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Post_Irradiation_Examination"
+        },
+        {
+          "chunk_id": 2270,
+          "score": 0.34555809982973135,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Enhanced_heat_transfer"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Enhanced_heat_transfer"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "What is the temperature of the on-line Nitrogen trap in IFMIF-DONES?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Nitrogen",
+          "label": "Nitrogen"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Temperature",
+          "label": "Temperature"
+        }
+      ],
+      "mentions_chunk_ids": [
+        3645,
+        5128,
+        7422
+      ],
+      "graph_chunk_ids": [
+        3645,
+        5128,
+        7422,
+        5809,
+        5130,
+        3213,
+        7012,
+        7999,
+        5701,
+        6960,
+        3715,
+        7383,
+        2651,
+        4619,
+        176,
+        4207,
+        6807,
+        5865,
+        6000,
+        542,
+        586,
+        2062,
+        5596,
+        5269,
+        3490,
+        5096,
+        4234
+      ],
+      "new_chunk_ids": [
+        176,
+        542,
+        586,
+        2062,
+        2651,
+        3213,
+        3490,
+        3715,
+        4207,
+        4234,
+        4619,
+        5096,
+        5130,
+        5269,
+        5596,
+        5701,
+        5809,
+        5865,
+        6000,
+        6807,
+        6960,
+        7012,
+        7383,
+        7999
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+        "http://dbpedia.org/resource/Nitrogen",
+        "http://dbpedia.org/resource/Temperature"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Heat_transfer_vinyl",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Heat transfer vinyl"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Nitrogen_rule",
+          "weight": 0.43477209252177346,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.43477209252177346
+            }
+          ],
+          "label": "Nitrogen rule"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spice_(oceanography)",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Spice (oceanography)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Viehland–Mason_theory",
+          "weight": 0.34555809982973135,
+          "degree": 1,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.34555809982973135
+            }
+          ],
+          "label": "Viehland–Mason theory"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Forest_fire_weather_index",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Forest fire weather index"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Mean_kinetic_temperature",
+          "weight": 0.2821470070228575,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2821470070228575
+            }
+          ],
+          "label": "Mean kinetic temperature"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Balance_point_temperature",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Balance point temperature"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Barber–Layden–Power_effect",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Barber–Layden–Power effect"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Drag_reducing_agent",
+          "weight": 0.24434647568354098,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Temperature",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24434647568354098
+            }
+          ],
+          "label": "Drag reducing agent"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Isoscape",
+          "weight": 0.3074302948928111,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3074302948928111
+            }
+          ],
+          "label": "Isoscape"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Tank_blanketing",
+          "weight": 0.3074302948928111,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3074302948928111
+            }
+          ],
+          "label": "Tank blanketing"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Air_barrier",
+          "weight": 0.2749740150892528,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2749740150892528
+            }
+          ],
+          "label": "Air barrier"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Limiting_oxygen_concentration",
+          "weight": 0.2749740150892528,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2749740150892528
+            }
+          ],
+          "label": "Limiting oxygen concentration"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Post_Irradiation_Examination",
+          "weight": 0.5818540174918544,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.5818540174918544
+            }
+          ],
+          "label": "Post Irradiation Examination"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Pressure-driven_flow",
+          "weight": 0.2510157846535828,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2510157846535828
+            }
+          ],
+          "label": "Pressure-driven flow"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Purging_(gas)",
+          "weight": 0.2510157846535828,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2510157846535828
+            }
+          ],
+          "label": "Purging (gas)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Nuclear_quadrupole_resonance",
+          "weight": 0.23239545879246531,
+          "degree": 6,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Nitrogen",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23239545879246531
+            }
+          ],
+          "label": "Nuclear quadrupole resonance"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Plasma-facing_material",
+          "weight": 0.3359335736279874,
+          "degree": 17,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3359335736279874
+            }
+          ],
+          "label": "Plasma-facing material"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spallation_Neutron_Source",
+          "weight": 0.3269737303168065,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3269737303168065
+            }
+          ],
+          "label": "Spallation Neutron Source"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Silicon_carbide",
+          "weight": 0.27428861428608414,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.27428861428608414
+            }
+          ],
+          "label": "Silicon carbide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Paul_Scherrer_Institute",
+          "weight": 0.2375409079405802,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2375409079405802
+            }
+          ],
+          "label": "Paul Scherrer Institute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/ITER",
+          "weight": 0.19764598236923836,
+          "degree": 51,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.19764598236923836
+            }
+          ],
+          "label": "ITER"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutron_flux",
+          "weight": 0.19577251845361032,
+          "degree": 52,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.19577251845361032
+            }
+          ],
+          "label": "Neutron flux"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Linear_particle_accelerator",
+          "weight": 0.18399839609937124,
+          "degree": 59,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.18399839609937124
+            }
+          ],
+          "label": "Linear particle accelerator"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 3645,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+        },
+        {
+          "chunk_id": 5128,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Nitrogen"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Nitrogen"
+        },
+        {
+          "chunk_id": 7422,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Temperature"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Temperature"
+        },
+        {
+          "chunk_id": 5809,
+          "score": 0.5818540174918544,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Post_Irradiation_Examination"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Post_Irradiation_Examination"
+        },
+        {
+          "chunk_id": 5130,
+          "score": 0.43477209252177346,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Nitrogen_rule"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Nitrogen_rule"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What is the bypass ratio of the ICS Branch of the DONES Li loop?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 9,
+      "question": "What will be volumen of the main building in the IFMIF DONES facilities?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        }
+      ],
+      "mentions_chunk_ids": [
+        3645
+      ],
+      "graph_chunk_ids": [
+        3645,
+        5809,
+        5701,
+        6960,
+        6807,
+        5596,
+        3490,
+        5096,
+        4234
+      ],
+      "new_chunk_ids": [
+        3490,
+        4234,
+        5096,
+        5596,
+        5701,
+        5809,
+        6807,
+        6960
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Post_Irradiation_Examination",
+          "weight": 0.5818540174918544,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.5818540174918544
+            }
+          ],
+          "label": "Post Irradiation Examination"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Plasma-facing_material",
+          "weight": 0.3359335736279874,
+          "degree": 17,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3359335736279874
+            }
+          ],
+          "label": "Plasma-facing material"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spallation_Neutron_Source",
+          "weight": 0.3269737303168065,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3269737303168065
+            }
+          ],
+          "label": "Spallation Neutron Source"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Silicon_carbide",
+          "weight": 0.27428861428608414,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.27428861428608414
+            }
+          ],
+          "label": "Silicon carbide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Paul_Scherrer_Institute",
+          "weight": 0.2375409079405802,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2375409079405802
+            }
+          ],
+          "label": "Paul Scherrer Institute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/ITER",
+          "weight": 0.19764598236923836,
+          "degree": 51,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.19764598236923836
+            }
+          ],
+          "label": "ITER"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutron_flux",
+          "weight": 0.19577251845361032,
+          "degree": 52,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.19577251845361032
+            }
+          ],
+          "label": "Neutron flux"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Linear_particle_accelerator",
+          "weight": 0.18399839609937124,
+          "degree": 59,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.18399839609937124
+            }
+          ],
+          "label": "Linear particle accelerator"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 3645,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+        },
+        {
+          "chunk_id": 5809,
+          "score": 0.5818540174918544,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Post_Irradiation_Examination"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Post_Irradiation_Examination"
+        },
+        {
+          "chunk_id": 5701,
+          "score": 0.3359335736279874,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Plasma-facing_material"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Plasma-facing_material"
+        },
+        {
+          "chunk_id": 6960,
+          "score": 0.3269737303168065,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Spallation_Neutron_Source"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Spallation_Neutron_Source"
+        },
+        {
+          "chunk_id": 6807,
+          "score": 0.27428861428608414,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Silicon_carbide"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Silicon_carbide"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "In the context of IFMIF DONES, when would be required hands-on or remote handling maintenance in areas with neutronics activity?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Neutron_transport",
+          "label": "Neutron transport"
+        }
+      ],
+      "mentions_chunk_ids": [
+        3645,
+        5107
+      ],
+      "graph_chunk_ids": [
+        3645,
+        5107,
+        5809,
+        6733,
+        6367,
+        1926,
+        5701,
+        6960,
+        6807,
+        4694,
+        4818,
+        5596,
+        3490,
+        5096,
+        5219,
+        4234,
+        5104,
+        1983
+      ],
+      "new_chunk_ids": [
+        1926,
+        1983,
+        3490,
+        4234,
+        4694,
+        4818,
+        5096,
+        5104,
+        5219,
+        5596,
+        5701,
+        5809,
+        6367,
+        6733,
+        6807,
+        6960
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+        "http://dbpedia.org/resource/Neutron_transport"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Serpent_(software)",
+          "weight": 0.5247327517177466,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.5247327517177466
+            }
+          ],
+          "label": "Serpent (software)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Post_Irradiation_Examination",
+          "weight": 0.5818540174918544,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.5818540174918544
+            }
+          ],
+          "label": "Post Irradiation Examination"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Resonance_escape_probability",
+          "weight": 0.3966606759473595,
+          "degree": 6,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3966606759473595
+            }
+          ],
+          "label": "Resonance escape probability"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Diffusion_process",
+          "weight": 0.3710420870502955,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3710420870502955
+            }
+          ],
+          "label": "Diffusion process"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/MicroMegas_detector",
+          "weight": 0.25453277182979717,
+          "degree": 16,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.25453277182979717
+            }
+          ],
+          "label": "MicroMegas detector"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Monte_Carlo_N-Particle_Transport_Code",
+          "weight": 0.25453277182979717,
+          "degree": 16,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.25453277182979717
+            }
+          ],
+          "label": "Monte Carlo N-Particle Transport Code"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Plasma-facing_material",
+          "weight": 0.3359335736279874,
+          "degree": 17,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3359335736279874
+            }
+          ],
+          "label": "Plasma-facing material"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spallation_Neutron_Source",
+          "weight": 0.3269737303168065,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3269737303168065
+            }
+          ],
+          "label": "Spallation Neutron Source"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Silicon_carbide",
+          "weight": 0.27428861428608414,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.27428861428608414
+            }
+          ],
+          "label": "Silicon carbide"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Nuclear_cross_section",
+          "weight": 0.19160530985171165,
+          "degree": 29,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.19160530985171165
+            }
+          ],
+          "label": "Nuclear cross section"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutron_scattering",
+          "weight": 0.182688494844417,
+          "degree": 32,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.182688494844417
+            }
+          ],
+          "label": "Neutron scattering"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Paul_Scherrer_Institute",
+          "weight": 0.2375409079405802,
+          "degree": 35,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2375409079405802
+            }
+          ],
+          "label": "Paul Scherrer Institute"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Discretization",
+          "weight": 0.15821287751440755,
+          "degree": 43,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Neutron_transport",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.15821287751440755
+            }
+          ],
+          "label": "Discretization"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/ITER",
+          "weight": 0.19764598236923836,
+          "degree": 51,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.19764598236923836
+            }
+          ],
+          "label": "ITER"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neutron_flux",
+          "weight": 0.19577251845361032,
+          "degree": 52,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.19577251845361032
+            }
+          ],
+          "label": "Neutron flux"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Linear_particle_accelerator",
+          "weight": 0.18399839609937124,
+          "degree": 59,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.18399839609937124
+            }
+          ],
+          "label": "Linear particle accelerator"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 3645,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility"
+        },
+        {
+          "chunk_id": 5107,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Neutron_transport"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Neutron_transport"
+        },
+        {
+          "chunk_id": 5809,
+          "score": 0.5818540174918544,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Post_Irradiation_Examination"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Post_Irradiation_Examination"
+        },
+        {
+          "chunk_id": 6733,
+          "score": 0.5247327517177466,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Serpent_(software)"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Serpent_(software)"
+        },
+        {
+          "chunk_id": 6367,
+          "score": 0.3966606759473595,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Resonance_escape_probability"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Resonance_escape_probability"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "In the paper 'OneSearch: A preliminary exploration of the unified end-to-end generative framework for e-commerce search'. Comparing RQ-VAE to RQ-Kmeans as a foundational tokenizer for OneSearch. What architectural property of RQ-Kmeans might explain its superiority over the learned reconstruction objective in RQ-VAE for this discrete tokenization task?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/K-means_clustering",
+          "label": "K-means clustering"
+        }
+      ],
+      "mentions_chunk_ids": [
+        3821
+      ],
+      "graph_chunk_ids": [
+        3821,
+        3776,
+        3833,
+        4935,
+        5963,
+        8148,
+        543,
+        1025,
+        2925
+      ],
+      "new_chunk_ids": [
+        543,
+        1025,
+        2925,
+        3776,
+        3833,
+        4935,
+        5963,
+        8148
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/K-means_clustering"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Jenks_natural_breaks_optimization",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Jenks natural breaks optimization"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/K_q-flats",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "K q-flats"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Multispectral_pattern_recognition",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Multispectral pattern recognition"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Prototype_methods",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Prototype methods"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Weber_problem",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Weber problem"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Balanced_clustering",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "Balanced clustering"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/CURE_algorithm",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "CURE algorithm"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Geodemographic_segmentation",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/K-means_clustering",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "Geodemographic segmentation"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 3821,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/K-means_clustering"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/K-means_clustering"
+        },
+        {
+          "chunk_id": 3776,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Jenks_natural_breaks_optimization"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Jenks_natural_breaks_optimization"
+        },
+        {
+          "chunk_id": 3833,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/K_q-flats"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/K_q-flats"
+        },
+        {
+          "chunk_id": 4935,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Multispectral_pattern_recognition"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Multispectral_pattern_recognition"
+        },
+        {
+          "chunk_id": 5963,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Prototype_methods"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Prototype_methods"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "In ONB-MACF, is the experimental comparison unfair because the proposed method enforces immutability constraints (via projections) while the baselines do not, and should an ablation without constraint satisfaction therefore be included?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 13,
+      "question": "In the context of properties of lush spaces and applications to Banach spaces with numerical index 1, on Theorem 4.1 \"Let $X$ be a Banach space and le $G \\subset S_{x^*}$ be a norming rounded subset for X. Then the following are equivalent\" , on \n\n(I) X is lush \n\nimply \n\n(II) $_\\mathbb{C}$ For every $x, y \\in S_X$, $n \\in \\mathbb{N}$ and $\\varepsilon > 0$, there exist $\\lambda_1, \\ldots, \\lambda_n \\geq 0$ with $\\sum_{k=1}^{n} \\lambda_k = 1$ and $x_1, \\ldots, x_n \\in B_X$ such that\n\n$$\\left\\| x + \\sum_{k=1}^{n} x_k \\right\\| > n + 1 - \\varepsilon$$\n\n*and*\n\n$$\\left\\| y - \\sum_{k=1}^{n} \\lambda_k \\exp\\left(\\frac{2\\pi i k}{n}\\right) x_k \\right\\| < \\varepsilon + \\frac{2\\pi}{n}$$\n\nWhy can we conclude that $Y$ is lush?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Banach_space",
+          "label": "Banach space"
+        }
+      ],
+      "mentions_chunk_ids": [
+        573
+      ],
+      "graph_chunk_ids": [
+        573,
+        789,
+        831,
+        3419,
+        4481,
+        4788,
+        453,
+        507,
+        567
+      ],
+      "new_chunk_ids": [
+        453,
+        507,
+        567,
+        789,
+        831,
+        3419,
+        4481,
+        4788
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Banach_space"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Bishop–Phelps_theorem",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Bishop–Phelps theorem"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Bochner_measurable_function",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Bochner measurable function"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Hyers–Ulam–Rassias_stability",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Hyers–Ulam–Rassias stability"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Maharam's_theorem",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Maharam's theorem"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Modulation_space",
+          "weight": 0.3071840391779665,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3071840391779665
+            }
+          ],
+          "label": "Modulation space"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Aubin–Lions_lemma",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "Aubin–Lions lemma"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/B-convex_space",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "B-convex space"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Banach_bundle_(non-commutative_geometry)",
+          "weight": 0.26602918156523325,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Banach_space",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26602918156523325
+            }
+          ],
+          "label": "Banach bundle (non-commutative geometry)"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 573,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Banach_space"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Banach_space"
+        },
+        {
+          "chunk_id": 789,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Bishop–Phelps_theorem"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Bishop–Phelps_theorem"
+        },
+        {
+          "chunk_id": 831,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Bochner_measurable_function"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Bochner_measurable_function"
+        },
+        {
+          "chunk_id": 3419,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Hyers–Ulam–Rassias_stability"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Hyers–Ulam–Rassias_stability"
+        },
+        {
+          "chunk_id": 4481,
+          "score": 0.3071840391779665,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Maharam's_theorem"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Maharam's_theorem"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "In REVEL framework, the authors say it is very important to have a metric between 0 and 1. Why is this?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 15,
+      "question": "In the paper WinStat. Considering how the window size heuristic is determined based on sequence length: if we have a sequence length of $L=512$, what would be the appropriate window size, $w$?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 16,
+      "question": "In the context of classic fuzzy cognitive maps. Why do relative activation values improve classification accuracy?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Cognitive_map",
+          "label": "Cognitive map"
+        }
+      ],
+      "mentions_chunk_ids": [
+        1305
+      ],
+      "graph_chunk_ids": [
+        1305,
+        2774,
+        6342,
+        7014,
+        5391,
+        3006
+      ],
+      "new_chunk_ids": [
+        2774,
+        3006,
+        5391,
+        6342,
+        7014
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Cognitive_map"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Fuzzy_cognitive_map",
+          "weight": 0.8882453201794993,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.8882453201794993
+            }
+          ],
+          "label": "Fuzzy cognitive map"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Repertory_grid",
+          "weight": 0.7252492669516145,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.7252492669516145
+            }
+          ],
+          "label": "Repertory grid"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spiking_neural_network",
+          "weight": 0.35529812807179967,
+          "degree": 24,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.35529812807179967
+            }
+          ],
+          "label": "Spiking neural network"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Operations_research",
+          "weight": 0.22206133004487483,
+          "degree": 63,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.22206133004487483
+            }
+          ],
+          "label": "Operations research"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Gradient",
+          "weight": 0.1431536953377434,
+          "degree": 153,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.1431536953377434
+            }
+          ],
+          "label": "Gradient"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 1305,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Cognitive_map"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Cognitive_map"
+        },
+        {
+          "chunk_id": 2774,
+          "score": 0.8882453201794993,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Fuzzy_cognitive_map"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Fuzzy_cognitive_map"
+        },
+        {
+          "chunk_id": 6342,
+          "score": 0.7252492669516145,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Repertory_grid"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Repertory_grid"
+        },
+        {
+          "chunk_id": 7014,
+          "score": 0.35529812807179967,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Spiking_neural_network"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Spiking_neural_network"
+        },
+        {
+          "chunk_id": 5391,
+          "score": 0.22206133004487483,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Operations_research"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Operations_research"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "question": "In Dynamic Behavior of Fuzzy Cognitive Maps. Why study the covering for stable FCMs using the knowledge of the weights? Summarize in a small paragraph.",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Cognitive_map",
+          "label": "Cognitive map"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Fuzzy_cognitive_map",
+          "label": "Fuzzy cognitive map"
+        }
+      ],
+      "mentions_chunk_ids": [
+        1305,
+        2774
+      ],
+      "graph_chunk_ids": [
+        1305,
+        2774,
+        5076,
+        6342,
+        2346,
+        7014,
+        5391,
+        3006
+      ],
+      "new_chunk_ids": [
+        2346,
+        3006,
+        5076,
+        5391,
+        6342,
+        7014
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Cognitive_map",
+        "http://dbpedia.org/resource/Fuzzy_cognitive_map"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Repertory_grid",
+          "weight": 1.1708268101502166,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 1.1708268101502166
+            }
+          ],
+          "label": "Repertory grid"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Neuro-fuzzy",
+          "weight": 1.5523738320215061,
+          "degree": 17,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Fuzzy_cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 1.5523738320215061
+            }
+          ],
+          "label": "Neuro-fuzzy"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Spiking_neural_network",
+          "weight": 0.5735856524077005,
+          "degree": 24,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.5735856524077005
+            }
+          ],
+          "label": "Spiking neural network"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Operations_research",
+          "weight": 0.35849103275481287,
+          "degree": 63,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.35849103275481287
+            }
+          ],
+          "label": "Operations research"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Evolutionary_computation",
+          "weight": 0.781633908564026,
+          "degree": 70,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Fuzzy_cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.781633908564026
+            }
+          ],
+          "label": "Evolutionary computation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Gradient",
+          "weight": 0.23110424527280238,
+          "degree": 153,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Cognitive_map",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.23110424527280238
+            }
+          ],
+          "label": "Gradient"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 1305,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Cognitive_map"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Cognitive_map"
+        },
+        {
+          "chunk_id": 2774,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Fuzzy_cognitive_map"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Fuzzy_cognitive_map"
+        },
+        {
+          "chunk_id": 5076,
+          "score": 1.5523738320215061,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Neuro-fuzzy"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Neuro-fuzzy"
+        },
+        {
+          "chunk_id": 6342,
+          "score": 1.1708268101502166,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Repertory_grid"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Repertory_grid"
+        },
+        {
+          "chunk_id": 2346,
+          "score": 0.781633908564026,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Evolutionary_computation"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Evolutionary_computation"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "question": "Given the mechanisms attributed to the fairness by brute force phenomenon as described in \"Fairness by Brute Force: Dissatisfaction-Driven Output Modification as De Facto Bias Mitigation in Text-to-Image Generative AI\", is there any model to which, under specific conditions—for example, in a particular profession and in a given iteration or set of iterations—said phenomenon could also be attributed according to the results presented?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Text-to-image_model",
+          "label": "Text-to-image model"
+        }
+      ],
+      "mentions_chunk_ids": [
+        7451
+      ],
+      "graph_chunk_ids": [
+        7451,
+        3507,
+        1671,
+        2066,
+        3528,
+        4300,
+        5194,
+        1925,
+        7046
+      ],
+      "new_chunk_ids": [
+        1671,
+        1925,
+        2066,
+        3507,
+        3528,
+        4300,
+        5194,
+        7046
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Text-to-image_model"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Imagen_(Google_Brain)",
+          "weight": 0.37629344906376244,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.37629344906376244
+            }
+          ],
+          "label": "Imagen (text-to-image model)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Crungus",
+          "weight": 0.3365670926377709,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3365670926377709
+            }
+          ],
+          "label": "Crungus"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/DreamBooth",
+          "weight": 0.3365670926377709,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3365670926377709
+            }
+          ],
+          "label": "DreamBooth"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Inception_score",
+          "weight": 0.3365670926377709,
+          "degree": 4,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3365670926377709
+            }
+          ],
+          "label": "Inception score"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Loab",
+          "weight": 0.3072423145860635,
+          "degree": 5,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3072423145860635
+            }
+          ],
+          "label": "Loab"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/NovelAI",
+          "weight": 0.25086229937584165,
+          "degree": 8,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.25086229937584165
+            }
+          ],
+          "label": "NovelAI"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Diffusion_model",
+          "weight": 0.217253124111256,
+          "degree": 11,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.217253124111256
+            }
+          ],
+          "label": "Diffusion model"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Stable_Diffusion",
+          "weight": 0.1726552755352958,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Text-to-image_model",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.1726552755352958
+            }
+          ],
+          "label": "Stable Diffusion"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 7451,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Text-to-image_model"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Text-to-image_model"
+        },
+        {
+          "chunk_id": 3507,
+          "score": 0.37629344906376244,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Imagen_(Google_Brain)"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Imagen_(Google_Brain)"
+        },
+        {
+          "chunk_id": 1671,
+          "score": 0.3365670926377709,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Crungus"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Crungus"
+        },
+        {
+          "chunk_id": 2066,
+          "score": 0.3365670926377709,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/DreamBooth"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/DreamBooth"
+        },
+        {
+          "chunk_id": 3528,
+          "score": 0.3365670926377709,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Inception_score"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Inception_score"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "question": "In WinStat paper. What type of normalized weighting mechanism has been used to adjust the $\\tilde{w}$ weights of the WinStatFlex model to prevent overflow and component dominance? Define it mathematically.",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 20,
+      "question": "In ZeroDiff (solidified visual-semantic correlation in zero-shot learning), what is the purpose of the other Diffusion-based Representation Generator (R)?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Freezing",
+          "label": "Freezing"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Zero-shot_learning",
+          "label": "Zero-shot learning"
+        }
+      ],
+      "mentions_chunk_ids": [
+        2704,
+        8309
+      ],
+      "graph_chunk_ids": [
+        2704,
+        8309,
+        7662,
+        2026,
+        2703,
+        6588,
+        5934,
+        7484,
+        3650,
+        7464,
+        2374,
+        3191,
+        3465,
+        2890,
+        1728,
+        5994,
+        1557,
+        7668
+      ],
+      "new_chunk_ids": [
+        1557,
+        1728,
+        2026,
+        2374,
+        2703,
+        2890,
+        3191,
+        3465,
+        3650,
+        5934,
+        5994,
+        6588,
+        7464,
+        7484,
+        7662,
+        7668
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Freezing",
+        "http://dbpedia.org/resource/Zero-shot_learning"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Transduction_(machine_learning)",
+          "weight": 0.3795668898316719,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3795668898316719
+            }
+          ],
+          "label": "Transduction (machine learning)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Domain_adaptation",
+          "weight": 0.3578590956184833,
+          "degree": 8,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3578590956184833
+            }
+          ],
+          "label": "Domain adaptation"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Freeze_stat",
+          "weight": 0.3487573071166053,
+          "degree": 9,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3487573071166053
+            }
+          ],
+          "label": "Freeze stat"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Prompt_engineering",
+          "weight": 0.3394949470687169,
+          "degree": 9,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3394949470687169
+            }
+          ],
+          "label": "Prompt engineering"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Scale_of_temperature",
+          "weight": 0.3487573071166053,
+          "degree": 9,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3487573071166053
+            }
+          ],
+          "label": "Scale of temperature"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Thermal_analysis",
+          "weight": 0.33252704506171865,
+          "degree": 10,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.33252704506171865
+            }
+          ],
+          "label": "Thermal analysis"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/International_Temperature_Scale_of_1990",
+          "weight": 0.3183704070042029,
+          "degree": 11,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3183704070042029
+            }
+          ],
+          "label": "International Temperature Scale of 1990"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Textual_entailment",
+          "weight": 0.2869255989739586,
+          "degree": 13,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2869255989739586
+            }
+          ],
+          "label": "Textual entailment"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Explicit_semantic_analysis",
+          "weight": 0.2771964635238467,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2771964635238467
+            }
+          ],
+          "label": "Explicit semantic analysis"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Heat-transfer_fluid",
+          "weight": 0.2674846441631261,
+          "degree": 16,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2674846441631261
+            }
+          ],
+          "label": "Heat-transfer fluid"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Generalization_error",
+          "weight": 0.2462955211307096,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2462955211307096
+            }
+          ],
+          "label": "Generalization error"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Hypothermia",
+          "weight": 0.25301514336542047,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.25301514336542047
+            }
+          ],
+          "label": "Hypothermia"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/DALL-E",
+          "weight": 0.2400591792508577,
+          "degree": 19,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2400591792508577
+            }
+          ],
+          "label": "DALL-E"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Pumpable_ice_technology",
+          "weight": 0.23513212849106596,
+          "degree": 21,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23513212849106596
+            }
+          ],
+          "label": "Pumpable ice technology"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cooling",
+          "weight": 0.22996375826678708,
+          "degree": 22,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Freezing",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.22996375826678708
+            }
+          ],
+          "label": "Cooling"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Transfer_learning",
+          "weight": 0.20661004518728734,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Zero-shot_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.20661004518728734
+            }
+          ],
+          "label": "Transfer learning"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 2704,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Freezing"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Freezing"
+        },
+        {
+          "chunk_id": 8309,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Zero-shot_learning"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Zero-shot_learning"
+        },
+        {
+          "chunk_id": 7662,
+          "score": 0.3795668898316719,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Transduction_(machine_learning)"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Transduction_(machine_learning)"
+        },
+        {
+          "chunk_id": 2026,
+          "score": 0.3578590956184833,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Domain_adaptation"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Domain_adaptation"
+        },
+        {
+          "chunk_id": 2703,
+          "score": 0.3487573071166053,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Freeze_stat"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Freeze_stat"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "question": "In the context of method 'ThinkMore' in hierarchical neuro-symbolic search with transformer re-evaluation for efficient chess play. Why are bayesian tests the best way to compare results between 'ThinkMore' options?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 22,
+      "question": "In SimCLR's paper, what is the main weakness of using a single fixed data augmentation?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Data_augmentation",
+          "label": "Data augmentation"
+        }
+      ],
+      "mentions_chunk_ids": [
+        1766
+      ],
+      "graph_chunk_ids": [
+        1766,
+        4437,
+        7046,
+        7965,
+        7668,
+        2908,
+        5488,
+        1553,
+        7274
+      ],
+      "new_chunk_ids": [
+        1553,
+        2908,
+        4437,
+        5488,
+        7046,
+        7274,
+        7668,
+        7965
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Data_augmentation"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Machine_learning_in_earth_sciences",
+          "weight": 0.448127125315112,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.448127125315112
+            }
+          ],
+          "label": "Machine learning in earth sciences"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Stable_Diffusion",
+          "weight": 0.39817139966072207,
+          "degree": 18,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.39817139966072207
+            }
+          ],
+          "label": "Stable Diffusion"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Variational_autoencoder",
+          "weight": 0.3787365466193261,
+          "degree": 20,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.3787365466193261
+            }
+          ],
+          "label": "Variational autoencoder"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Transfer_learning",
+          "weight": 0.3340142382553858,
+          "degree": 26,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3340142382553858
+            }
+          ],
+          "label": "Transfer learning"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Generative_adversarial_network",
+          "weight": 0.2430310561389139,
+          "degree": 50,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.2430310561389139
+            }
+          ],
+          "label": "Generative adversarial network"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Overfitting",
+          "weight": 0.20313531513611616,
+          "degree": 72,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.20313531513611616
+            }
+          ],
+          "label": "Overfitting"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Convolutional_neural_network",
+          "weight": 0.16623926623686283,
+          "degree": 108,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.16623926623686283
+            }
+          ],
+          "label": "Convolutional neural network"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Support_vector_machine",
+          "weight": 0.16255279322309335,
+          "degree": 113,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Data_augmentation",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.16255279322309335
+            }
+          ],
+          "label": "Support vector machine"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 1766,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Data_augmentation"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Data_augmentation"
+        },
+        {
+          "chunk_id": 4437,
+          "score": 0.448127125315112,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Machine_learning_in_earth_sciences"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Machine_learning_in_earth_sciences"
+        },
+        {
+          "chunk_id": 7046,
+          "score": 0.39817139966072207,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Stable_Diffusion"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Stable_Diffusion"
+        },
+        {
+          "chunk_id": 7965,
+          "score": 0.3787365466193261,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Variational_autoencoder"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Variational_autoencoder"
+        },
+        {
+          "chunk_id": 7668,
+          "score": 0.3340142382553858,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Transfer_learning"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Transfer_learning"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "question": "In the context of federated learning, what are the differences between $(\\alpha,f)$-byzantine resilience method and other approaches?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Federated_learning",
+          "label": "Federated learning"
+        }
+      ],
+      "mentions_chunk_ids": [
+        2481
+      ],
+      "graph_chunk_ids": [
+        2481,
+        2480,
+        4015,
+        1767,
+        144,
+        4883,
+        2472,
+        856,
+        7118
+      ],
+      "new_chunk_ids": [
+        144,
+        856,
+        1767,
+        2472,
+        2480,
+        4015,
+        4883,
+        7118
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Federated_learning"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Federated_Learning_of_Cohorts",
+          "weight": 0.6737613427637034,
+          "degree": 2,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.6737613427637034
+            }
+          ],
+          "label": "Federated Learning of Cohorts"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Labeled_data",
+          "weight": 0.3518603856656068,
+          "degree": 10,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3518603856656068
+            }
+          ],
+          "label": "Labeled data"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Data_center",
+          "weight": 0.3236644797659649,
+          "degree": 12,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.3236644797659649
+            }
+          ],
+          "label": "Data center"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Adversarial_machine_learning",
+          "weight": 0.26094664598421696,
+          "degree": 19,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.26094664598421696
+            }
+          ],
+          "label": "Adversarial machine learning"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Multi-task_learning",
+          "weight": 0.2167043943198331,
+          "degree": 28,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.2167043943198331
+            }
+          ],
+          "label": "Multi-task learning"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Feature_(machine_learning)",
+          "weight": 0.1822530431348361,
+          "degree": 40,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.1822530431348361
+            }
+          ],
+          "label": "Feature (machine learning)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Boosting_(machine_learning)",
+          "weight": 0.18007029321961,
+          "degree": 41,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.18007029321961
+            }
+          ],
+          "label": "Boosting (machine learning)"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Stochastic_gradient_descent",
+          "weight": 0.14474715573176056,
+          "degree": 64,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Federated_learning",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.14474715573176056
+            }
+          ],
+          "label": "Stochastic gradient descent"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 2481,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Federated_learning"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Federated_learning"
+        },
+        {
+          "chunk_id": 2480,
+          "score": 0.6737613427637034,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Federated_Learning_of_Cohorts"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Federated_Learning_of_Cohorts"
+        },
+        {
+          "chunk_id": 4015,
+          "score": 0.3518603856656068,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Labeled_data"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Labeled_data"
+        },
+        {
+          "chunk_id": 1767,
+          "score": 0.3236644797659649,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Data_center"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Data_center"
+        },
+        {
+          "chunk_id": 144,
+          "score": 0.26094664598421696,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Adversarial_machine_learning"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Adversarial_machine_learning"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "question": "According to the taxonomy and definition framework of \"General Purpose Artificial Intelligence Systems: Definition and Taxonomy\", what specific capability would an open-world GPAIS gain by incorporating active learning that would move it closer to being classified as an 'advanced GPAIS,' in terms of the supervision mechanism described for handling new tasks at time $t + \\Delta t$?",
+      "entities": [],
+      "mentions_chunk_ids": [],
+      "graph_chunk_ids": [],
+      "new_chunk_ids": [],
+      "expansion_seeds": [],
+      "expansions": [],
+      "top_hits": []
+    },
+    {
+      "id": 25,
+      "question": "In the paper of Mamba, why Linear Time Invariance models struggle with selective Copying?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)",
+          "label": "Mamba (deep learning architecture)"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Time-invariant_system",
+          "label": "Time-invariant system"
+        }
+      ],
+      "mentions_chunk_ids": [
+        4486,
+        7586
+      ],
+      "graph_chunk_ids": [
+        4486,
+        7586,
+        6768,
+        3184,
+        4820,
+        1661,
+        7051,
+        8023,
+        6798,
+        4513
+      ],
+      "new_chunk_ids": [
+        1661,
+        3184,
+        4513,
+        4820,
+        6768,
+        6798,
+        7051,
+        8023
+      ],
+      "expansion_seeds": [
+        "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)",
+        "http://dbpedia.org/resource/Time-invariant_system"
+      ],
+      "expansions": [
+        {
+          "entity": "http://dbpedia.org/resource/Shift-invariant_system",
+          "weight": 0.4487517028631771,
+          "degree": 3,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming",
+                "outgoing"
+              ],
+              "contribution": 0.4487517028631771
+            }
+          ],
+          "label": "Shift-invariant system"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Head-related_transfer_function",
+          "weight": 0.3392244017693481,
+          "degree": 6,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.3392244017693481
+            }
+          ],
+          "label": "Head-related transfer function"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Monte_Carlo_localization",
+          "weight": 0.31731537216356315,
+          "degree": 7,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.31731537216356315
+            }
+          ],
+          "label": "Monte Carlo localization"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Cross_Gramian",
+          "weight": 0.2838154969853487,
+          "degree": 9,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.2838154969853487
+            }
+          ],
+          "label": "Cross Gramian"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Stable_polynomial",
+          "weight": 0.24892265763461002,
+          "degree": 12,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.24892265763461002
+            }
+          ],
+          "label": "Stable polynomial"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Volterra_series",
+          "weight": 0.23986787483505592,
+          "degree": 13,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.23986787483505592
+            }
+          ],
+          "label": "Volterra series"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Signal-flow_graph",
+          "weight": 0.23173438290284054,
+          "degree": 14,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "outgoing"
+              ],
+              "contribution": 0.23173438290284054
+            }
+          ],
+          "label": "Signal-flow graph"
+        },
+        {
+          "entity": "http://dbpedia.org/resource/Marginal_stability",
+          "weight": 0.22437585143158856,
+          "degree": 15,
+          "via": [
+            {
+              "seed": "http://dbpedia.org/resource/Time-invariant_system",
+              "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+              "directions": [
+                "incoming"
+              ],
+              "contribution": 0.22437585143158856
+            }
+          ],
+          "label": "Marginal stability"
+        }
+      ],
+      "top_hits": [
+        {
+          "chunk_id": 4486,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)"
+        },
+        {
+          "chunk_id": 7586,
+          "score": 9.336030962342129,
+          "direct_entities": [
+            "http://dbpedia.org/resource/Time-invariant_system"
+          ],
+          "expanded_entities": [],
+          "source_chunk_id": "http://dbpedia.org/resource/Time-invariant_system"
+        },
+        {
+          "chunk_id": 6768,
+          "score": 0.4487517028631771,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Shift-invariant_system"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Shift-invariant_system"
+        },
+        {
+          "chunk_id": 3184,
+          "score": 0.3392244017693481,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Head-related_transfer_function"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Head-related_transfer_function"
+        },
+        {
+          "chunk_id": 4820,
+          "score": 0.31731537216356315,
+          "direct_entities": [],
+          "expanded_entities": [
+            "http://dbpedia.org/resource/Monte_Carlo_localization"
+          ],
+          "source_chunk_id": "http://dbpedia.org/resource/Monte_Carlo_localization"
+        }
+      ]
+    }
+  ],
+  "chunk_source": "Synthetic: one canonical KG label per chunk. These are not scientific document passages.",
+  "chunk_count": 8342,
+  "config": {
+    "expansion_weight": 0.25,
+    "max_seeds": 8,
+    "max_neighbors": 8,
+    "max_expanded_entities": 32,
+    "max_neighbor_degree": 256,
+    "max_neighbor_document_ratio": 0.5,
+    "direction": "both"
+  },
+  "graph_index_build_seconds": 0.5053192230043351,
+  "mentions_index_build_seconds": 0.03029618899745401,
+  "entities_with_postings": 8341,
+  "seeds_with_eligible_neighbors": 7565,
+  "questions_with_new_chunks": 17
+}

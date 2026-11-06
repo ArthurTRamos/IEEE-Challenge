@@ -4,8 +4,9 @@ Answering with LLMs.
 
 Blind retrieval over the whole corpus: every PDF in corpus_dir is parsed with
 Docling, chunked and embedded once per run, then for each question every
-chunk is ranked by BM25 and cosine similarity. Reciprocal Rank Fusion (RRF)
-combines both rankings, and the best-ranked chunks are packed
+chunk is ranked by BM25 and cosine similarity. An optional DBpedia entity
+index adds a third ranking of corpus chunks. Reciprocal Rank Fusion (RRF)
+combines the rankings, and the best-ranked chunks are packed
 into a fixed context budget before asking the base model. No document_id is
 known to this code — the same "search has to find it" design as a real
 participant would face.
@@ -15,6 +16,7 @@ to this file (see build.sh): the evaluation environment has no internet
 access, so neither can be downloaded there the first time they're used.
 """
 
+import os
 import re
 from pathlib import Path
 
@@ -27,6 +29,11 @@ from docling.document_converter import DocumentConverter, PdfFormatOption
 from sentence_transformers import SentenceTransformer
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
+if __package__:
+    from .kg_retrieval import GraphConfig, KGChunkIndex
+else:
+    from kg_retrieval import GraphConfig, KGChunkIndex
+
 SYSTEM_PROMPT = (
     "You are a scientific expert. Answer the following question as accurately "
     "and concisely as possible based on your knowledge."
@@ -37,6 +44,8 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 150
 RETRIEVAL_TOP_K = 100
 RRF_K = 60
+KG_RRF_WEIGHT = 0.5  # Experimental: evaluate against KG_MODE=off.
+KG_PATH = Path(__file__).parent / "kg"
 
 # A local copy, not the "sentence-transformers/all-MiniLM-L6-v2" repo id:
 # same reason as the Docling model below — small, but still a model the
@@ -55,6 +64,7 @@ MAX_CONTEXT_TOKENS = 10_000
 # Loaded once and reused across every question in the run (answer() is
 # called once per question, in the same process).
 _cache = {}
+_model_cache = {}
 
 
 def _docling_converter() -> DocumentConverter:
@@ -90,6 +100,7 @@ def _build_index(corpus_dir: str):
     embedder = SentenceTransformer(EMBED_MODEL_PATH, device="cpu")
 
     all_chunks = []
+    sources = []
     pdfs = sorted(Path(corpus_dir).glob("*.pdf"))
     for pdf_path in pdfs:
         try:
@@ -99,11 +110,22 @@ def _build_index(corpus_dir: str):
             # One bad PDF shouldn't take down the whole run.
             print(f"[rag] skipping {pdf_path.name}: {e}")
             continue
-        all_chunks.extend(_chunk_markdown(text))
+        document_chunks = _chunk_markdown(text)
+        section = None
+        for local_id, chunk in enumerate(document_chunks):
+            headings = re.findall(r"^#{1,6}\s+(.+)$", chunk, flags=re.MULTILINE)
+            sources.append({
+                "chunk_id": f"{pdf_path.name}#{local_id}",
+                "document": pdf_path.name,
+                "section": headings[0] if headings else section,
+            })
+            if headings:
+                section = headings[-1]
+        all_chunks.extend(document_chunks)
 
     print(f"[rag] parsed {len(pdfs)} PDFs into {len(all_chunks)} chunks")
     if not all_chunks:
-        return [], np.empty((0, 0), dtype=np.float32), embedder, None
+        return [], np.empty((0, 0), dtype=np.float32), embedder, None, []
 
     embeddings = embedder.encode(
         all_chunks, normalize_embeddings=True, show_progress_bar=False, batch_size=64,
@@ -111,7 +133,7 @@ def _build_index(corpus_dir: str):
     tokenized_chunks = [_lexical_tokens(chunk) for chunk in all_chunks]
     # BM25 cannot initialize a corpus with no tokens (e.g. punctuation only).
     bm25 = BM25Okapi(tokenized_chunks) if any(tokenized_chunks) else None
-    return all_chunks, np.asarray(embeddings, dtype=np.float32), embedder, bm25
+    return all_chunks, np.asarray(embeddings, dtype=np.float32), embedder, bm25, sources
 
 
 def _lexical_tokens(text: str) -> list[str]:
@@ -119,67 +141,99 @@ def _lexical_tokens(text: str) -> list[str]:
     return re.findall(r"\w+", text.casefold())
 
 
-def _hybrid_order(question, embeddings, embedder, bm25):
-    """Fuse the top dense and lexical results with equal-weight RRF."""
+def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight=KG_RRF_WEIGHT):
+    """Fuse dense, lexical and optional entity-mention rankings of chunk IDs."""
     if len(embeddings) == 0:
         return []
     query_emb = embedder.encode([question], normalize_embeddings=True, show_progress_bar=False)[0]
     dense_order = np.argsort(-(embeddings @ query_emb), kind="stable")[:RETRIEVAL_TOP_K]
-    rankings = [dense_order]
+    rankings = [(dense_order, 1.0)]
     if bm25 is not None:
         lexical_scores = np.asarray(bm25.get_scores(_lexical_tokens(question)))
         lexical_order = np.argsort(-lexical_scores, kind="stable")
         # Zero-score chunks provide no lexical evidence for the question.
-        rankings.append(lexical_order[lexical_scores[lexical_order] != 0][:RETRIEVAL_TOP_K])
+        rankings.append((lexical_order[lexical_scores[lexical_order] != 0][:RETRIEVAL_TOP_K], 1.0))
+
+    if kg_index is not None and kg_weight > 0:
+        rankings.append((kg_index.rank(question, top_k=RETRIEVAL_TOP_K), kg_weight))
 
     scores = {}
-    for ranking in rankings:
+    for ranking, weight in rankings:
         for rank, index in enumerate(ranking, start=1):
             index = int(index)
-            scores[index] = scores.get(index, 0.0) + 1.0 / (RRF_K + rank)
+            scores[index] = scores.get(index, 0.0) + weight / (RRF_K + rank)
     return sorted(scores, key=lambda index: (-scores[index], index))
 
 
 def _load(model_id: str, corpus_dir: str):
-    cache_key = (model_id, str(Path(corpus_dir).resolve()))
+    kg_mode = os.environ.get("KG_MODE", "graph")
+    if kg_mode not in ("off", "mentions", "graph"):
+        raise ValueError("KG_MODE must be 'off', 'mentions' or 'graph'")
+    graph_config = GraphConfig.from_env() if kg_mode == "graph" else None
+    cache_key = (model_id, str(Path(corpus_dir).resolve()), kg_mode, graph_config)
     if cache_key not in _cache:
-        chunks, embeddings, embedder, bm25 = _build_index(corpus_dir)
-        tokenizer = AutoTokenizer.from_pretrained(model_id)
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id, dtype=torch.bfloat16, device_map="cuda",
-        )
-        model.eval()
-        _cache[cache_key] = (tokenizer, model, chunks, embeddings, embedder, bm25)
+        chunks, embeddings, embedder, bm25, sources = _build_index(corpus_dir)
+        kg_index = None
+        if kg_mode != "off" and KG_PATH.exists():
+            # A present but corrupt artifact fails explicitly, rather than
+            # silently switching the submitted experiment back to the baseline.
+            kg_index = KGChunkIndex.from_directory(KG_PATH, chunks, mode=kg_mode, config=graph_config)
+            print(f"[kg] mode={kg_mode}; indexed {len(kg_index.postings)} entities mentioned in corpus chunks")
+        if model_id not in _model_cache:
+            tokenizer = AutoTokenizer.from_pretrained(model_id)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_id, dtype=torch.bfloat16, device_map="cuda",
+            )
+            model.eval()
+            _model_cache[model_id] = (tokenizer, model)
+        tokenizer, model = _model_cache[model_id]
+        _cache[cache_key] = (tokenizer, model, chunks, embeddings, embedder, bm25, kg_index, sources)
     return _cache[cache_key]
 
 
-def _build_context(question, chunks, embeddings, embedder, tokenizer, bm25, max_tokens=MAX_CONTEXT_TOKENS):
-    """As many of the top-ranked chunks (blind, corpus-wide) as fit in
-    max_tokens. Falls back to a truncated slice of the single best chunk
-    when even that alone doesn't fit."""
-    order = _hybrid_order(question, embeddings, embedder, bm25)
+def _build_context(question, chunks, embeddings, embedder, tokenizer, bm25, max_tokens=MAX_CONTEXT_TOKENS, kg_index=None, sources=None):
+    """Pack ranked evidence and source labels within the total context budget.
 
-    selected, used = [], 0
+    If the first fragment is too long, truncate its text while retaining its
+    source. Return no context if even the labels cannot fit.
+    """
+    order = _hybrid_order(question, embeddings, embedder, bm25, kg_index=kg_index)
+    prefix = "Context extracted from a blind search over the corpus:\n\n"
+    suffix = "\n\n---\n\n"
+    selected = []
     for i in order:
+        label = f"[Fragment {len(selected) + 1}]"
+        if sources is not None:
+            source = sources[i]
+            label += f" [Source: {source['chunk_id']}]"
+            if source.get("section"):
+                label += f" [Section: {source['section']}]"
+        def context_with(text):
+            return prefix + "\n\n".join([*selected, f"{label}\n{text}"]) + suffix
         chunk = chunks[i]
-        n = len(tokenizer.encode(chunk))
-        if used + n > max_tokens:
-            if not selected and n > 0:
-                ratio = max_tokens / n
-                selected.append(chunk[: int(len(chunk) * ratio)])
+        if len(tokenizer.encode(context_with(chunk))) > max_tokens:
+            if not selected:
+                # Keep source labels intact and truncate only evidence text.
+                low, high = 0, len(chunk)
+                while low < high:
+                    mid = (low + high + 1) // 2
+                    if len(tokenizer.encode(context_with(chunk[:mid]))) <= max_tokens:
+                        low = mid
+                    else:
+                        high = mid - 1
+                if low and len(tokenizer.encode(context_with(chunk[:low]))) <= max_tokens:
+                    selected.append(f"{label}\n{chunk[:low]}")
             break
-        selected.append(chunk)
-        used += n
+        selected.append(f"{label}\n{chunk}")
 
     if not selected:
         return ""
-    body = "\n\n".join(f"[Fragment {i}]\n{c}" for i, c in enumerate(selected, 1))
-    return f"Context extracted from a blind search over the corpus:\n\n{body}\n\n---\n\n"
+    return prefix + "\n\n".join(selected) + suffix
 
 
 def answer(question: str, corpus_dir: str, model_id: str) -> str:
-    tokenizer, model, chunks, embeddings, embedder, bm25 = _load(model_id, corpus_dir)
-    context = _build_context(question, chunks, embeddings, embedder, tokenizer, bm25)
+    tokenizer, model, chunks, embeddings, embedder, bm25, kg_index, sources = _load(model_id, corpus_dir)
+    context = _build_context(question, chunks, embeddings, embedder, tokenizer, bm25, kg_index=kg_index, sources=sources)
 
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},

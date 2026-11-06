@@ -5,4 +5,5 @@ __pycache__/
 *.pyc
 /src/docling_models/
 /src/embed_model/
+/src/kg/
 /hybrid_rag_submission.zip

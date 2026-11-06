@@ -1,0 +1,8 @@
+{
+  "http://dbpedia.org/resource/Beryllium-7": ["Be7", "Be-7", "7Be"],
+  "http://dbpedia.org/resource/Transition_radiation": ["OTR"],
+  "http://dbpedia.org/resource/Scintillation_(physics)": ["Scintillation"],
+  "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)": ["Mamba"],
+  "http://dbpedia.org/resource/Linear_time-invariant_system": ["LTI"],
+  "http://dbpedia.org/resource/Fuzzy_cognitive_map": ["FCM", "FCMs"]
+}

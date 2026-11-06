@@ -1,0 +1,284 @@
+{
+  "scope": "Local CPU diagnostic on public questions. No answer references, evidence relevance labels, LLM or H100 evaluation. Entity linking only; no corpus index.",
+  "mode": "linking",
+  "counts": {
+    "edges": 60021,
+    "nodes": 8342
+  },
+  "input_hashes": {
+    "domain_kg.ttl": "2f521a6bf38a0c8981fcddf430361504419906f35b8d5e78592d11f0bffa3beb",
+    "kg_rag_chunks.jsonl": "9ae2663de7b9d3e941606360e57a3610e750226e28db3f553fdf1f62819105e7"
+  },
+  "artifact_bytes": 14221041,
+  "load_seconds": 0.36830976600322174,
+  "matcher_build_seconds": 0.24026721299742348,
+  "process_peak_rss_mib_linux": 119.15625,
+  "median_query_ms": 0.007582995749544352,
+  "max_query_ms": 0.054026000725571066,
+  "questions_with_entities": 17,
+  "question_count": 25,
+  "results": [
+    {
+      "id": 1,
+      "question": "Both OTR and scintillation are proposed for experimental beam imaging diagnostics, but they produce photons by different mechanisms. Which physical process does scintillation require that OTR does not?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Scintillation_(physics)",
+          "label": "Scintillation (physics)"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Transition_radiation",
+          "label": "Transition radiation"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What does a \"destructive\" beam diagnostic do to the beam it measures?",
+      "entities": []
+    },
+    {
+      "id": 3,
+      "question": "What would be the radioactive decay constant of Be7 if we round its half life in days to the nearest integer?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Half-life",
+          "label": "Half-life"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Radioactive_decay",
+          "label": "Radioactive decay"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "At what point in time does Be7 stop being the main source of activity in the Heat Exchanger of DONES?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Heat_exchanger",
+          "label": "Heat exchanger"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "How are the inventories of Be7 and Tritium calculated for DONES Li loop?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Beryllium-7",
+          "label": "Beryllium-7"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Tritium",
+          "label": "Tritium"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "In the context of IFMIF-DONES, what is the approximate volumetric flow rate in the primary heat exchanger?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Heat_exchanger",
+          "label": "Heat exchanger"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Volumetric_flow_rate",
+          "label": "Volumetric flow rate"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "What is the temperature of the on-line Nitrogen trap in IFMIF-DONES?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Nitrogen",
+          "label": "Nitrogen"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Temperature",
+          "label": "Temperature"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What is the bypass ratio of the ICS Branch of the DONES Li loop?",
+      "entities": []
+    },
+    {
+      "id": 9,
+      "question": "What will be volumen of the main building in the IFMIF DONES facilities?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "In the context of IFMIF DONES, when would be required hands-on or remote handling maintenance in areas with neutronics activity?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/International_Fusion_Materials_Irradiation_Facility",
+          "label": "International Fusion Materials Irradiation Facility"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Neutron_transport",
+          "label": "Neutron transport"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "In the paper 'OneSearch: A preliminary exploration of the unified end-to-end generative framework for e-commerce search'. Comparing RQ-VAE to RQ-Kmeans as a foundational tokenizer for OneSearch. What architectural property of RQ-Kmeans might explain its superiority over the learned reconstruction objective in RQ-VAE for this discrete tokenization task?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/K-means_clustering",
+          "label": "K-means clustering"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "In ONB-MACF, is the experimental comparison unfair because the proposed method enforces immutability constraints (via projections) while the baselines do not, and should an ablation without constraint satisfaction therefore be included?",
+      "entities": []
+    },
+    {
+      "id": 13,
+      "question": "In the context of properties of lush spaces and applications to Banach spaces with numerical index 1, on Theorem 4.1 \"Let $X$ be a Banach space and le $G \\subset S_{x^*}$ be a norming rounded subset for X. Then the following are equivalent\" , on \n\n(I) X is lush \n\nimply \n\n(II) $_\\mathbb{C}$ For every $x, y \\in S_X$, $n \\in \\mathbb{N}$ and $\\varepsilon > 0$, there exist $\\lambda_1, \\ldots, \\lambda_n \\geq 0$ with $\\sum_{k=1}^{n} \\lambda_k = 1$ and $x_1, \\ldots, x_n \\in B_X$ such that\n\n$$\\left\\| x + \\sum_{k=1}^{n} x_k \\right\\| > n + 1 - \\varepsilon$$\n\n*and*\n\n$$\\left\\| y - \\sum_{k=1}^{n} \\lambda_k \\exp\\left(\\frac{2\\pi i k}{n}\\right) x_k \\right\\| < \\varepsilon + \\frac{2\\pi}{n}$$\n\nWhy can we conclude that $Y$ is lush?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Banach_space",
+          "label": "Banach space"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "In REVEL framework, the authors say it is very important to have a metric between 0 and 1. Why is this?",
+      "entities": []
+    },
+    {
+      "id": 15,
+      "question": "In the paper WinStat. Considering how the window size heuristic is determined based on sequence length: if we have a sequence length of $L=512$, what would be the appropriate window size, $w$?",
+      "entities": []
+    },
+    {
+      "id": 16,
+      "question": "In the context of classic fuzzy cognitive maps. Why do relative activation values improve classification accuracy?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Cognitive_map",
+          "label": "Cognitive map"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "question": "In Dynamic Behavior of Fuzzy Cognitive Maps. Why study the covering for stable FCMs using the knowledge of the weights? Summarize in a small paragraph.",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Cognitive_map",
+          "label": "Cognitive map"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Fuzzy_cognitive_map",
+          "label": "Fuzzy cognitive map"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "question": "Given the mechanisms attributed to the fairness by brute force phenomenon as described in \"Fairness by Brute Force: Dissatisfaction-Driven Output Modification as De Facto Bias Mitigation in Text-to-Image Generative AI\", is there any model to which, under specific conditions—for example, in a particular profession and in a given iteration or set of iterations—said phenomenon could also be attributed according to the results presented?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Text-to-image_model",
+          "label": "Text-to-image model"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "question": "In WinStat paper. What type of normalized weighting mechanism has been used to adjust the $\\tilde{w}$ weights of the WinStatFlex model to prevent overflow and component dominance? Define it mathematically.",
+      "entities": []
+    },
+    {
+      "id": 20,
+      "question": "In ZeroDiff (solidified visual-semantic correlation in zero-shot learning), what is the purpose of the other Diffusion-based Representation Generator (R)?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Freezing",
+          "label": "Freezing"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Zero-shot_learning",
+          "label": "Zero-shot learning"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "question": "In the context of method 'ThinkMore' in hierarchical neuro-symbolic search with transformer re-evaluation for efficient chess play. Why are bayesian tests the best way to compare results between 'ThinkMore' options?",
+      "entities": []
+    },
+    {
+      "id": 22,
+      "question": "In SimCLR's paper, what is the main weakness of using a single fixed data augmentation?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Data_augmentation",
+          "label": "Data augmentation"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "question": "In the context of federated learning, what are the differences between $(\\alpha,f)$-byzantine resilience method and other approaches?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Federated_learning",
+          "label": "Federated learning"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "question": "According to the taxonomy and definition framework of \"General Purpose Artificial Intelligence Systems: Definition and Taxonomy\", what specific capability would an open-world GPAIS gain by incorporating active learning that would move it closer to being classified as an 'advanced GPAIS,' in terms of the supervision mechanism described for handling new tasks at time $t + \\Delta t$?",
+      "entities": []
+    },
+    {
+      "id": 25,
+      "question": "In the paper of Mamba, why Linear Time Invariance models struggle with selective Copying?",
+      "entities": [
+        {
+          "uri": "http://dbpedia.org/resource/Mamba_(deep_learning_architecture)",
+          "label": "Mamba (deep learning architecture)"
+        },
+        {
+          "uri": "http://dbpedia.org/resource/Time-invariant_system",
+          "label": "Time-invariant system"
+        }
+      ]
+    }
+  ]
+}

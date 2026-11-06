@@ -1,0 +1,2 @@
+# Development only: converting the original Turtle. Not needed in evaluation.
+rdflib==7.6.0
