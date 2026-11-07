@@ -1,0 +1,245 @@
+[
+  {
+    "id": "AI-001",
+    "title": "OneSearch: A Preliminary Exploration of the Unified End-to-End Generative Framework for E-commerce Search",
+    "url": "https://arxiv.org/pdf/2509.03236",
+    "path": "pdfs_ia/AI-001.pdf",
+    "status": "downloaded",
+    "sha256": "c5aa16f4b864f5d0ea9be55c7a6d4fb6f887516d66d27dce77b834f837bcd426",
+    "bytes": 10735940
+  },
+  {
+    "id": "AI-002",
+    "title": "PinGER: Token-Efficient Generative Retrieval with Semantic IDs",
+    "url": "https://arxiv.org/pdf/2610.33435",
+    "path": "pdfs_ia/AI-002.pdf",
+    "status": "downloaded",
+    "sha256": "f59b0bd8bed24c321020a95be031a835383bc15eb5ff0c9d055f5ffb05231efa",
+    "bytes": 827432
+  },
+  {
+    "id": "AI-003",
+    "title": "Guiding the coarse levels of semantic IDs makes the fine levels learnable",
+    "url": "https://arxiv.org/pdf/2609.22227",
+    "path": "pdfs_ia/AI-003.pdf",
+    "status": "downloaded",
+    "sha256": "97963d4a94649ef9ddfc2567cbeec45d71f38e9ab5d2a70dcdfd77530df395b4",
+    "bytes": 309487
+  },
+  {
+    "id": "AI-004",
+    "title": "Overlap Number of Balls Model-Agnostic CounterFactuals (ONB-MACF): A Data-Morphology-based Counterfactual Generation Method for Trustworthy Artificial Intelligence",
+    "url": "https://arxiv.org/pdf/2405.12326",
+    "path": "pdfs_ia/AI-004.pdf",
+    "status": "downloaded",
+    "sha256": "a93ed0f26e15b5c53a495244dd4c857165be684d3bcf3ce98f5287afc4331321",
+    "bytes": 1069915
+  },
+  {
+    "id": "AI-005",
+    "title": "Explaining Machine Learning Classifiers through Diverse Counterfactual Explanations",
+    "url": "https://arxiv.org/pdf/1905.07697",
+    "path": "pdfs_ia/AI-005.pdf",
+    "status": "downloaded",
+    "sha256": "4bfac41f236f1239a0f5ac738e78fffd192c2e42b5290323d94a656610627a01",
+    "bytes": 1147988
+  },
+  {
+    "id": "AI-006",
+    "title": "FACE: Feasible and Actionable Counterfactual Explanations",
+    "url": "https://arxiv.org/pdf/1909.09369",
+    "path": "pdfs_ia/AI-006.pdf",
+    "status": "downloaded",
+    "sha256": "566d89b33d252d8993b211533ac4d5f7e3ecc65e7c8b635a2b51d0630ac97344",
+    "bytes": 5883010
+  },
+  {
+    "id": "AI-007",
+    "title": "Properties of lush spaces and applications to Banach spaces with numerical index 1",
+    "url": "https://www.ugr.es/~mmartins/Curriculum/Papers/2009-BKMM-lush.pdf",
+    "path": "pdfs_ia/AI-007.pdf",
+    "status": "downloaded",
+    "sha256": "0b4c102bccd5769c3082149436d957a5c949729227005d8d1fe7f01f04a09e21",
+    "bytes": 447723
+  },
+  {
+    "id": "AI-008",
+    "title": "REVEL Framework to Measure Local Linear Explanations for Black-Box Models: Deep Learning Image Classification Case Study",
+    "url": "",
+    "path": "pdfs_ia/AI-008.pdf",
+    "status": "manual_url_required"
+  },
+  {
+    "id": "AI-009",
+    "title": "To trust or not to trust an explanation: using LEAF to evaluate local linear XAI methods",
+    "url": "https://arxiv.org/pdf/2106.00461",
+    "path": "pdfs_ia/AI-009.pdf",
+    "status": "downloaded",
+    "sha256": "3cc81439dcf5c90758038340b472d0ddf5c9f222f2911d72fe2e22baa0424f82",
+    "bytes": 2165591
+  },
+  {
+    "id": "AI-010",
+    "title": "WinStat: A Family of Trainable Positional Encodings for Transformers in Time Series Forecasting",
+    "url": "",
+    "path": "pdfs_ia/AI-010.pdf",
+    "status": "manual_url_required"
+  },
+  {
+    "id": "AI-011",
+    "title": "Unveiling the Dynamic Behavior of Fuzzy Cognitive Maps",
+    "url": "",
+    "path": "pdfs_ia/AI-011.pdf",
+    "status": "manual_url_required"
+  },
+  {
+    "id": "AI-012",
+    "title": "Prompting Away Stereotypes? Evaluating Bias in Text-to-Image Models for Occupations",
+    "url": "https://arxiv.org/pdf/2509.00849",
+    "path": "pdfs_ia/AI-012.pdf",
+    "status": "downloaded",
+    "sha256": "6dbd451f0fc0b352e8265bf3362ba7e5f1ce9985b5168cbf546d2ebb6adbc1b4",
+    "bytes": 4917662
+  },
+  {
+    "id": "AI-013",
+    "title": "Survey of Bias In Text-to-Image Generation: Definition, Evaluation, and Mitigation",
+    "url": "https://arxiv.org/pdf/2404.01030",
+    "path": "pdfs_ia/AI-013.pdf",
+    "status": "downloaded",
+    "sha256": "b7962f0b538c2a36c2ae207af49f6320dc0e14fed731aa33e0dba185e3c0e595",
+    "bytes": 318143
+  },
+  {
+    "id": "AI-014",
+    "title": "ZeroDiff: Solidified Visual-Semantic Correlation in Zero-Shot Learning",
+    "url": "https://arxiv.org/pdf/2406.02929",
+    "path": "pdfs_ia/AI-014.pdf",
+    "status": "downloaded",
+    "sha256": "7be194da1e97c749d0a3f136eb67c4b3733cff6d77058510e27eb61331449748",
+    "bytes": 2045416
+  },
+  {
+    "id": "AI-015",
+    "title": "ZeroDiff++: Generative Test-Time Adaptation for Zero-shot Learning",
+    "url": "",
+    "path": "pdfs_ia/AI-015.pdf",
+    "status": "manual_url_required"
+  },
+  {
+    "id": "AI-016",
+    "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+    "url": "https://arxiv.org/pdf/2002.05709",
+    "path": "pdfs_ia/AI-016.pdf",
+    "status": "downloaded",
+    "sha256": "e1b10db76adeb0d21a014b9abcf42f6a6af928540c223f010fa1d8c293d9d105",
+    "bytes": 6564895
+  },
+  {
+    "id": "AI-017",
+    "title": "Supervised Contrastive Learning",
+    "url": "https://arxiv.org/pdf/2004.11362",
+    "path": "pdfs_ia/AI-017.pdf",
+    "status": "downloaded",
+    "sha256": "b6f1f9ed63e6fcc3d387fa069425848d4791e35db1ea5b404441e0fdcab885a6",
+    "bytes": 2197586
+  },
+  {
+    "id": "AI-018",
+    "title": "Machine Learning with Adversaries: Byzantine Tolerant Gradient Descent",
+    "url": "https://proceedings.neurips.cc/paper/6617-machine-learning-with-adversaries-byzantine-tolerant-gradient-descent.pdf",
+    "path": "pdfs_ia/AI-018.pdf",
+    "status": "downloaded",
+    "sha256": "df73b5e45e062a2aceeb5ecba0881c6d0d04f382fb29e6ef7324f7cf6bb489c7",
+    "bytes": 356077
+  },
+  {
+    "id": "AI-019",
+    "title": "FLTrust: Byzantine-robust Federated Learning via Trust Bootstrapping",
+    "url": "https://arxiv.org/pdf/2012.13995",
+    "path": "pdfs_ia/AI-019.pdf",
+    "status": "downloaded",
+    "sha256": "5b4efd6b3ccdb5e9f97880f76291b5670bb7258b5fe7590914aea88397a93217",
+    "bytes": 927214
+  },
+  {
+    "id": "AI-020",
+    "title": "Byzantine Machine Learning: MultiKrum and an optimal notion of robustness",
+    "url": "https://arxiv.org/pdf/2602.03899",
+    "path": "pdfs_ia/AI-020.pdf",
+    "status": "downloaded",
+    "sha256": "3a326dd4cd3a57775e0f0ad257f5313c520764e651a11cd342137abe9cda196b",
+    "bytes": 686371
+  },
+  {
+    "id": "AI-021",
+    "title": "General Purpose Artificial Intelligence Systems (GPAIS): Properties, Definition, Taxonomy, Societal Implications and Responsible Governance",
+    "url": "https://arxiv.org/pdf/2307.14283",
+    "path": "pdfs_ia/AI-021.pdf",
+    "status": "downloaded",
+    "sha256": "289031c08ad9430cf2f3bc6df49d0e7c1b413de97779ddcc0135ed3d2f4e31b3",
+    "bytes": 1538089
+  },
+  {
+    "id": "AI-022",
+    "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "url": "https://arxiv.org/pdf/2312.00752",
+    "path": "pdfs_ia/AI-022.pdf",
+    "status": "downloaded",
+    "sha256": "adf70ed1803c85b1899dec3e21f3af0b124411439e8654b840ea65f7b9f52b2e",
+    "bytes": 1168615
+  },
+  {
+    "id": "AI-023",
+    "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+    "url": "https://arxiv.org/pdf/2111.00396",
+    "path": "pdfs_ia/AI-023.pdf",
+    "status": "downloaded",
+    "sha256": "872b4ef302312d04ef4d55610613c0e59da32c443a2e38552d7cebb7dc3636fa",
+    "bytes": 3386172
+  },
+  {
+    "id": "AI-024",
+    "title": "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+    "url": "https://arxiv.org/pdf/2405.21060",
+    "path": "pdfs_ia/AI-024.pdf",
+    "status": "downloaded",
+    "sha256": "6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f",
+    "bytes": 3209170
+  },
+  {
+    "id": "AI-025",
+    "title": "A Survey on Structured State Space Sequence (S4) Models",
+    "url": "https://arxiv.org/pdf/2503.18970",
+    "path": "pdfs_ia/AI-025.pdf",
+    "status": "downloaded",
+    "sha256": "0682997d136fd0b2f20129014c8f3d37306d9e25a0c468025bd31483ad6ad6ff",
+    "bytes": 10811761
+  },
+  {
+    "id": "AI-026",
+    "title": "Measuring Social Bias in Vision-Language Models with Face-Only Counterfactuals from Real Photos",
+    "url": "https://arxiv.org/pdf/2601.06931",
+    "path": "pdfs_ia/AI-026.pdf",
+    "status": "failed",
+    "error": "PDF maior que 35 MB"
+  },
+  {
+    "id": "AI-027",
+    "title": "Transformers to SSMs: Distilling Quadratic Knowledge to Subquadratic Models",
+    "url": "https://arxiv.org/pdf/2408.10189",
+    "path": "pdfs_ia/AI-027.pdf",
+    "status": "downloaded",
+    "sha256": "9eea5a394b9ea6f8026d54adff20543bceb76e738ace18566a0f5801ce7af080",
+    "bytes": 812851
+  },
+  {
+    "id": "AI-028",
+    "title": "FoggyTrust: Robust Federated Learning with Hierarchical Trust Networks",
+    "url": "https://arxiv.org/pdf/2606.27622",
+    "path": "pdfs_ia/AI-028.pdf",
+    "status": "downloaded",
+    "sha256": "2057f7f7497650171b9f9a2411c8a2ccd68a9ae3fd8b53c55337ec122cafa1c7",
+    "bytes": 1197933
+  }
+]

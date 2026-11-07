@@ -7,3 +7,4 @@ __pycache__/
 /src/embed_model/
 /src/kg/
 /hybrid_rag_submission.zip
+*.pdf
