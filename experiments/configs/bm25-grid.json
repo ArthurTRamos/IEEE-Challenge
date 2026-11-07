@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "pipeline_config": "experiments/configs/pipeline.json",
+  "output_root": "experiments/runs/bm25-grid",
+  "preprocessing": [
+    {"name": "normalized", "stopwords": false, "stemming": false},
+    {"name": "stopwords", "stopwords": true, "stemming": false},
+    {"name": "stemming", "stopwords": false, "stemming": true},
+    {"name": "stopwords_stemming", "stopwords": true, "stemming": true}
+  ],
+  "k1": [1.25],
+  "b": [0.75],
+  "epsilon": 0.25,
+  "preserve_words": [],
+  "controls": ["dense", "dense_mentions", "dense_graph"],
+  "variants": ["bm25", "hybrid", "mentions", "graph"]
+}

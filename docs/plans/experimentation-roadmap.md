@@ -128,8 +128,12 @@ experiments/
     error-notes.md
 ```
 
-PDFs, caches, pesos e ZIPs devem ficar fora do versionamento de código. Essa
-estrutura é uma proposta; o runner e a coleta ainda não estão implementados.
+PDFs, caches, pesos e ZIPs devem ficar fora do versionamento de código. A estrutura
+acima é uma proposta de base anotada. Desde 7/11 há um
+[runner para revisão manual](../implementations/local-retrieval-review.md), que
+usa os PDFs recebidos em `data/download_pdfs/` e grava em `experiments/runs/`.
+Ainda não existe uma base com relevância julgada; o runner exporta os candidatos
+para a anotação, sem produzir métricas de qualidade automaticamente.
 O corpus local serve para pesquisa e não precisa entrar no ZIP de avaliação,
 que recebe o corpus oculto pela interface oficial.
 
@@ -201,8 +205,8 @@ Antes de acrescentar componentes, padronizar o experimento:
 
 1. Preservar o ZIP/código exato das três submissões já avaliadas e coletar seus
    IDs, logs, duração, score sem arredondamento e configuração quando disponíveis.
-2. Acrescentar uma configuração explícita de recuperação **somente semântica**
-   no runner futuro. Hoje `KG_MODE=off` ainda mantém BM25; não é o baseline denso.
+2. Usar a variante `dense` do runner local para recuperação **somente semântica**.
+   Na submissão, `KG_MODE=off` ainda mantém BM25; não é o baseline denso.
 3. Comparar canais mantendo embedding, extração, chunking, prompt, ordem de
    contexto e orçamento iguais. As versões recentes também mudaram referências
    de fonte e contagem de tokens; isso pode confundir uma comparação histórica.
@@ -217,8 +221,11 @@ Experimentos locais em sequência, sem cruzar todas as combinações:
 - Denso + KG, sem BM25, para isolar a contribuição do reconhecimento de entidades.
 - Comparar `off`, `mentions` e `graph` na melhor configuração comparável.
 
-O suporte a pesos/modos independentes precisa ser implementado; os valores acima
-não são todos configuráveis no código atual. Não concluir que BM25 é sempre ruim
+O runner local já oferece pesos independentes e variante somente semântica.
+O [executor de grades](../implementations/experiment-configuration.md) também
+permite comparar stopwords/stemming e valores de `k1/b` a partir de JSON.
+Esses argumentos são de pesquisa e não alteram automaticamente os parâmetros
+da submissão. Não concluir que BM25 é sempre ruim
 ou que o KG melhorou o baseline com base apenas nos três scores agregados.
 
 ## 5. Embeddings: dois candidatos, medidos em etapas

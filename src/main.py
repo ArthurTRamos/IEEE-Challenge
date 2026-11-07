@@ -31,13 +31,12 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 if __package__:
     from .kg_retrieval import GraphConfig, KGChunkIndex
+    from .retrieval_utils import rrf_fuse
+    from .prompts import SYSTEM_PROMPT, build_user_message
 else:
     from kg_retrieval import GraphConfig, KGChunkIndex
-
-SYSTEM_PROMPT = (
-    "You are a scientific expert. Answer the following question as accurately "
-    "and concisely as possible based on your knowledge."
-)
+    from retrieval_utils import rrf_fuse
+    from prompts import SYSTEM_PROMPT, build_user_message
 
 MAX_NEW_TOKENS = 2048
 CHUNK_SIZE = 800
@@ -67,12 +66,20 @@ _cache = {}
 _model_cache = {}
 
 
-def _docling_converter() -> DocumentConverter:
+def _docling_converter(device=None, num_threads=None) -> DocumentConverter:
     pipeline_options = PdfPipelineOptions(
         artifacts_path=str(Path(__file__).parent / "docling_models"),
         do_ocr=False,              # the corpus is born-digital text, not scans
         do_table_structure=False,  # avoids needing cv2/libGL, not in the image
     )
+    if device is not None or num_threads is not None:
+        from docling.datamodel.accelerator_options import AcceleratorOptions
+        options = {}
+        if device is not None:
+            options["device"] = device
+        if num_threads is not None:
+            options["num_threads"] = num_threads
+        pipeline_options.accelerator_options = AcceleratorOptions(**options)
     return DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)})
 
 
@@ -111,16 +118,7 @@ def _build_index(corpus_dir: str):
             print(f"[rag] skipping {pdf_path.name}: {e}")
             continue
         document_chunks = _chunk_markdown(text)
-        section = None
-        for local_id, chunk in enumerate(document_chunks):
-            headings = re.findall(r"^#{1,6}\s+(.+)$", chunk, flags=re.MULTILINE)
-            sources.append({
-                "chunk_id": f"{pdf_path.name}#{local_id}",
-                "document": pdf_path.name,
-                "section": headings[0] if headings else section,
-            })
-            if headings:
-                section = headings[-1]
+        sources.extend(_chunk_sources(pdf_path.name, document_chunks))
         all_chunks.extend(document_chunks)
 
     print(f"[rag] parsed {len(pdfs)} PDFs into {len(all_chunks)} chunks")
@@ -141,6 +139,18 @@ def _lexical_tokens(text: str) -> list[str]:
     return re.findall(r"\w+", text.casefold())
 
 
+def _chunk_sources(document, chunks):
+    """Preserve source and section consistently in submission and local runs."""
+    sources, section = [], None
+    for local_id, chunk in enumerate(chunks):
+        headings = re.findall(r"^#{1,6}\s+(.+)$", chunk, flags=re.MULTILINE)
+        sources.append({"chunk_id": f"{document}#{local_id}", "document": document,
+                        "section": headings[0] if headings else section})
+        if headings:
+            section = headings[-1]
+    return sources
+
+
 def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight=KG_RRF_WEIGHT):
     """Fuse dense, lexical and optional entity-mention rankings of chunk IDs."""
     if len(embeddings) == 0:
@@ -157,12 +167,9 @@ def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight
     if kg_index is not None and kg_weight > 0:
         rankings.append((kg_index.rank(question, top_k=RETRIEVAL_TOP_K), kg_weight))
 
-    scores = {}
-    for ranking, weight in rankings:
-        for rank, index in enumerate(ranking, start=1):
-            index = int(index)
-            scores[index] = scores.get(index, 0.0) + weight / (RRF_K + rank)
-    return sorted(scores, key=lambda index: (-scores[index], index))
+    named = {str(i): ranking for i, (ranking, _) in enumerate(rankings)}
+    weights = {str(i): weight for i, (_, weight) in enumerate(rankings)}
+    return rrf_fuse(named, weights, RRF_K)[0]
 
 
 def _load(model_id: str, corpus_dir: str):
@@ -237,7 +244,7 @@ def answer(question: str, corpus_dir: str, model_id: str) -> str:
 
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": context + question},
+        {"role": "user", "content": build_user_message(question, context)},
     ]
     inputs = tokenizer.apply_chat_template(
         messages, add_generation_prompt=True, return_tensors="pt", return_dict=True,

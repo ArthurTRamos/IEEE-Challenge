@@ -36,6 +36,9 @@ flowchart LR
 | Preparação da DBpedia | Converte os resultados dos notebooks para arquivos locais validados | [Preparação do KG](implementations/kg-data-preparation.md) |
 | Exploração do grafo | Segue associações de um salto para recuperar chunks de entidades vizinhas | [Recuperação pelo grafo](implementations/graph-retrieval.md) |
 | Testes e submissão | Valida componentes, executa diagnósticos e constrói o ZIP | [Build e validação](implementations/build-and-validation.md) |
+| Avaliação local | Salva rankings e chunks dos PDFs para revisão humana, sem OLMo | [Revisão manual](implementations/local-retrieval-review.md) |
+| Experimentos configuráveis | Executa combinações de BM25 e canais a partir de JSON | [Configuração de experimentos](implementations/experiment-configuration.md) |
+| Geração externa | Exporta as perguntas e seus dez chunks finais para um notebook com OLMo 3 7B | [Geração externa](implementations/external-generation.md) |
 
 ## Como o grafo influencia a busca
 
@@ -71,7 +74,8 @@ a 60 minutos e o ZIP a 1 GB. O KG roda em CPU, sem outro modelo de linguagem ou
 dependência adicional em inferência. Consulte os
 [requisitos locais da competição](competition-requirements.md).
 
-Há testes funcionais e um diagnóstico de expansão com o grafo real e chunks
-sintéticos. Isso demonstra que as arestas influenciam o ranking, mas ainda não
-mede ganho de acurácia, recall de evidências ou o tempo completo na H100.
-Os próximos experimentos devem comparar os três modos no mesmo corpus.
+Há testes funcionais, diagnóstico com chunks sintéticos e um runner sobre PDFs
+reais que compara semântico, BM25 e as variantes do KG. O runner exporta Markdown
+e CSV com julgamentos inicialmente vazios. Ainda não há métricas de relevância
+sem a anotação manual, nem medição de acurácia das respostas ou da execução
+completa na H100.

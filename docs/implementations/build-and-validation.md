@@ -46,6 +46,7 @@ HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 | [test_retrieval.py](../../tests/test_retrieval.py) | BM25, embeddings simulados, alinhamento de fontes, RRF, contexto, cache e candidato exclusivo do grafo |
 | [test_kg.py](../../tests/test_kg.py) | Aliases, ambiguidades, identidade canônica, postings, integridade e conversão do artefato |
 | [test_graph_retrieval.py](../../tests/test_graph_retrieval.py) | Um salto, direções, duplicatas/ciclos, filtros, pesos, limites, caminhos compartilhados e configuração |
+| [test_local_retrieval.py](../../tests/test_local_retrieval.py) | Cache, fontes, exportação para revisão, pesos independentes e execução sem OLMo |
 
 Os testes unitários não carregam OLMo nem dependem de GPU. A extração de PDFs e
 os modelos usados nos testes do pipeline são simulados. Isso valida o código,
@@ -100,7 +101,7 @@ REUSE_MODELS=1 ./src/build.sh
 
 O script verifica se os dados originais e aliases locais ainda correspondem
 ao manifesto. Se estiverem diferentes, pede uma nova preparação. Inclui
-`main.py`, `kg_retrieval.py`, quatro arquivos do KG, Docling layout e MiniLM.
+`main.py`, `kg_retrieval.py`, `retrieval_utils.py`, `prompts.py`, quatro arquivos do KG, Docling layout e MiniLM.
 Notebooks, dados brutos, ferramentas de preparação e dependências de
 desenvolvimento ficam fora do pacote.
 

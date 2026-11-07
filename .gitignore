@@ -8,3 +8,4 @@ __pycache__/
 /src/kg/
 /hybrid_rag_submission.zip
 *.pdf
+/experiments/runs/

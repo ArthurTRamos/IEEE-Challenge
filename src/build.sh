@@ -23,7 +23,7 @@ case "$include_kg:$reuse_models" in
     0:0|0:1|1:0|1:1) ;;
     *) echo "INCLUDE_KG and REUSE_MODELS must be 0 or 1" >&2; exit 1 ;;
 esac
-files=(main.py kg_retrieval.py docling_models embed_model)
+files=(main.py kg_retrieval.py retrieval_utils.py prompts.py docling_models embed_model)
 if [[ "$include_kg" == 1 ]]; then
     if [[ ! -f kg/manifest.json ]]; then
         echo "Prepare the KG first: python tools/prepare_kg.py (from the repository root)" >&2

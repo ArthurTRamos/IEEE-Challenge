@@ -90,7 +90,9 @@ RRF(c) = 1 / (60 + posição_BM25(c))
        + 0,5 / (60 + posição_KG(c))
 ```
 
-As posições começam em 1. Um canal ausente ou que não recuperou o chunk não
+O cálculo está compartilhado com o runner local em
+[retrieval_utils.py](../../src/retrieval_utils.py). As posições começam em 1.
+Um canal ausente ou que não recuperou o chunk não
 contribui. O RRF funde posições, não compara diretamente scores BM25, cossenos e
 scores do grafo. Empates finais são resolvidos pela posição inteira do chunk.
 A união tem no máximo 300 candidatos. Peso KG 0,5 e `k=60` são parâmetros atuais,
@@ -112,6 +114,17 @@ o template de chat; apenas os tokens novos são decodificados como resposta.
 
 O KG altera a seleção dos chunks, mas suas propriedades e caminhos não são
 injetados como fatos no prompt. As fontes do contexto são os PDFs.
+
+O prompt em `src/prompts.py` pede resposta direta e breve com referências
+`[Fragment N]` que sustentem as afirmações. Ele orienta a correção de premissas
+contraditas, a preservação de unidades e quantificadores e a identificação de
+lacunas, sem inventar fórmulas ou comparações. `build_user_message()` separa
+pergunta, evidências e tarefa de resposta; o bloco de contexto conserva seu
+orçamento e empacotamento. As instruções adicionais ficam fora dos 10.000 tokens
+das evidências. Não há nova chamada a modelos nem dependência adicional; o
+efeito em qualidade e tempo ainda depende de avaliação. O texto completo da
+revisão e o teste controlado estão no
+[relatório de evidência manual](../reports/manual-evidence-q13-q23-2026-11-07.md#revisão-do-prompt-após-este-diagnóstico).
 
 ## Validação e limites
 

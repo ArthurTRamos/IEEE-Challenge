@@ -264,6 +264,27 @@ class HybridRetrievalTests(unittest.TestCase):
         ), "")
 
 
+class AnswerPromptTests(unittest.TestCase):
+    def test_generation_receives_separate_question_and_cited_evidence(self):
+        question = r"Why does $x_{m,n} \in Y$ hold?"
+        context = "[Fragment 1] [Source: proof.pdf#3]\nWitnesses belong to Y."
+        tokenizer, model = Mock(), Mock()
+        batch = Mock()
+        batch.to.return_value = {"input_ids": np.array([[1, 2, 3]])}
+        tokenizer.apply_chat_template.return_value = batch
+        tokenizer.decode.return_value = "Answer [Fragment 1]."
+        model.generate.return_value = np.array([[1, 2, 3, 4]])
+        with patch.object(rag, "_load", return_value=(tokenizer, model, [], None, None, None, None, [])), \
+             patch.object(rag, "_build_context", return_value=context):
+            self.assertEqual(rag.answer(question, "unused", "unused"), "Answer [Fragment 1].")
+        messages = tokenizer.apply_chat_template.call_args.args[0]
+        self.assertEqual(messages[0], {"role": "system", "content": rag.SYSTEM_PROMPT})
+        self.assertIn("QUESTION:\n" + question, messages[1]["content"])
+        self.assertIn("REFERENCE EXCERPTS:\n" + context, messages[1]["content"])
+        self.assertLess(messages[1]["content"].index(question), messages[1]["content"].index(context))
+        self.assertFalse(model.generate.call_args.kwargs["do_sample"])
+
+
 class KGLoadingTests(unittest.TestCase):
     def setUp(self):
         patcher = patch.dict(rag._model_cache, {}, clear=True)

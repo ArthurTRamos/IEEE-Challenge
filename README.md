@@ -7,6 +7,8 @@ com recuperação BM25, busca semântica e exploração de um KG local da DBpedi
 - [Detalhes das implementações](docs/implementations/README.md)
 - [Requisitos da competição](docs/competition-requirements.md)
 - [Notebooks da DBpedia](notebooks/dbpedia/README.md)
+- [Recuperação local dos PDFs para avaliação manual](docs/implementations/local-retrieval-review.md)
+- [Experimentos configuráveis sem editar código](experiments/README.md)
 
 Com o ambiente `.venv` preparado:
 
@@ -21,3 +23,9 @@ O modo padrão de recuperação é `KG_MODE=graph`. Os modos `mentions` e `off`
 permitem comparar o efeito da exploração. Consulte os detalhes de
 [build e validação](docs/implementations/build-and-validation.md) antes de
 interpretar os diagnósticos como resultados da avaliação.
+
+Para recuperar os chunks dos PDFs locais e gerar os arquivos de revisão manual:
+
+```bash
+.venv/bin/python tools/run_retrieval.py --output experiments/runs/manual-01
+```

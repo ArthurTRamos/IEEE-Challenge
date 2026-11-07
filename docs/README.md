@@ -11,6 +11,8 @@ use o [índice de implementações](implementations/README.md).
 - [Resultados informados das submissões](reports/submission-results.md)
 - [Relatório de reconhecimento de entidades](reports/kg-linking-report.json)
 - [Diagnóstico de exploração do grafo](reports/kg-graph-report.json)
+- [Piloto local: PDFs reais e chunks para revisão manual](reports/local-retrieval-pilot-2026-11-07.md)
+- [Grade de stopwords, stemming e k1/b do BM25](reports/bm25-grid-2026-11-07.md)
 
 Os relatórios distinguem medições locais e dados sintéticos de avaliações de
 qualidade sobre o corpus. A documentação de implementações descreve o código

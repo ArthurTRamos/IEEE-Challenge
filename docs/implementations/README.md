@@ -9,6 +9,9 @@ está na [visão técnica](../technical-overview.md).
 | [Preparação do KG](kg-data-preparation.md) | Exportações dos notebooks, conversão, esquema, auditoria e proveniência |
 | [Recuperação pelo grafo](graph-retrieval.md) | Entidades, postings, adjacência, filtros, limites, pontuação e rastreabilidade |
 | [Build e validação](build-and-validation.md) | Ambiente, testes, diagnósticos, ZIP e limites de recursos |
+| [Recuperação local e revisão manual](local-retrieval-review.md) | PDFs reais, variantes, caches, tempos e exportação de chunks para anotação |
+| [Configuração e grades de experimentos](experiment-configuration.md) | JSON editável, stopwords, stemming, k1/b e controles sem BM25 |
+| [Geração externa](external-generation.md) | Top 10 autocontido em JSON e notebook com OLMo 3 7B |
 
 ```mermaid
 flowchart TD
