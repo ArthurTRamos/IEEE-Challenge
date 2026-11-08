@@ -119,7 +119,7 @@ def export_suite_review(output, questions, chunks, results, include_answers=Fals
                           "| Posição | Texto completo | Documento | Score |", "| --- | --- | --- | --- |"]
                 for hit in row["hits"]:
                     chunk = chunks[hit["index"]]
-                    lines.append(f"| {hit['rank']} | [C{hit['index']:06d}](../questions/{filename}#c{hit['index']:06d}) | {chunk['document_id']} | {hit['score']:.6g} |")
+                    lines.append(f"| {hit['rank']} | [C{hit['index']:06d}](../questions/{filename}#c{hit['index']:06d}) | {chunk['document_id']} | {runner.format_score(hit['score'])} |")
                     writer.writerow({"case_id": case_id, "variant": row["variant"], "question_id": row["question_id"],
                                      "rank": hit["rank"], "chunk_id": chunk["chunk_id"], "score": hit["score"]})
                 lines.append("")
@@ -224,11 +224,14 @@ def execute(args, config, cases):
     def get_result(qid, variant, case_id, rankings, lexical_scores=None):
         weights = runner.variant_weights(variant, pipeline_args.dense_weight, pipeline_args.bm25_weight, pipeline_args.kg_weight)
         order, scores = rrf_fuse(rankings, weights, pipeline_args.rrf_k)
+        selected, adjusted, anchors = runner.select_evidence(order, scores, chunks, next(q["question"] for q in questions if q["id"] == qid), pipeline_args)
         return {"case_id": case_id, "variant": variant, "question_id": qid,
-                "hits": [{"index": index, "chunk_id": chunks[index]["chunk_id"], "rank": rank, "score": scores[index],
+                "hits": [{"index": index, "chunk_id": chunks[index]["chunk_id"], "rank": rank, "score": adjusted.get(index), "rrf_score": scores.get(index),
+                          "content_kind": chunks[index].get("content_kind", "body"),
+                          "selection_role": "anchor" if index in anchors else "neighbor",
                           "dense_score": float(shared[qid]["dense_scores"][index]),
                           "bm25_score": float(lexical_scores[index]) if lexical_scores is not None else None}
-                         for rank, index in enumerate(order[:pipeline_args.top_k], 1)]}
+                         for rank, index in enumerate(selected, 1)]}
 
     for qid, row in shared.items():
         for variant in config["controls"]:

@@ -8,7 +8,7 @@ extraídas de PDFs. A interface de submissão é
 
 ```mermaid
 flowchart LR
-    P[PDFs do corpus] --> D[Docling e chunks com fontes]
+    P[PDFs do corpus] --> D[Docling, fórmulas em LaTeX e chunks por seção]
     D --> B[Índice BM25]
     D --> E[Embeddings MiniLM]
     D --> I[Índice de menções de entidades]
@@ -20,25 +20,34 @@ flowchart LR
     I --> G
     B --> R[Fusão RRF dos chunks]
     E --> R
-    G --> R
-    R --> C[Contexto com fontes e limite de tokens]
+    G -. KG opcional .-> R
+    R --> M[Penalização de capas e referências]
+    M --> V[Continuidade na mesma seção]
+    V --> C[Contexto com fontes e limite de tokens]
     C --> L[OLMo fornecido pela avaliação]
     Q --> L
     L --> A[Resposta]
 ```
 
+O padrão de submissão é **hybrid** (semântico + BM25, `KG_MODE=off`). O KG
+é opcional. O reconhecimento de fórmulas usa CodeFormulaV2 local; os chunks
+respeitam títulos e a seleção expande vizinhos da mesma seção, com limites.
+Capas e referências têm pontuação reduzida, sem serem excluídas.
+
 ## Implementações principais
 
 | Parte | O que faz | Detalhes |
 | --- | --- | --- |
+| Evidências e fórmulas | Seções, vizinhos, penalizações e extração LaTeX offline | [Detalhes](implementations/evidence-and-formulas.md) |
 | Documentos e geração | Extrai Markdown, cria chunks, preserva referências e monta o prompt | [Pipeline RAG](implementations/rag-pipeline.md) |
-| Busca híbrida | Combina rankings BM25, semântico e KG usando RRF | [Pipeline RAG](implementations/rag-pipeline.md#recuperação-e-fusão) |
+| Busca híbrida | Combina BM25 e semântico por RRF; KG opcional | [Pipeline RAG](implementations/rag-pipeline.md#recuperação-e-fusão) |
 | Preparação da DBpedia | Converte os resultados dos notebooks para arquivos locais validados | [Preparação do KG](implementations/kg-data-preparation.md) |
 | Exploração do grafo | Segue associações de um salto para recuperar chunks de entidades vizinhas | [Recuperação pelo grafo](implementations/graph-retrieval.md) |
 | Testes e submissão | Valida componentes, executa diagnósticos e constrói o ZIP | [Build e validação](implementations/build-and-validation.md) |
 | Avaliação local | Salva rankings e chunks dos PDFs para revisão humana, sem OLMo | [Revisão manual](implementations/local-retrieval-review.md) |
 | Experimentos configuráveis | Executa combinações de BM25 e canais a partir de JSON | [Configuração de experimentos](implementations/experiment-configuration.md) |
 | Geração externa | Exporta as perguntas e seus dez chunks finais para um notebook com OLMo 3 7B | [Geração externa](implementations/external-generation.md) |
+| Métricas de recuperação | Compara documentos recuperados com notas estimadas de relevância, usando nDCG e Recall | [Métricas](implementations/retrieval-metrics.md) |
 
 ## Como o grafo influencia a busca
 
@@ -55,7 +64,7 @@ causalidade ou equivalência à conexão.
 | --- | --- |
 | `off` | BM25 + semântico |
 | `mentions` | Acrescenta menções das entidades da pergunta |
-| `graph` | Acrescenta menções e expansão limitada por vizinhos; padrão atual |
+| `graph` | Acrescenta menções e expansão limitada por vizinhos; experimental |
 
 ## Organização
 

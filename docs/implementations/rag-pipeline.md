@@ -41,18 +41,21 @@ entre variantes, use processos separados.
 
 ## PDF, chunking e fontes
 
-- Docling converte cada PDF para Markdown com modelos de layout locais.
+- Docling converte PDFs para Markdown com layout Transformers e CodeFormulaV2
+  locais. Fórmulas detectadas são reconhecidas em LaTeX.
 - OCR e reconhecimento de estrutura de tabelas estão desativados, conforme o
   baseline. Isso limita a qualidade de extração de tabelas e documentos escaneados.
 - Um PDF que falha é registrado e ignorado; os demais continuam sendo processados.
 - `_chunk_markdown()` agrupa parágrafos mirando 800 **caracteres**, com uma
-  cauda de 150 caracteres de sobreposição. Um parágrafo longo pode superar 800;
+  cauda de até 150 caracteres de sobreposição apenas dentro da seção. Blocos
+  de fórmulas não são divididos ou usados como caudas cortadas. Um parágrafo longo pode superar 800;
   esse valor não é um limite rígido nem uma quantidade de tokens.
 
 Cada chunk tem uma posição inteira compartilhada por todos os rankings. Em
 paralelo, `sources` guarda `chunk_id` (`nome.pdf#posição_local`), `document` e
-`section`. A seção vem do primeiro título Markdown no chunk ou do último título
-observado anteriormente; é uma referência de seção, não um mapa exato de páginas.
+`section`, `section_id`, `section_path`, `local_chunk_index` e `content_kind`.
+Títulos Markdown iniciam novos chunks. A seção é uma referência textual, não
+um mapa exato de páginas.
 O texto original do chunk permanece disponível.
 
 ## Recuperação e fusão
@@ -71,7 +74,8 @@ flowchart LR
 ```
 
 O BM25 usa `rank-bm25` do ambiente oficial, com a mesma tokenização Unicode em
-documentos e perguntas: `casefold()` e `\w+`. Chunks com score lexical zero são
+documentos e perguntas: `casefold()`, `\w+`, remoção de stopwords em inglês e
+Porter stemming. A submissão usa `k1=1.2`, `b=0.75`, `epsilon=0.25`. Chunks com score lexical zero são
 excluídos do ranking lexical. O índice é construído uma vez; corpus sem tokens
 não cria BM25.
 
@@ -98,10 +102,17 @@ scores do grafo. Empates finais são resolvidos pela posição inteira do chunk.
 A união tem no máximo 300 candidatos. Peso KG 0,5 e `k=60` são parâmetros atuais,
 sem garantia de otimalidade.
 
+Após o RRF, capas e bibliografias recebem uma redução multiplicativa de score.
+A seleção expande seções curtas ou uma janela local na mesma seção e documento,
+até dez chunks, sem duplicar IDs. A ordem dentro de cada bloco é a da fonte.
+Detalhes e parâmetros em [Evidências e fórmulas](evidence-and-formulas.md).
+O padrão é semântico + BM25; o termo KG da fórmula acima só existe quando
+`KG_MODE=mentions` ou `graph` é explicitamente habilitado.
+
 ## Contexto e geração
 
 O contexto inclui títulos, fontes, seções e separadores dentro de um orçamento
-de 10.000 tokens, contado com o tokenizer do OLMo. Os chunks seguem a ordem RRF.
+de 10.000 tokens, contado com o tokenizer do OLMo. Os blocos seguem as âncoras após penalização e a continuidade por seção.
 Quando o próximo não cabe, o preenchimento para; não é um algoritmo de mochila.
 Se o primeiro chunk for longo demais, seu texto é truncado por busca binária de
 prefixo, preservando os rótulos de fonte. Sem espaço para uma evidência, o contexto

@@ -1,0 +1,49 @@
+{
+  "submission_file": "hybrid_rag_submission.zip",
+  "submission_bytes": 746098072,
+  "default_variant": "hybrid",
+  "kg_included": false,
+  "tests_passed": 96,
+  "smoke": {
+    "selection": {
+      "AI-007": {
+        "original_pdf": "data/download_pdfs/corpus_piloto_ia_28_artigos/pdfs_ia/AI-007.pdf",
+        "pages_1_based": [
+          10,
+          11
+        ]
+      },
+      "AI-018": {
+        "original_pdf": "data/download_pdfs/corpus_piloto_ia_28_artigos/pdfs_ia/AI-018.pdf",
+        "pages_1_based": [
+          4
+        ]
+      }
+    },
+    "summary": {
+      "documents": 2,
+      "failed_documents": 0,
+      "partial_documents": 0,
+      "chunks": 19,
+      "questions": 2,
+      "variants": [
+        "hybrid"
+      ],
+      "truncated_embedding_chunks": 3,
+      "text_cache_hits": 1,
+      "missing_catalog_document_ids": [],
+      "quality_metrics": null,
+      "annotation_status": "unjudged",
+      "output": "/home/arthur/repos/IEEE-Challenge/experiments/runs/section-formula-smoke-2026-11-07-complete"
+    },
+    "total_seconds": 23.12188831000094,
+    "text_cache_hits": 1,
+    "missing_formula_markers": 0
+  },
+  "limitations": [
+    "No OLMo generation or accuracy evaluation in this change",
+    "No full-corpus H100 timing",
+    "PDF subset integration test includes one cached document",
+    "Section boundaries depend on headings detected by Docling"
+  ]
+}

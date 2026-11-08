@@ -13,6 +13,7 @@ use o [índice de implementações](implementations/README.md).
 - [Diagnóstico de exploração do grafo](reports/kg-graph-report.json)
 - [Piloto local: PDFs reais e chunks para revisão manual](reports/local-retrieval-pilot-2026-11-07.md)
 - [Grade de stopwords, stemming e k1/b do BM25](reports/bm25-grid-2026-11-07.md)
+- [Rankings híbridos e relevância estimada das cinco perguntas](reports/hybrid-relevance-selected-five-2026-11-07.md)
 
 Os relatórios distinguem medições locais e dados sintéticos de avaliações de
 qualidade sobre o corpus. A documentação de implementações descreve o código

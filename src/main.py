@@ -33,10 +33,14 @@ if __package__:
     from .kg_retrieval import GraphConfig, KGChunkIndex
     from .retrieval_utils import rrf_fuse
     from .prompts import SYSTEM_PROMPT, build_user_message
+    from .lexical import LexicalPreprocessor
+    from .evidence import EvidenceConfig, section_chunks, chunk_sources, penalize_order, continuity_order
 else:
     from kg_retrieval import GraphConfig, KGChunkIndex
     from retrieval_utils import rrf_fuse
     from prompts import SYSTEM_PROMPT, build_user_message
+    from lexical import LexicalPreprocessor
+    from evidence import EvidenceConfig, section_chunks, chunk_sources, penalize_order, continuity_order
 
 MAX_NEW_TOKENS = 2048
 CHUNK_SIZE = 800
@@ -52,53 +56,48 @@ KG_PATH = Path(__file__).parent / "kg"
 # internet there to fetch it by name (see build.sh).
 EMBED_MODEL_PATH = str(Path(__file__).parent / "embed_model")
 
-# Fixed context budget, in tokens. Deliberately NOT "as much as fits the
-# model's real context window" (Olmo-3.1-32B-Instruct's is 65536): measured
-# directly, filling anywhere near that runs the GPU (80 GB) out of memory
-# during prefill, and even a context that does fit paired with a long real
-# answer can take minutes for a single question. 10,000 keeps every
-# question fast and safe — tested end to end against real questions.
+# Budget for the evidence block only, excluding system/user instructions.
+# Full latency and VRAM with the new formula stage still require an H100 run.
 MAX_CONTEXT_TOKENS = 10_000
 
 # Loaded once and reused across every question in the run (answer() is
 # called once per question, in the same process).
 _cache = {}
 _model_cache = {}
+_bm25_preprocessor = None
 
 
-def _docling_converter(device=None, num_threads=None) -> DocumentConverter:
+def _docling_converter(device=None, num_threads=None, formula_enrichment=False) -> DocumentConverter:
     pipeline_options = PdfPipelineOptions(
         artifacts_path=str(Path(__file__).parent / "docling_models"),
         do_ocr=False,              # the corpus is born-digital text, not scans
-        do_table_structure=False,  # avoids needing cv2/libGL, not in the image
+        do_table_structure=False,  # TableFormer is a separate, untested ablation.
+        do_formula_enrichment=formula_enrichment,
     )
-    if device is not None or num_threads is not None:
-        from docling.datamodel.accelerator_options import AcceleratorOptions
-        options = {}
-        if device is not None:
-            options["device"] = device
-        if num_threads is not None:
-            options["num_threads"] = num_threads
-        pipeline_options.accelerator_options = AcceleratorOptions(**options)
+    from docling.datamodel.accelerator_options import AcceleratorOptions
+    from docling.datamodel.object_detection_engine_options import TransformersObjectDetectionEngineOptions
+    pipeline_options.layout_options.engine_options = TransformersObjectDetectionEngineOptions(compile_model=False)
+    pipeline_options.accelerator_options = AcceleratorOptions(
+        device=device or "auto", num_threads=num_threads or 4,
+        cuda_use_flash_attention2=False,
+    )
+    if formula_enrichment:
+        from docling.datamodel.pipeline_options import CodeFormulaVlmOptions
+        from docling.datamodel.vlm_engine_options import TransformersVlmEngineOptions
+        formula_path = Path(__file__).parent / "docling_models/docling-project--CodeFormulaV2"
+        if not (formula_path / "model.safetensors").is_file():
+            raise FileNotFoundError("Missing offline formula model; run src/build.sh")
+        pipeline_options.code_formula_options = CodeFormulaVlmOptions.from_preset("codeformulav2")
+        pipeline_options.code_formula_options.model_spec.max_new_tokens = 1024
+        pipeline_options.code_formula_options.engine_options = TransformersVlmEngineOptions(
+            torch_dtype="float32" if device == "cpu" else "bfloat16", compile_model=False,
+        )
     return DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)})
 
 
 def _chunk_markdown(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list:
-    """Greedily pack paragraphs into ~chunk_size-char chunks, so cuts land on
-    paragraph boundaries instead of mid-sentence, carrying the tail of each
-    chunk into the next one for a bit of overlap."""
-    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
-    chunks = []
-    current = ""
-    for para in paragraphs:
-        if current and len(current) + len(para) + 2 > chunk_size:
-            chunks.append(current)
-            current = current[-overlap:] + "\n\n" + para if overlap else para
-        else:
-            current = f"{current}\n\n{para}" if current else para
-    if current:
-        chunks.append(current)
-    return chunks
+    """Preserve section boundaries and atomic display formulas."""
+    return section_chunks(text, chunk_size, overlap)
 
 
 def _build_index(corpus_dir: str):
@@ -113,6 +112,7 @@ def _build_index(corpus_dir: str):
         try:
             result = converter.convert(str(pdf_path))
             text = result.document.export_to_markdown()
+            del result
         except Exception as e:
             # One bad PDF shouldn't take down the whole run.
             print(f"[rag] skipping {pdf_path.name}: {e}")
@@ -121,6 +121,11 @@ def _build_index(corpus_dir: str):
         sources.extend(_chunk_sources(pdf_path.name, document_chunks))
         all_chunks.extend(document_chunks)
 
+    del converter
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     print(f"[rag] parsed {len(pdfs)} PDFs into {len(all_chunks)} chunks")
     if not all_chunks:
         return [], np.empty((0, 0), dtype=np.float32), embedder, None, []
@@ -128,9 +133,9 @@ def _build_index(corpus_dir: str):
     embeddings = embedder.encode(
         all_chunks, normalize_embeddings=True, show_progress_bar=False, batch_size=64,
     )
-    tokenized_chunks = [_lexical_tokens(chunk) for chunk in all_chunks]
+    tokenized_chunks = [_bm25_tokens(chunk) for chunk in all_chunks]
     # BM25 cannot initialize a corpus with no tokens (e.g. punctuation only).
-    bm25 = BM25Okapi(tokenized_chunks) if any(tokenized_chunks) else None
+    bm25 = BM25Okapi(tokenized_chunks, k1=1.2, b=0.75, epsilon=0.25) if any(tokenized_chunks) else None
     return all_chunks, np.asarray(embeddings, dtype=np.float32), embedder, bm25, sources
 
 
@@ -139,19 +144,19 @@ def _lexical_tokens(text: str) -> list[str]:
     return re.findall(r"\w+", text.casefold())
 
 
+def _bm25_tokens(text):
+    global _bm25_preprocessor
+    if _bm25_preprocessor is None:
+        _bm25_preprocessor = LexicalPreprocessor(stopwords=True, stemming=True)
+    return _bm25_preprocessor(text)
+
+
 def _chunk_sources(document, chunks):
-    """Preserve source and section consistently in submission and local runs."""
-    sources, section = [], None
-    for local_id, chunk in enumerate(chunks):
-        headings = re.findall(r"^#{1,6}\s+(.+)$", chunk, flags=re.MULTILINE)
-        sources.append({"chunk_id": f"{document}#{local_id}", "document": document,
-                        "section": headings[0] if headings else section})
-        if headings:
-            section = headings[-1]
-    return sources
+    """Preserve section identity and content kind in all retrieval paths."""
+    return chunk_sources(document, chunks)
 
 
-def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight=KG_RRF_WEIGHT):
+def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight=KG_RRF_WEIGHT, sources=None):
     """Fuse dense, lexical and optional entity-mention rankings of chunk IDs."""
     if len(embeddings) == 0:
         return []
@@ -159,7 +164,7 @@ def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight
     dense_order = np.argsort(-(embeddings @ query_emb), kind="stable")[:RETRIEVAL_TOP_K]
     rankings = [(dense_order, 1.0)]
     if bm25 is not None:
-        lexical_scores = np.asarray(bm25.get_scores(_lexical_tokens(question)))
+        lexical_scores = np.asarray(bm25.get_scores(_bm25_tokens(question)))
         lexical_order = np.argsort(-lexical_scores, kind="stable")
         # Zero-score chunks provide no lexical evidence for the question.
         rankings.append((lexical_order[lexical_scores[lexical_order] != 0][:RETRIEVAL_TOP_K], 1.0))
@@ -169,11 +174,14 @@ def _hybrid_order(question, embeddings, embedder, bm25, kg_index=None, kg_weight
 
     named = {str(i): ranking for i, (ranking, _) in enumerate(rankings)}
     weights = {str(i): weight for i, (_, weight) in enumerate(rankings)}
-    return rrf_fuse(named, weights, RRF_K)[0]
+    order, scores = rrf_fuse(named, weights, RRF_K)
+    if sources is not None:
+        order, _ = penalize_order(order, scores, sources, question)
+    return order
 
 
 def _load(model_id: str, corpus_dir: str):
-    kg_mode = os.environ.get("KG_MODE", "graph")
+    kg_mode = os.environ.get("KG_MODE", "off")
     if kg_mode not in ("off", "mentions", "graph"):
         raise ValueError("KG_MODE must be 'off', 'mentions' or 'graph'")
     graph_config = GraphConfig.from_env() if kg_mode == "graph" else None
@@ -204,7 +212,9 @@ def _build_context(question, chunks, embeddings, embedder, tokenizer, bm25, max_
     If the first fragment is too long, truncate its text while retaining its
     source. Return no context if even the labels cannot fit.
     """
-    order = _hybrid_order(question, embeddings, embedder, bm25, kg_index=kg_index)
+    order = _hybrid_order(question, embeddings, embedder, bm25, kg_index=kg_index, sources=sources)
+    if sources is not None:
+        order = continuity_order(order, sources)
     prefix = "Context extracted from a blind search over the corpus:\n\n"
     suffix = "\n\n---\n\n"
     selected = []

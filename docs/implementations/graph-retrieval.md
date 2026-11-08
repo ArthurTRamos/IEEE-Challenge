@@ -6,13 +6,16 @@ Implementação: [src/kg_retrieval.py](../../src/kg_retrieval.py), integrada em
 [_hybrid_order e _load](../../src/main.py). Este módulo usa somente a biblioteca
 padrão do Python; a operação é offline e em CPU.
 
+O padrão atual de submissão é `KG_MODE=off` (híbrido sem KG). Este componente
+permanece disponível para ablações explícitas.
+
 ## Modos e objetivo
 
 | `KG_MODE` | Canal KG |
 | --- | --- |
 | `off` | Desativado; apenas BM25 e semântico |
 | `mentions` | Chunks que mencionam entidades reconhecidas na pergunta |
-| `graph` | Menções diretas + vizinhos de um salto com evidências no corpus; padrão |
+| `graph` | Menções diretas + vizinhos de um salto com evidências no corpus; experimental |
 
 Exemplo conceitual: se a pergunta menciona `Alpha` e existe uma associação
 `Alpha → Beta`, um chunk sobre `Beta` pode ser recuperado mesmo sem mencionar

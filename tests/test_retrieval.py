@@ -65,7 +65,8 @@ class LexicalIndexTests(unittest.TestCase):
         np.testing.assert_array_equal(scores[1:], [0, 0])
         self.assertEqual(bm25.doc_freqs[0]["lithium"], 1)
         self.assertNotIn("lithium", bm25.doc_freqs[1])
-        self.assertEqual(sources[0], {"chunk_id": "a.pdf#0", "document": "a.pdf", "section": None})
+        self.assertEqual({key: sources[0][key] for key in ("chunk_id", "document", "section")},
+                         {"chunk_id": "a.pdf#0", "document": "a.pdf", "section": None})
         self.assertEqual(sources[1]["document"], "b.pdf")
         embedder.encode.assert_called_once_with(
             chunks, normalize_embeddings=True, show_progress_bar=False, batch_size=64
@@ -307,9 +308,9 @@ class KGLoadingTests(unittest.TestCase):
             build.assert_called_once()
             load_kg.assert_called_once_with(path, chunks, mode="mentions", config=None)
 
-    def test_graph_is_default_and_configuration_is_in_cache_key(self):
+    def test_explicit_graph_configuration_is_in_cache_key(self):
         index = ([], np.empty((0, 0)), Mock(), None, [])
-        with patch.dict(os.environ, {}, clear=True), patch.dict(rag._cache, {}, clear=True), \
+        with patch.dict(os.environ, {"KG_MODE": "graph"}, clear=True), patch.dict(rag._cache, {}, clear=True), \
              patch.object(rag, "_build_index", return_value=index), \
              patch.object(rag, "KG_PATH") as path, \
              patch.object(rag.KGChunkIndex, "from_directory") as load_kg, \

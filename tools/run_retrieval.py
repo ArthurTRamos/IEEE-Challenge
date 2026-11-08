@@ -35,6 +35,10 @@ def key_for(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
+def format_score(value):
+    return "—" if value is None else f"{value:.6g}"
+
+
 def save_json(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -212,6 +216,33 @@ def graph_configuration(args):
         raise ValueError(f"Invalid graph config: {exc}") from exc
 
 
+def evidence_configuration(args):
+    from src.evidence import EvidenceConfig
+    return EvidenceConfig(
+        reference_weight=getattr(args, "reference_weight", 0.5),
+        front_matter_weight=getattr(args, "front_matter_weight", 0.7),
+        neighbors_before=getattr(args, "neighbors_before", 1),
+        neighbors_after=getattr(args, "neighbors_after", 3),
+        small_section_chunks=getattr(args, "small_section_chunks", 6),
+        max_chunks=args.top_k,
+    )
+
+
+def select_evidence(order, scores, chunks, question, args):
+    from src.evidence import penalize_order, continuity_order
+    config = evidence_configuration(args)
+    if getattr(args, "penalize_metadata", True):
+        order, adjusted = penalize_order(order, scores, chunks, question, config)
+    else:
+        adjusted = dict(scores)
+    anchors = order[:args.top_k]
+    if getattr(args, "continuity", True):
+        selected = continuity_order(order, chunks, config)
+    else:
+        selected = anchors
+    return selected, adjusted, set(anchors)
+
+
 def document_embeddings(texts, embedder, model_key, cache, batch_size):
     """Shared cache contract for single runs and parameter sweeps."""
     import numpy as np
@@ -273,7 +304,7 @@ def export_review(output, questions, chunks, results, variants, include_answers=
                     chunk = chunks[hit["index"]]
                     ranks.setdefault(hit["index"], {})[variant] = hit["rank"]
                     title = chunk["title"].replace("|", "\\|").replace("\n", " ")
-                    lines.append(f"| {hit['rank']} | [C{hit['index']:06d}](#c{hit['index']:06d}) | {title} | {hit['score']:.6g} |")
+                    lines.append(f"| {hit['rank']} | [C{hit['index']:06d}](#c{hit['index']:06d}) | {title} | {format_score(hit['score'])} |")
                 lines.append("")
                 answers.writerow({"question_id": question["id"], "variant": variant, "sufficient_evidence": "", "notes": ""})
             for chunk_index in sorted(ranks, key=lambda i: (min(ranks[i].values()), i)):
@@ -323,7 +354,8 @@ def run(args):
     started = time.perf_counter()
     extraction_key = {"docling_version": version("docling"), "device": "cpu", "threads": args.threads,
                       "converter_source": key_for(inspect.getsource(pipeline._docling_converter)),
-                      "layout_model_sha256": tree_fingerprint(ROOT / "src/docling_models")}
+                      "layout_model_sha256": tree_fingerprint(ROOT / "src/docling_models"),
+                      "formula_enrichment": getattr(args, "formula_enrichment", True)}
     model_key = tree_fingerprint(args.embed_model)
     timings["fingerprint_seconds"] = time.perf_counter() - started
     configuration = {"corpus": str(args.corpus.resolve()), "questions_file": str(args.questions.resolve()),
@@ -338,12 +370,14 @@ def run(args):
                      "code_sha256": {str(p.relative_to(ROOT)): digest(p) for p in (ROOT / "src/main.py", ROOT / "src/kg_retrieval.py", ROOT / "src/retrieval_utils.py", Path(__file__))},
                      "cache_enabled": cache is not None, "missing_catalog_document_ids": missing_ids,
                      "include_reference_answers": args.include_reference_answers,
+                     "evidence": {**evidence_configuration(args).to_dict(), "continuity": getattr(args, "continuity", True), "penalize_metadata": getattr(args, "penalize_metadata", True)},
                      "scope": "Retrieved candidates for manual review. No relevance ground truth, OLMo, accuracy or final prompt context."}
     save_json(output / "config.json", configuration)
     save_jsonl(output / "questions.jsonl", [{k: q[k] for k in ("id", "question", "domain", "question_type", *(["answer"] if args.include_reference_answers else [])) if k in q} for q in questions])
     started = time.perf_counter()
     chunks, documents = prepare_chunks(documents, output, cache, extraction_key,
-                                      lambda: pipeline._docling_converter(device="cpu", num_threads=args.threads),
+                                      lambda: pipeline._docling_converter(device="cpu", num_threads=args.threads,
+                                                                           formula_enrichment=getattr(args, "formula_enrichment", True)),
                                       lambda text: pipeline._chunk_markdown(text, args.chunk_size, args.chunk_overlap), pipeline._chunk_sources)
     timings["pdf_and_chunking_seconds"] = time.perf_counter() - started
     started = time.perf_counter()
@@ -410,11 +444,14 @@ def run(args):
             started = time.perf_counter()
             order, scores = rrf_fuse(rankings, configuration["weights"][variant], args.rrf_k)
             measured[f"{variant}_fusion_seconds"] = time.perf_counter() - started
+            selected, adjusted, anchors = select_evidence(order, scores, chunks, question["question"], args)
             hits = [{"rank": rank, "index": int(index), "chunk_id": chunks[index]["chunk_id"], "text": texts[index],
-                     "document_id": chunks[index]["document_id"], "section": chunks[index]["section"], "score": scores[index],
+                     "document_id": chunks[index]["document_id"], "section": chunks[index]["section"], "score": adjusted.get(index), "rrf_score": scores.get(index),
+                     "content_kind": chunks[index].get("content_kind", "body"),
+                     "selection_role": "anchor" if index in anchors else "neighbor",
                      "dense_score": float(dense_scores[index]), "bm25_score": float(lexical_scores[index]),
                      "channel_ranks": {name: ranks.get(index) for name, ranks in positions.items()}}
-                    for rank, index in enumerate(order[:args.top_k], 1)]
+                    for rank, index in enumerate(selected, 1)]
             results.append({"question_id": question["id"], "variant": variant, "hits": hits,
                             "kg_trace": traces.get(variant.removeprefix("dense_")), "relevance_judgments": None})
         query_timings.append(measured)
@@ -461,20 +498,28 @@ def parse_args(argv=None):
     parser.add_argument("--embedding-device", choices=("cpu", "cuda"), default="cpu")
     parser.add_argument("--kg", type=Path, default=ROOT / "src/kg")
     parser.add_argument("--graph-config", type=Path, help="JSON GraphConfig fields; otherwise use KG_GRAPH_* environment variables")
-    parser.add_argument("--variants", nargs="+", choices=VARIANTS, default=["dense", "hybrid", "mentions", "graph"])
+    parser.add_argument("--variants", nargs="+", choices=VARIANTS, default=["hybrid"])
     parser.add_argument("--top-k", type=int, default=10)
     parser.add_argument("--candidate-depth", type=int, default=100)
     parser.add_argument("--rrf-k", type=float, default=60)
     parser.add_argument("--dense-weight", type=float, default=1.0)
     parser.add_argument("--bm25-weight", type=float, default=1.0)
     parser.add_argument("--kg-weight", type=float, default=0.5)
-    parser.add_argument("--bm25-stopwords", action=argparse.BooleanOptionalAction, default=False)
-    parser.add_argument("--bm25-stemming", action=argparse.BooleanOptionalAction, default=False)
+    parser.add_argument("--bm25-stopwords", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--bm25-stemming", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--preserve-words", nargs="+")
     parser.add_argument("--stopwords-file", type=Path)
-    parser.add_argument("--bm25-k1", type=float, default=1.5)
+    parser.add_argument("--bm25-k1", type=float, default=1.2)
     parser.add_argument("--bm25-b", type=float, default=0.75)
     parser.add_argument("--bm25-epsilon", type=float, default=0.25)
+    parser.add_argument("--formula-enrichment", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--continuity", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--penalize-metadata", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--reference-weight", type=float, default=0.5)
+    parser.add_argument("--front-matter-weight", type=float, default=0.7)
+    parser.add_argument("--neighbors-before", type=int, default=1)
+    parser.add_argument("--neighbors-after", type=int, default=3)
+    parser.add_argument("--small-section-chunks", type=int, default=6)
     parser.add_argument("--chunk-size", type=int, default=800)
     parser.add_argument("--chunk-overlap", type=int, default=150)
     parser.add_argument("--batch-size", type=int, default=8)
@@ -502,6 +547,10 @@ def parse_args(argv=None):
         parser.error("BM25 requires k1 > 0 and 0 <= b <= 1")
     if not math.isfinite(args.bm25_epsilon) or args.bm25_epsilon < 0:
         parser.error("BM25 epsilon must be finite and nonnegative")
+    try:
+        evidence_configuration(args)
+    except ValueError as exc:
+        parser.error(str(exc))
     return args
 
 

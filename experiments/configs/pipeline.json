@@ -10,6 +10,14 @@
   "embedding_device": "cpu",
   "batch_size": 8,
   "threads": 4,
+  "formula_enrichment": true,
+  "continuity": true,
+  "penalize_metadata": true,
+  "reference_weight": 0.5,
+  "front_matter_weight": 0.7,
+  "neighbors_before": 1,
+  "neighbors_after": 3,
+  "small_section_chunks": 6,
   "chunk_size": 800,
   "chunk_overlap": 150,
   "top_k": 10,
@@ -24,5 +32,5 @@
   "bm25_stopwords": true,
   "bm25_stemming": true,
   "preserve_words": [],
-  "variants": ["dense", "bm25", "hybrid", "dense_mentions", "mentions", "dense_graph", "graph"]
+  "variants": ["hybrid"]
 }

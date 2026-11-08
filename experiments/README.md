@@ -72,3 +72,33 @@ Para gerar esses arquivos a partir de rankings já salvos:
 
 Detalhes do formato e da geração estão no
 [guia de geração externa](../docs/implementations/external-generation.md).
+
+## Avaliar a recuperação com julgamentos de relevância
+
+O avaliador aceita tanto o JSON de entrada quanto o JSON de respostas do
+notebook e não carrega modelos:
+
+```bash
+.venv/bin/python tools/evaluate_retrieval.py \
+  --input experiments/runs/hybrid-relevance-2026-11-07/run/llm_inputs/hybrid.json \
+  --judgments experiments/judgments/selected-five-2026-11-07.json \
+  --k 1 3 5 10 \
+  --output experiments/runs/hybrid-relevance-2026-11-07/metrics.json
+```
+
+Os julgamentos iniciais usam notas 0 (não relevante), 1 (possivelmente relevante)
+e 2 (relevante), estimadas pelo assistente para os documentos locais. As métricas
+são por **documento**, com artigos repetidos deduplicados; não medem diretamente
+a utilidade de cada chunk. O resultado inclui nDCG e Recall com dois limiares,
+além de cobertura de documentos dentro dos primeiros k chunks.
+Veja [definições e formato dos julgamentos](../docs/implementations/retrieval-metrics.md).
+
+## Continuidade, penalizações e fórmulas
+
+O pipeline padrão agora usa somente `hybrid` e os três novos componentes.
+Os parâmetros e flags de ablação estão em
+[Evidências e fórmulas](../docs/implementations/evidence-and-formulas.md).
+O reconhecimento exige os pesos locais preparados pelo build. Mudanças no
+chunking alteram IDs e textos; use novas pastas de execução e não transfira
+julgamentos antigos apenas por ID. A grade BM25 continua disponível para
+combinações futuras, com os componentes definidos no pipeline associado.

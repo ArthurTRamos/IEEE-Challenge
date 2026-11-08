@@ -1,29 +1,21 @@
 #!/bin/bash
 # Builds ../hybrid_rag_submission.zip, ready to upload to Codabench.
 #
-# Docling and sentence-transformers (the libraries) are already in the
-# challenge's evaluation environment, but two model weight files they need —
-# Docling's "layout" model, and the "all-MiniLM-L6-v2" embedding model — are
-# not pre-downloaded there, and that environment has no internet access to
-# fetch them on its own. This script downloads both once, here, where there
-# IS internet, and bundles them into the submission zip so the evaluation
-# container never needs to reach out for either.
-#
-# Needs `docling-tools` (from the `docling` package) and `sentence-transformers`
-# on PATH/importable, matching the versions pinned in the challenge's
-# docker/requirements-participant.txt, plus `zip`. If you don't have them
-# installed locally: pip install docling sentence-transformers (matching
-# those pinned versions).
+# Bundles MiniLM and both Transformers and ONNX layout models, so
+# document processing runs without network access in the evaluation container.
+# Libraries must match requirements-participant.txt. No dependencies are shipped.
+# REUSE_MODELS=1 reuses existing weights without downloading; INCLUDE_KG=1
+# optionally adds the experimental KG. Default inference is hybrid (KG off).
 set -euo pipefail
 cd "$(dirname "$0")"
 
-include_kg="${INCLUDE_KG:-1}"
+include_kg="${INCLUDE_KG:-0}"
 reuse_models="${REUSE_MODELS:-0}"
 case "$include_kg:$reuse_models" in
     0:0|0:1|1:0|1:1) ;;
     *) echo "INCLUDE_KG and REUSE_MODELS must be 0 or 1" >&2; exit 1 ;;
 esac
-files=(main.py kg_retrieval.py retrieval_utils.py prompts.py docling_models embed_model)
+files=(main.py kg_retrieval.py retrieval_utils.py prompts.py evidence.py lexical.py embed_model)
 if [[ "$include_kg" == 1 ]]; then
     if [[ ! -f kg/manifest.json ]]; then
         echo "Prepare the KG first: python tools/prepare_kg.py (from the repository root)" >&2
@@ -46,8 +38,7 @@ PY
     files+=(kg/manifest.json kg/nodes.jsonl kg/edges.jsonl kg/audit.json)
 fi
 
-if [[ "$reuse_models" == 0 || ! -d docling_models ]]; then
-    rm -rf docling_models
+if [[ "$reuse_models" == 0 || ! -f docling_models/docling-project--docling-layout-heron/model.safetensors || ! -f docling_models/docling-project--docling-layout-heron-onnx/model.onnx ]]; then
     HF_HUB_OFFLINE=0 TRANSFORMERS_OFFLINE=0 docling-tools models download layout -o ./docling_models
 fi
 
@@ -59,16 +50,20 @@ SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2').save('embed_model'
 "
 fi
 
-submission_zip="../hybrid_rag_submission.zip"
-rm -f "$submission_zip"
-zip -q -r "$submission_zip" "${files[@]}" -x '__pycache__/*' '*.pyc' '*/.cache/*'
+# Keep both layout formats, as in the original package. Formula assets stay out.
+files+=(docling_models/docling-project--docling-layout-heron docling_models/docling-project--docling-layout-heron-onnx)
 
-# Use decimal GB so the archive also fits the stricter interpretation of 1 GB.
-python3 - "$submission_zip" <<'PY'
+submission_zip="../hybrid_rag_submission.zip"
+staging_zip="../hybrid_rag_submission.build.zip"
+trap 'rm -f "$staging_zip"' EXIT
+rm -f "$staging_zip"
+zip -q -r "$staging_zip" "${files[@]}" -x '__pycache__/*' '*.pyc' '*/.cache/*'
+
+# Validate the candidate before replacing the previous working submission.
+python3 - "$staging_zip" <<'VALIDATE'
 import sys
 from pathlib import Path
 from zipfile import ZipFile
-
 archive = Path(sys.argv[1])
 size = archive.stat().st_size
 if size > 1_000_000_000:
@@ -77,5 +72,12 @@ with ZipFile(archive) as bundle:
     bad = bundle.testzip()
     if bad:
         raise SystemExit(f"ZIP checksum failed: {bad}")
-print(f"-> {archive} ({size:,} bytes)")
-PY
+    required = {'main.py', 'evidence.py', 'lexical.py', 'prompts.py',
+                'docling_models/docling-project--docling-layout-heron/model.safetensors',
+                'docling_models/docling-project--docling-layout-heron-onnx/model.onnx'}
+    if not required.issubset(bundle.namelist()):
+        raise SystemExit('ZIP missing required inference assets')
+print(f"[build] validated candidate ({size:,} bytes)")
+VALIDATE
+mv -f "$staging_zip" "$submission_zip"
+echo "-> $submission_zip"

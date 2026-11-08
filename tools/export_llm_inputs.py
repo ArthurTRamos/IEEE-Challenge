@@ -43,7 +43,9 @@ def export_llm_inputs(output, questions, chunks, results, top_k=10, include_answ
                 chosen.append({"rank": hit["rank"], "chunk_id": chunk["chunk_id"],
                                "document_id": chunk.get("document_id"), "document": chunk.get("document"),
                                "title": chunk.get("title"), "section": chunk.get("section"),
-                               "text": chunk["text"], "retrieval_score": hit.get("score")})
+                               "text": chunk["text"], "retrieval_score": hit.get("score"),
+                               "selection_role": hit.get("selection_role", "anchor"),
+                               "content_kind": chunk.get("content_kind", "body")})
             records.append({"id": question["id"], "question": question["question"],
                             "domain": question.get("domain"), "question_type": question.get("question_type"), "chunks": chosen})
             if include_answers:

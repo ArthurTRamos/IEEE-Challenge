@@ -91,7 +91,7 @@ uma medição do pipeline completo na H100.
 
 | Variável | Padrão | Efeito |
 | --- | --- | --- |
-| `INCLUDE_KG` | `1` | Incluir o KG validado; `0` gera pacote sem artefato KG |
+| `INCLUDE_KG` | `0` | Incluir o KG validado; `0` gera pacote sem artefato KG |
 | `REUSE_MODELS` | `0` | `1` reutiliza os diretórios de modelos presentes |
 
 ```bash
@@ -101,23 +101,33 @@ REUSE_MODELS=1 ./src/build.sh
 
 O script verifica se os dados originais e aliases locais ainda correspondem
 ao manifesto. Se estiverem diferentes, pede uma nova preparação. Inclui
-`main.py`, `kg_retrieval.py`, `retrieval_utils.py`, `prompts.py`, quatro arquivos do KG, Docling layout e MiniLM.
+`main.py`, `kg_retrieval.py`, `retrieval_utils.py`, `prompts.py`, `evidence.py`,
+`lexical.py`, Docling layout e MiniLM. O KG e sua
+validação entram somente com `INCLUDE_KG=1`. As cópias Transformers e ONNX do
+layout entram no pacote. CodeFormulaV2 foi retirado do build após a execução
+ultrapassar o limite de tempo; a seleção atual está explícita em `src/build.sh`.
 Notebooks, dados brutos, ferramentas de preparação e dependências de
 desenvolvimento ficam fora do pacote.
 
-A saída é `hybrid_rag_submission.zip`, substituída em cada build. O script
+A saída é `hybrid_rag_submission.zip`, substituída apenas após validar o
+arquivo temporário de cada build. O script
 verifica CRC e rejeita arquivos maiores que 1.000.000.000 bytes. A quantidade
 de entidades e arestas não muda com a nova exploração; o custo adicional é
 construir adjacências em RAM e consultar os postings em CPU.
 
 `KG_MODE` controla a **inferência**, não altera o código dentro do ZIP. O padrão
-do código é `graph`; em execução local, `KG_MODE=mentions` ou `KG_MODE=off`
+do código é `off` (híbrido); em execução local, `KG_MODE=mentions` ou `KG_MODE=off`
 permitem comparar variantes. Definir `KG_MODE=mentions` apenas ao executar o
 build não faz esse valor persistir no avaliador. `INCLUDE_KG=0` gera um ZIP sem
-KG, que usa os dois canais mesmo com o modo padrão.
+KG, que usa os dois canais no modo padrão.
 
 Para comparar variantes, mantenha corpus, modelo, pergunta e orçamento de
 contexto iguais. Use processos separados para medições de RAM. É necessário
 anotar evidências relevantes para medir recall/MRR e avaliar as respostas para
 medir correção. Qualquer conclusão sobre melhoria ou conformidade com os 60
 minutos depende desses experimentos completos.
+
+O build verifica o SHA-256 dos pesos fixados de CodeFormulaV2 pelo
+[preparador de modelos](../../tools/prepare_formula_model.py). O reconhecimento
+de fórmulas não requer instalação de LaTeX; o modelo produz texto LaTeX.
+Configuração, teste real e limites estão em [Evidências e fórmulas](evidence-and-formulas.md).
