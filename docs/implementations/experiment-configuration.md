@@ -43,6 +43,12 @@ Flags na linha de comando substituem os valores do arquivo. Por exemplo:
   --bm25-k1 0.75 --bm25-b 1 --bm25-stopwords --no-bm25-stemming
 ```
 
+Para variar somente a suavização do RRF, use `rrf_k` no JSON ou `--rrf-k` na
+CLI. O valor deve ser não negativo. Ele é diferente do `top_k` de chunks e do
+`bm25_k1`. O [teste dos dois finalistas](../reports/rrf-k-public25-2026-11-08.md)
+compara 0, 10, 30, 60 e 100, mantendo pesos e profundidade fixos; inclui as
+configurações completas, métricas e contextos para o notebook.
+
 Os parâmetros do grafo vêm de `graph_config` quando esse arquivo é informado;
 caso contrário, o runner mantém o suporte a `KG_GRAPH_*`.
 

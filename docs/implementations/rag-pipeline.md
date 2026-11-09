@@ -1,146 +1,128 @@
-# Pipeline RAG e recuperação híbrida
+# Pipeline RAG e configuração das técnicas
 
-[Visão geral](../technical-overview.md) · [Índice de implementações](README.md)
+[Visão geral](../technical-overview.md) · [Como testar](../testing-guide.md)
 
-Implementação: [src/main.py](../../src/main.py).
+A interface oficial continua sendo `answer(question, corpus_dir, model_id) -> str`
+em [main.py](../../src/main.py). O avaliador fornece o modelo de resposta e uma
+pasta com PDFs. O sistema procura evidências sem conhecer o documento correto.
 
-## Contrato e inicialização
+## Organização do código
 
-A função pública `answer(question, corpus_dir, model_id)` retorna uma string.
-O corpus é acessado como no baseline oficial: PDFs diretamente em `corpus_dir`,
-ordenados pelo nome. O sistema não recebe o documento correto da pergunta.
+| Módulo em src | Responsabilidade |
+| --- | --- |
+| [main.py](../../src/main.py) | Coordenação da entrada oficial e cache de índices |
+| [settings.py](../../src/settings.py) | Configuração tipada, valores padrão e validações |
+| [pipeline.json](../../src/pipeline.json) | Escolhas da submissão: variante, pesos, dispositivos e limites |
+| [documents.py](../../src/documents.py) | Construção do conversor Docling offline |
+| [evidence.py](../../src/evidence.py) | Chunking por seção, metadados, penalizações e vizinhança |
+| [indexing.py](../../src/indexing.py) | Índice do corpus e construção apenas dos canais habilitados |
+| [embedding.py](../../src/embedding.py) | Instruções de consulta/documento e codificação |
+| [lexical.py](../../src/lexical.py) | Tokenização, stopwords, stemming e construção BM25 |
+| [kg_retrieval.py](../../src/kg_retrieval.py) | Artefato, entidades, postings e exploração do grafo |
+| [retrieval_utils.py](../../src/retrieval_utils.py) | Definição das variantes e RRF ponderado |
+| [retrieval.py](../../src/retrieval.py) | Rankings estáveis dos canais e seleção final compartilhada |
+| [context.py](../../src/context.py) | Empacotamento com fontes e orçamento de tokens |
+| [generation.py](../../src/generation.py) | Carregamento tardio da LLM e geração determinística |
+| [prompts.py](../../src/prompts.py) | Instruções de sistema e mensagem com pergunta/evidências |
+| [runtime.py](../../src/runtime.py) | Escolha explícita de CPU/CUDA e diagnóstico |
 
 ```mermaid
-sequenceDiagram
-    participant E as Avaliador
-    participant A as answer
-    participant C as Cache de índices
-    participant M as Cache do modelo
-    E->>A: question, corpus_dir, model_id
-    A->>C: _load
-    alt Índice ainda não construído
-        C->>C: PDF, chunks, BM25, embeddings e KG
-        C->>M: Obter tokenizer e OLMo
-        alt Modelo ainda não carregado
-            M->>M: Carregar e guardar por model_id
-        end
-    end
-    C-->>A: Índices, fontes e modelo
-    A->>A: Recuperar, fundir e montar contexto
-    A->>M: generate com prompt e pergunta
-    M-->>A: Tokens da resposta
-    A-->>E: String decodificada
+flowchart TD
+    A[answer: interface oficial] --> S[Carregar e validar configuração]
+    S --> I[Obter índice do corpus]
+    I --> D[Docling e chunks]
+    D --> E[Construir canais habilitados]
+    E --> R[Recuperação, RRF e seleção]
+    R --> L[Obter tokenizer e modelo de resposta]
+    L --> C[Montar contexto com fontes]
+    C --> G[Gerar resposta]
+    T[Runner local, sem LLM] --> D
+    T --> R
+    R --> X[JSONs para revisão ou notebook]
 ```
 
-`_cache` usa modelo, caminho absoluto do corpus, modo KG e configuração do
-grafo como chave. Isso evita reutilizar um índice com configuração diferente.
-`_model_cache` mantém uma única instância do modelo/tokenizer por `model_id`,
-inclusive quando se troca a configuração de recuperação no mesmo processo.
-Os índices de configurações anteriores permanecem na memória; para medir RAM
-entre variantes, use processos separados.
+O runner local mantém sua descoberta recursiva, caches em disco, auditorias e
+exportações. Ele usa as mesmas definições de canais, rankings, chunking e
+seleção da submissão; não importa o ponto de entrada para acessar funções
+privadas e não chama `generation.load_model`.
 
-## PDF, chunking e fontes
+## Configuração da submissão
 
-- Docling converte PDFs para Markdown com layout Transformers e CodeFormulaV2
-  locais. Fórmulas detectadas são reconhecidas em LaTeX.
-- OCR e reconhecimento de estrutura de tabelas estão desativados, conforme o
-  baseline. Isso limita a qualidade de extração de tabelas e documentos escaneados.
-- Um PDF que falha é registrado e ignorado; os demais continuam sendo processados.
-- `_chunk_markdown()` agrupa parágrafos mirando 800 **caracteres**, com uma
-  cauda de até 150 caracteres de sobreposição apenas dentro da seção. Blocos
-  de fórmulas não são divididos ou usados como caudas cortadas. Um parágrafo longo pode superar 800;
-  esse valor não é um limite rígido nem uma quantidade de tokens.
+`src/pipeline.json` é um JSON plano, validado por `PipelineConfig`. Caminhos
+relativos são resolvidos ao lado desse arquivo, portanto `embed_model` aponta
+para o encoder empacotado. `RAG_CONFIG` pode selecionar outro arquivo em uma
+execução local da interface oficial. `KG_MODE` continua como alternativa legada
+para ativar `mentions`, `graph` ou desligar o canal KG.
 
-Cada chunk tem uma posição inteira compartilhada por todos os rankings. Em
-paralelo, `sources` guarda `chunk_id` (`nome.pdf#posição_local`), `document` e
-`section`, `section_id`, `section_path`, `local_chunk_index` e `content_kind`.
-Títulos Markdown iniciam novos chunks. A seção é uma referência textual, não
-um mapa exato de páginas.
-O texto original do chunk permanece disponível.
+| Campo | Função |
+| --- | --- |
+| `variant` | `dense`, `bm25`, `hybrid`, `mentions`, `graph`, `dense_mentions`, `dense_graph` |
+| `dense_weight`, `bm25_weight`, `kg_weight` | Pesos dos canais no RRF; zero desativa o canal |
+| `rrf_k`, `candidate_depth`, `top_k` | Suavização do RRF, profundidade por canal e contexto final |
+| `bm25_stopwords`, `bm25_stemming` | Pré-processamento lexical |
+| `bm25_k1`, `bm25_b`, `bm25_epsilon` | Parâmetros BM25 |
+| `formula_enrichment` | Reconhecimento opcional de fórmulas; exige pesos locais |
+| `penalize_metadata` | Penalizar capas e referências |
+| `continuity` | Expandir vizinhos da mesma seção |
+| `reference_weight`, `front_matter_weight` | Fatores de penalização |
+| `neighbors_before`, `neighbors_after`, `small_section_chunks` | Limites da continuidade |
+| `embedding_device`, `docling_device`, `query_device`, `llm_device` | Dispositivos de cada etapa |
+| `chunk_size`, `chunk_overlap` | Tamanho nominal em caracteres e sobreposição |
+| `max_context_tokens`, `max_new_tokens` | Orçamento de evidências e limite da resposta |
+
+Os defaults preservam híbrido 1/1, RRF 60, top 10, stopwords/stemming e
+penalizações. Continuidade e fórmulas permanecem desligadas. Alterar uma técnica
+não requer editar `answer()`. Não existem etapas vazias de reranking ou outros
+componentes futuros: quando forem implementados, entram no módulo responsável.
 
 ## Recuperação e fusão
 
-```mermaid
-flowchart LR
-    Q[Pergunta] --> L[Tokenização lexical]
-    L --> B[BM25 no corpus]
-    Q --> E[MiniLM em CPU]
-    E --> D[Produto com embeddings normalizados]
-    Q --> G[Entidades e exploração do KG]
-    B --> R[RRF por ID de chunk]
-    D --> R
-    G --> R
-    R --> C[Contexto com evidências dos PDFs]
-```
+`variant_weights` é a definição única dos canais. `rank_candidates` usa os
+canais habilitados para produzir candidatos. Rankings semânticos usam produto
+escalar de vetores normalizados; BM25 descarta scores zero. `rrf_fuse` combina
+posições por `sum(peso / (k + posição))`, com desempate determinístico por índice.
+`select_evidence` aplica penalizações e, se habilitada, continuidade.
 
-O BM25 usa `rank-bm25` do ambiente oficial, com a mesma tokenização Unicode em
-documentos e perguntas: `casefold()`, `\w+`, remoção de stopwords em inglês e
-Porter stemming. A submissão usa `k1=1.2`, `b=0.75`, `epsilon=0.25`. Chunks com score lexical zero são
-excluídos do ranking lexical. O índice é construído uma vez; corpus sem tokens
-não cria BM25.
+Os experimentos usam essas mesmas operações e registram scores/ranks dos canais
+para diagnóstico. A construção de BM25 é omitida em um teste só semântico;
+um teste só BM25 não carrega encoder nem calcula vetores. Os canais KG só
+constroem índices quando participam com peso positivo. Solicitar KG com artefato
+inexistente/corrompido produz erro, evitando mudar a experiência silenciosamente.
 
-A busca densa usa a cópia local de `all-MiniLM-L6-v2` em CPU. Os embeddings dos
-chunks são float32, normalizados, gerados em lotes de 64. A pergunta é codificada
-uma vez por busca; produto escalar entre vetores normalizados produz a ordenação
-semântica. Os notebooks experimentais usam outro modelo, mas esse não é carregado
-pelo pipeline de submissão.
+## Cache e dispositivos
 
-O terceiro canal é descrito em [recuperação pelo grafo](graph-retrieval.md).
-Cada canal entrega até 100 IDs de chunks. Para o chunk `c`:
+`main._indices` usa caminho absoluto do corpus, a configuração imutável completa
+e a configuração do grafo como chave. `generation._models` usa modelo/dispositivo,
+independentemente dos índices. Novas configurações no mesmo processo podem
+manter vários índices em RAM; use processos separados para medir memória.
 
-```text
-RRF(c) = 1 / (60 + posição_BM25(c))
-       + 1 / (60 + posição_densa(c))
-       + 0,5 / (60 + posição_KG(c))
-```
+Na submissão, documentos são codificados no dispositivo de embedding escolhido,
+e o encoder retorna à CPU por padrão antes do carregamento da LLM. O modelo de
+resposta usa CUDA por padrão. Essa separação reduz a competição por VRAM.
+No runner sem LLM, o encoder pode permanecer na GPU para as consultas.
 
-O cálculo está compartilhado com o runner local em
-[retrieval_utils.py](../../src/retrieval_utils.py). As posições começam em 1.
-Um canal ausente ou que não recuperou o chunk não
-contribui. O RRF funde posições, não compara diretamente scores BM25, cossenos e
-scores do grafo. Empates finais são resolvidos pela posição inteira do chunk.
-A união tem no máximo 300 candidatos. Peso KG 0,5 e `k=60` são parâmetros atuais,
-sem garantia de otimalidade.
-
-Após o RRF, capas e bibliografias recebem uma redução multiplicativa de score.
-A seleção expande seções curtas ou uma janela local na mesma seção e documento,
-até dez chunks, sem duplicar IDs. A ordem dentro de cada bloco é a da fonte.
-Detalhes e parâmetros em [Evidências e fórmulas](evidence-and-formulas.md).
-O padrão é semântico + BM25; o termo KG da fórmula acima só existe quando
-`KG_MODE=mentions` ou `graph` é explicitamente habilitado.
+`auto` escolhe CUDA quando acessível, caso contrário CPU. `cuda` exige GPU e
+falha explicitamente se indisponível. `cpu` fixa CPU. O produto com os vetores
+NumPy e as buscas lexical/KG continuam em CPU. `config.json` registra o pedido,
+o dispositivo efetivo e os canais executados; `timings.json` registra cache.
 
 ## Contexto e geração
 
-O contexto inclui títulos, fontes, seções e separadores dentro de um orçamento
-de 10.000 tokens, contado com o tokenizer do OLMo. Os blocos seguem as âncoras após penalização e a continuidade por seção.
-Quando o próximo não cabe, o preenchimento para; não é um algoritmo de mochila.
-Se o primeiro chunk for longo demais, seu texto é truncado por busca binária de
-prefixo, preservando os rótulos de fonte. Sem espaço para uma evidência, o contexto
-é vazio. O limite é do bloco de contexto, não do prompt completo com a pergunta
-e o template de chat.
+`context.build_context` preserva fonte e seção dos fragmentos e limita o bloco
+completo de evidências a 10.000 tokens por padrão. Se o primeiro chunk exceder
+o orçamento, corta apenas seu texto; as fontes permanecem. Se nem os rótulos
+couberem, retorna contexto vazio. O orçamento não inclui as instruções/pergunta.
 
-O OLMo fornecido é carregado com `bfloat16` e `device_map="cuda"`. A geração usa
-`do_sample=False`, até 2.048 tokens novos e `torch.no_grad()`. O tokenizer aplica
-o template de chat; apenas os tokens novos são decodificados como resposta.
+A LLM é carregada somente em `generation.load_model`, usando arquivos locais.
+O prompt separa pergunta e referências. A geração mantém `do_sample=False`,
+2.048 novos tokens e decodifica somente o trecho posterior à entrada. Esses
+padrões também orientam o notebook externo. Não há execução da LLM durante
+os testes locais de recuperação.
 
-O KG altera a seleção dos chunks, mas suas propriedades e caminhos não são
-injetados como fatos no prompt. As fontes do contexto são os PDFs.
+## Verificação
 
-O prompt em `src/prompts.py` pede resposta direta e breve com referências
-`[Fragment N]` que sustentem as afirmações. Ele orienta a correção de premissas
-contraditas, a preservação de unidades e quantificadores e a identificação de
-lacunas, sem inventar fórmulas ou comparações. `build_user_message()` separa
-pergunta, evidências e tarefa de resposta; o bloco de contexto conserva seu
-orçamento e empacotamento. As instruções adicionais ficam fora dos 10.000 tokens
-das evidências. Não há nova chamada a modelos nem dependência adicional; o
-efeito em qualidade e tempo ainda depende de avaliação. O texto completo da
-revisão e o teste controlado estão no
-[relatório de evidência manual](../reports/manual-evidence-q13-q23-2026-11-07.md#revisão-do-prompt-após-este-diagnóstico).
-
-## Validação e limites
-
-[tests/test_retrieval.py](../../tests/test_retrieval.py) cobre alinhamento entre
-índices e fontes, corpus vazio, PDFs inválidos, fusão ponderada, recuperação de
-um candidato apenas pelo grafo, montagem do contexto e reutilização de modelos.
-Os modelos e PDFs são simulados nesses testes. O tempo completo, a memória da
-H100 e a qualidade das respostas precisam de avaliação end-to-end no corpus.
+A refatoração é validada por testes dos módulos, da API oficial, do cache,
+da desativação real dos canais e da importação do pacote plano do build.
+Uma reprodução do código anterior e do novo compara rankings e exportações
+sobre o mesmo corpus em CPU. Consulte o relatório de refatoração para o
+resultado dessa verificação e o [guia de testes](../testing-guide.md) para uso.

@@ -192,7 +192,8 @@ def execute(args, config, cases):
     texts = [chunk["text"] for chunk in chunks]
     runner.save_jsonl(output / "chunks.jsonl", chunks)
     runner.save_jsonl(output / "questions.jsonl", [{key: q[key] for key in ("id", "question", "domain", "question_type", *(["answer"] if pipeline_args.include_reference_answers else [])) if key in q} for q in questions])
-    encoder = SentenceTransformer(str(pipeline_args.embed_model.resolve()), device=pipeline_args.embedding_device, local_files_only=True)
+    from src.runtime import resolve_device
+    encoder = SentenceTransformer(str(pipeline_args.embed_model.resolve()), device=resolve_device(pipeline_args.embedding_device), local_files_only=True)
     matrix, embedding_cache_hit = runner.document_embeddings(texts, encoder, runner.tree_fingerprint(pipeline_args.embed_model),
                                                            None if pipeline_args.no_cache else pipeline_args.cache, pipeline_args.batch_size)
     kg_needed = {mode for mode in ("mentions", "graph") if mode in config["variants"] or f"dense_{mode}" in config["controls"]}
@@ -210,7 +211,7 @@ def execute(args, config, cases):
             kg_indices[mode] = KGChunkIndex(matcher, texts, edges=edges, mode=mode, config=graph_config)
     shared = {}
     for question in questions:
-        embedding = encoder.encode([question["question"]], normalize_embeddings=True, show_progress_bar=False)[0]
+        embedding = runner.encode_queries(encoder, [question["question"]], normalize_embeddings=True, show_progress_bar=False)[0]
         dense_scores = matrix @ embedding
         ranking = {"dense": np.argsort(-dense_scores, kind="stable")[:pipeline_args.candidate_depth].tolist()}
         traces = {}

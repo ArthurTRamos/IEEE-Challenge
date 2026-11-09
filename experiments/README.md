@@ -3,6 +3,38 @@
 Os arquivos em `configs/` controlam os experimentos locais. Os resultados ficam
 em `runs/`, ignorados pelo Git, em diretórios novos para preservar anotações.
 
+O [guia prático de testes e resultados](../docs/testing-guide.md) é o ponto de
+partida atual. O preset `configs/public-25-minilm.json` usa MiniLM, as cinco
+variantes e `embedding_device=auto`; Docling fica em CPU por padrão.
+
+## Base das 25 perguntas públicas
+
+A [base ampliada](../data/local_eval/README.md) contém as 25 perguntas oficiais,
+64 documentos e julgamentos estimados para os 1.600 pares. O
+[relatório de cobertura](../docs/reports/public-25-corpus-2026-11-08.md) identifica
+as fontes ausentes, parciais e visuais; 22 perguntas têm algum documento nota 2.
+A questão 1 passou a ter evidências diretas com as fontes novas de cintilação/OTR.
+
+Use `configs/public-25.json` no próximo experimento e escolha `embed_model` antes
+de executar. Essa configuração fixa os IDs dos documentos, inclui stopwords e
+stemming e compara `dense`, `bm25` e `hybrid`, sem LLM. O caminho do encoder foi
+copiado da configuração atual; isso não escolhe uma nova candidata de submissão.
+
+```bash
+.venv/bin/python tools/build_public_qa_judgments.py --check
+.venv/bin/python tools/run_retrieval.py --config experiments/configs/public-25.json \
+  --output experiments/runs/public-25-SEU-EXPERIMENTO
+.venv/bin/python tools/evaluate_retrieval.py \
+  --input experiments/runs/public-25-SEU-EXPERIMENTO/llm_inputs/hybrid.json \
+  --judgments experiments/judgments/public-25-2026-11-08.json \
+  --output experiments/runs/public-25-SEU-EXPERIMENTO/metrics-hybrid.json
+```
+
+Os seis PDFs adicionados mudam o corpus encontrado por configurações sem filtro
+de documentos. Não compare scores antigos de 58 documentos com scores novos
+de 64 como se apenas um parâmetro de recuperação tivesse mudado. Os julgamentos
+e execuções históricos continuam preservados.
+
 ## Grade solicitada de BM25
 
 ```bash
@@ -42,7 +74,9 @@ Para uma única configuração do pipeline:
 
 Os caminhos escritos nos JSONs são relativos à raiz do repositório, ou absolutos.
 `question_ids` seleciona os IDs das perguntas na ordem desejada; atualmente,
-`[7, 1, 5, 13, 23]`. `include_reference_answers=true` inclui a resposta esperada
+`[7, 2, 5, 13, 23]`. A questão 2 substitui a 1 por ter evidência direta no corpus;
+o [relatório de 08/11](../docs/reports/covered-five-2026-11-08.md) registra os novos scores.
+`include_reference_answers=true` inclui a resposta esperada
 nos JSONs exportados, sem usá-la como entrada da LLM. A configuração atual do
 pipeline também habilita stopwords e stemming para BM25, com `k1=1.2` e `b=0.75`.
 Os nomes e valores são validados; erros de digitação não são ignorados. A grade
@@ -80,10 +114,10 @@ notebook e não carrega modelos:
 
 ```bash
 .venv/bin/python tools/evaluate_retrieval.py \
-  --input experiments/runs/hybrid-relevance-2026-11-07/run/llm_inputs/hybrid.json \
-  --judgments experiments/judgments/selected-five-2026-11-07.json \
+  --input experiments/runs/covered-five-2026-11-08/run/llm_inputs/hybrid.json \
+  --judgments experiments/judgments/selected-five-2026-11-08.json \
   --k 1 3 5 10 \
-  --output experiments/runs/hybrid-relevance-2026-11-07/metrics.json
+  --output experiments/runs/covered-five-2026-11-08/metrics.json
 ```
 
 Os julgamentos iniciais usam notas 0 (não relevante), 1 (possivelmente relevante)
@@ -95,10 +129,22 @@ Veja [definições e formato dos julgamentos](../docs/implementations/retrieval-
 
 ## Continuidade, penalizações e fórmulas
 
-O pipeline padrão agora usa somente `hybrid` e os três novos componentes.
+O pipeline padrão usa `hybrid`, chunking por seção e penalização de capas e
+referências. `continuity=false` seleciona os dez melhores candidatos sem expandir
+vizinhos. `formula_enrichment=false` acompanha a inferência atual e as últimas
+execuções locais, que não utilizam o reconhecimento de fórmulas.
 Os parâmetros e flags de ablação estão em
 [Evidências e fórmulas](../docs/implementations/evidence-and-formulas.md).
-O reconhecimento exige os pesos locais preparados pelo build. Mudanças no
+Para ativar o reconhecimento opcional, os pesos precisam ser preparados com
+`tools/prepare_formula_model.py`; eles não entram no build atual. Mudanças no
 chunking alteram IDs e textos; use novas pastas de execução e não transfira
 julgamentos antigos apenas por ID. A grade BM25 continua disponível para
 combinações futuras, com os componentes definidos no pipeline associado.
+
+## Comparar embeddings
+
+O caminho `embed_model` seleciona o encoder local. Os prompts de consulta e o
+limite de tokens acompanham o modelo salvo e são usados igualmente pelo runner
+e pela submissão. A auditoria inclui truncamento dos documentos e das perguntas.
+Preparação, configurações e cuidados com tempo/VRAM estão em
+[Modelos de embedding](../docs/implementations/embedding-models.md).

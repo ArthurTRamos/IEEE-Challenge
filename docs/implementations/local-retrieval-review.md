@@ -12,7 +12,7 @@ carregar OLMo ou seu tokenizer. Não exige rótulos prévios de relevância.
 flowchart TD
     P[PDFs nas subpastas de data/download_pdfs] --> M[Inventário, metadados e SHA-256]
     M --> E[Docling em CPU ou Markdown em cache]
-    E --> C[Chunking e fontes compartilhados com main.py]
+    E --> C[Chunking e fontes compartilhados em evidence.py]
     C --> D[Embeddings locais e BM25]
     C --> G[Índices KG por menções e grafo]
     Q[Perguntas JSON ou JSONL] --> R[Rankings dos canais]
@@ -37,8 +37,9 @@ Usar o `.venv` com as dependências oficiais e os modelos locais já preparados:
   --output experiments/runs/pilot-2026-11-07
 ```
 
-O padrão usa as 25 perguntas de `sample_qa.json`, busca recursivamente os PDFs
-e compara quatro variantes sobre o **mesmo corpus completo**:
+O runner busca recursivamente os PDFs. O preset `public-25-minilm.json` usa as
+25 perguntas e compara cinco variantes sobre o **mesmo corpus completo**;
+outras combinações são escolhidas em `variants`:
 
 | Variante | Pesos/canais |
 | --- | --- |
@@ -52,7 +53,8 @@ e compara quatro variantes sobre o **mesmo corpus completo**:
 
 Os modelos são lidos localmente, com modo offline ativado. A extração usa o
 mesmo conversor do baseline, com CPU e quatro threads explícitos. Os embeddings
-usam CPU por padrão, em lotes de oito. Na RTX 4050, é possível testar
+usam `auto` por padrão, em lotes de oito: CUDA quando acessível ao processo,
+ou CPU como alternativa. O log e `config.json` registram o dispositivo efetivo. Na RTX 4050, é possível testar
 `--embedding-device cuda --batch-size 8`; medir a VRAM antes de aumentar o lote.
 
 O runner não usa o domínio da pergunta para filtrar documentos. Catálogos dos
@@ -210,6 +212,6 @@ da fusão compartilhada.
 Resultados, caches e PDFs são ignorados pelo Git. Para preservar julgamentos
 manuais em controle de versão, copiar o CSV escolhido para uma pasta de anotações
 e manter o vínculo com o run/configuração original. Eles não entram no ZIP.
-O único módulo adicional de inferência é `retrieval_utils.py`, incluído no build.
-Pré-processamentos experimentais de `lexical.py` são usados pelo runner local;
-a tokenização padrão da submissão permanece definida em `main.py`.
+Os módulos de inferência estão separados por responsabilidade e incluídos no
+build; consulte [a organização atual](rag-pipeline.md). A tokenização BM25 de
+`lexical.py`, os canais e a seleção são compartilhados por runner e submissão.

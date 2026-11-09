@@ -60,7 +60,7 @@ dupla quantização. O cálculo usa BF16 quando a GPU suporta, ou FP16 caso cont
 (incluindo uma T4). A atenção usa SDPA. A configuração segue a
 [documentação do Transformers](https://huggingface.co/docs/transformers/quantization/bitsandbytes).
 
-O contexto segue os rótulos de fragmentos/fontes e o empacotamento de `src/main.py`.
+O contexto segue os rótulos de fragmentos/fontes e o empacotamento de `src/context.py`.
 As novas exportações incluem `user_message_template`, compartilhado com
 `src/prompts.py`, que separa pergunta, referências e tarefa de resposta. O
 notebook registra o template no resultado; em JSONs antigos sem esse campo,
@@ -84,8 +84,10 @@ modelo, configuração, variante, prompt, parâmetros, respostas, IDs dos chunks
 contagens de tokens. Executar novamente a célula de geração reinicia as respostas.
 
 O notebook mantém `allenai/Olmo-3-7B-Instruct` quantizado para o Colab.
-`main.py` recebe `model_id` da avaliação, sem fixar um identificador, e carrega
-esse modelo em BF16. A geração é determinística nos dois casos. Os resultados
+`main.py` recebe `model_id` da avaliação, sem fixar um identificador, e
+`generation.py` carrega esse modelo em BF16/CUDA por padrão. Os defaults dos
+limites estão em `src/settings.py` e os valores da submissão em `src/pipeline.json`.
+Alterar esses valores não edita automaticamente as células do notebook. A geração é determinística nos dois casos. Os resultados
 permitem comparar experimentos locais, mas não equivalem à acurácia oficial.
 O notebook e os JSONs de experimentos ficam fora do ZIP. A exportação usa apenas
 a biblioteca padrão e não acrescenta inferência ou modelos ao build.

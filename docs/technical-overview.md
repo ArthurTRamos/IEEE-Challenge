@@ -3,14 +3,17 @@
 O sistema responde perguntas sobre IFMIF-DONES e artigos de IA usando evidências
 extraídas de PDFs. A interface de submissão é
 `answer(question, corpus_dir, model_id) -> str`, em [main.py](../src/main.py).
+O [guia prático de testes](testing-guide.md) reúne comandos e resultados.
+A configuração da submissão fica em `src/pipeline.json`; os experimentos locais
+usam os JSONs de `experiments/configs/`.
 
 ## Fluxo completo
 
 ```mermaid
 flowchart LR
-    P[PDFs do corpus] --> D[Docling, fórmulas em LaTeX e chunks por seção]
+    P[PDFs do corpus] --> D[Docling e chunks por seção]
     D --> B[Índice BM25]
-    D --> E[Embeddings MiniLM]
+    D --> E[Embedding local com limite e instrução de consulta]
     D --> I[Índice de menções de entidades]
     K[KG local da DBpedia] --> I
     Q[Pergunta] --> B
@@ -22,7 +25,7 @@ flowchart LR
     E --> R
     G -. KG opcional .-> R
     R --> M[Penalização de capas e referências]
-    M --> V[Continuidade na mesma seção]
+    M --> V[Top 10 sem expansão automática de vizinhos]
     V --> C[Contexto com fontes e limite de tokens]
     C --> L[OLMo fornecido pela avaliação]
     Q --> L
@@ -30,9 +33,12 @@ flowchart LR
 ```
 
 O padrão de submissão é **hybrid** (semântico + BM25, `KG_MODE=off`). O KG
-é opcional. O reconhecimento de fórmulas usa CodeFormulaV2 local; os chunks
-respeitam títulos e a seleção expande vizinhos da mesma seção, com limites.
-Capas e referências têm pontuação reduzida, sem serem excluídas.
+é opcional. Os chunks respeitam títulos, e capas/referências têm pontuação
+reduzida. A expansão automática de vizinhos e o reconhecimento de fórmulas
+ficaram desativados após os diagnósticos de qualidade e tempo; continuam
+disponíveis como componentes experimentais. O encoder local inclui seu limite
+de tokens e a instrução usada apenas na consulta; consulte
+[modelos de embedding](implementations/embedding-models.md).
 
 ## Implementações principais
 
@@ -85,6 +91,11 @@ dependência adicional em inferência. Consulte os
 
 Há testes funcionais, diagnóstico com chunks sintéticos e um runner sobre PDFs
 reais que compara semântico, BM25 e as variantes do KG. O runner exporta Markdown
-e CSV com julgamentos inicialmente vazios. Ainda não há métricas de relevância
-sem a anotação manual, nem medição de acurácia das respostas ou da execução
-completa na H100.
+e CSV com julgamentos inicialmente vazios. A base pública tem julgamentos estimados
+e métricas documentais; os relatórios distinguem esses scores da suficiência
+dos chunks. A execução completa na H100 continua dependendo de avaliação oficial.
+
+A refatoração separa configuração, conversão, indexação, recuperação, contexto e
+geração. Técnicas desativadas não constroem seus índices. O preset local MiniLM
+usa GPU automaticamente quando acessível, mantendo BM25, KG, RRF e operações
+NumPy em CPU. Na submissão, o encoder retorna à CPU antes de carregar OLMo.

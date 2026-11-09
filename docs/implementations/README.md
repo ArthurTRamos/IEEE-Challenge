@@ -3,6 +3,10 @@
 Esta pasta detalha os componentes implementados. A introdução menos detalhada
 está na [visão técnica](../technical-overview.md).
 
+Para executar testes e interpretar seus resultados, comece pelo
+[guia prático](../testing-guide.md). A divisão dos módulos e os controles das
+técnicas estão no [pipeline RAG](rag-pipeline.md).
+
 | Documento | Conteúdo |
 | --- | --- |
 | [Evidências e fórmulas](evidence-and-formulas.md) | Chunking por seção, continuidade, penalização de metadados e LaTeX offline |
@@ -14,6 +18,8 @@ está na [visão técnica](../technical-overview.md).
 | [Configuração e grades de experimentos](experiment-configuration.md) | JSON editável, stopwords, stemming, k1/b e controles sem BM25 |
 | [Geração externa](external-generation.md) | Top 10 autocontido em JSON e notebook com OLMo 3 7B |
 | [Métricas de recuperação](retrieval-metrics.md) | Julgamentos estimados por documento, nDCG, Recall, Precision, MRR e cobertura do contexto |
+| [Base pública de avaliação](public-evaluation-dataset.md) | 25 perguntas, aquisição de fontes, notas estimadas, passagens estáveis e lacunas de cobertura |
+| [Modelos de embedding](embedding-models.md) | Modelos locais, prompts por papel, auditoria de tokens, cache e ciclo CPU/GPU |
 
 ```mermaid
 flowchart TD

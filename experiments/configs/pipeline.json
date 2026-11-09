@@ -1,17 +1,23 @@
 {
   "corpus": "data/download_pdfs",
   "questions": "starter-kit/IEEE-CIS-DSQA-Starter-Kit/sample/sample_qa.json",
-  "question_ids": [7, 1, 5, 13, 23],
+  "question_ids": [
+    7,
+    2,
+    5,
+    13,
+    23
+  ],
   "include_reference_answers": true,
   "embed_model": "src/embed_model",
   "kg": "src/kg",
   "graph_config": "experiments/configs/graph.json",
   "cache": ".cache/local-retrieval",
-  "embedding_device": "cpu",
+  "embedding_device": "auto",
   "batch_size": 8,
   "threads": 4,
-  "formula_enrichment": true,
-  "continuity": true,
+  "formula_enrichment": false,
+  "continuity": false,
   "penalize_metadata": true,
   "reference_weight": 0.5,
   "front_matter_weight": 0.7,
@@ -32,5 +38,8 @@
   "bm25_stopwords": true,
   "bm25_stemming": true,
   "preserve_words": [],
-  "variants": ["hybrid"]
+  "variants": [
+    "hybrid"
+  ],
+  "docling_device": "cpu"
 }

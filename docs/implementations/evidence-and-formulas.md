@@ -3,9 +3,16 @@
 [Visão técnica](../technical-overview.md) · [Pipeline](rag-pipeline.md)
 
 Implementação: [evidence.py](../../src/evidence.py),
-[main.py](../../src/main.py) e [run_retrieval.py](../../tools/run_retrieval.py).
+[documents.py](../../src/documents.py), [retrieval.py](../../src/retrieval.py)
+e [run_retrieval.py](../../tools/run_retrieval.py).
 A submissão usa **hybrid**: semântico + BM25; o KG permanece opcional e fora do
 ZIP padrão. Não foi acrescentado um reranker neural.
+
+**Estado da candidata de 08/11:** o chunking por seção e as penalizações estão
+ativos. A expansão automática de vizinhos e o reconhecimento de fórmulas estão
+desativados; as seções abaixo documentam esses componentes opcionais. O encoder
+agora é selecionado por artefato local, conforme
+[Modelos de embedding](embedding-models.md).
 
 ```mermaid
 flowchart TD
@@ -110,7 +117,7 @@ antes de atribuir melhora de respostas a esta etapa.
 ## Configuração local e ablações
 
 O [pipeline.json](../../experiments/configs/pipeline.json) usa somente `hybrid`
-por padrão e expõe:
+por padrão. Para ativar os componentes opcionais em uma cópia do JSON:
 
 ```json
 {
@@ -126,7 +133,8 @@ por padrão e expõe:
 ```
 
 `top_k` controla o total de chunks exportados no runner. Na submissão, os
-padrões estão em `EvidenceConfig`; BM25 usa `k1=1.2`, `b=0.75`, stopwords e
+valores são escolhidos em `src/pipeline.json` e validados em `PipelineConfig`;
+`EvidenceConfig` define a seleção. BM25 usa `k1=1.2`, `b=0.75`, stopwords e
 stemming, alinhados à configuração atual. Exemplos de ablação:
 
 ```bash

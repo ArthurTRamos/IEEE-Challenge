@@ -18,8 +18,9 @@ referência. A busca combina duas formas de encontrar esses trechos:
 - **Busca por palavras:** procura termos importantes que aparecem tanto na
   pergunta quanto nos documentos.
 
-Os resultados das duas buscas são combinados. O sistema também tenta manter
-trechos próximos da mesma seção e reduzir a prioridade de capas e bibliografias.
+Os resultados das duas buscas são combinados. Os trechos respeitam as seções dos
+artigos, e o sistema reduz a prioridade de capas e bibliografias antes de escolher
+as referências para a resposta.
 Há uma opção experimental que usa um grafo local de conceitos da DBpedia para
 orientar a busca. As respostas continuam baseadas nos trechos encontrados nos
 documentos.
@@ -44,18 +45,20 @@ Para rodar os testes locais:
 ## Experimentar a busca com PDFs locais
 
 Coloque os PDFs em uma pasta e indique essa pasta no arquivo
-[`experiments/configs/pipeline.json`](experiments/configs/pipeline.json). Em
+[`experiments/configs/public-25-minilm.json`](experiments/configs/public-25-minilm.json). Em
 seguida, execute:
 
 ```bash
-.venv/bin/python tools/run_retrieval.py --config experiments/configs/pipeline.json
+.venv/bin/python tools/run_retrieval.py --config experiments/configs/public-25-minilm.json
 ```
 
 O programa salva os trechos recuperados e rankings para inspeção manual. Essa
 etapa ajuda a avaliar se a busca encontra evidências úteis; ela não gera as
 respostas com o modelo da competição. O local e o formato dos arquivos gerados
 são informados ao final da execução. Mais opções estão descritas no
-[guia de experimentos](experiments/README.md).
+[guia prático de testes e resultados](docs/testing-guide.md).
+O preset usa a GPU automaticamente quando acessível. Com vetores em cache,
+é normal haver pouco uso da GPU.
 
 ## Criar o arquivo de submissão
 
@@ -63,8 +66,12 @@ O build prepara e empacota o código e os modelos de busca necessários para
 funcionar sem internet. Com os modelos já disponíveis localmente, rode:
 
 ```bash
+source .venv/bin/activate
 REUSE_MODELS=1 ./src/build.sh
 ```
+
+As técnicas da submissão são escolhidas em `src/pipeline.json`. Essa configuração
+é independente dos testes locais.
 
 O arquivo criado é `hybrid_rag_submission.zip`, na raiz do repositório. O script
 verifica se o ZIP está íntegro e respeita o limite de tamanho da competição.

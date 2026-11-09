@@ -1,0 +1,134 @@
+[
+  {
+    "id": "DONES-031",
+    "title": "Status of DONES neutronics, source terms analyses and radiation protections",
+    "domain": "DONES",
+    "year": 2025,
+    "authors": "Y. Qiu et al.",
+    "doi": "10.1088/1741-4326/addeda",
+    "article_url": "https://doi.org/10.1088/1741-4326/addeda",
+    "pdf_url": "https://publikationen.bibliothek.kit.edu/1000187161/169658642",
+    "license": "CC-BY-4.0",
+    "candidate_questions": [
+      3,
+      5,
+      10
+    ],
+    "reason": "Primary recent nuclear analysis: activation inventories, lithium-loop source terms and radiation protection.",
+    "pages": 38,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/DONES-031.pdf",
+    "sha256": "2403738aec50e81f22af1d23e644389b935df380ff23236b98a50f01840cf7b6",
+    "bytes": 11008618,
+    "accessed_at": "2026-11-08T13:39:19.528121+00:00"
+  },
+  {
+    "id": "DONES-032",
+    "title": "Resolution Studies of Inorganic Scintillation Screens for High Energy and High Brilliance Electron Beams",
+    "domain": "DONES",
+    "year": 2010,
+    "authors": "G. Kube, C. Behrens and W. Lauth",
+    "article_url": "https://proceedings.jacow.org/IPAC10/papers/mopd088.pdf",
+    "pdf_url": "https://proceedings.jacow.org/IPAC10/papers/mopd088.pdf",
+    "license": "See original proceedings; public PDF, no redistribution license asserted here",
+    "candidate_questions": [
+      1,
+      2
+    ],
+    "reason": "Primary explanation of scintillation via energy deposition, electron-hole formation and radiative relaxation; general beam physics, not DONES design parameters.",
+    "pages": 3,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/DONES-032.pdf",
+    "sha256": "16c78d9ac22d811dd67c3434656ecada5be8da36d4e63f0184f016aba5bae8a1",
+    "bytes": 299793,
+    "accessed_at": "2026-11-08T13:39:19.515515+00:00"
+  },
+  {
+    "id": "DONES-033",
+    "title": "Beam Instrumentation — CERN Summer Student Lectures",
+    "domain": "DONES",
+    "year": 2014,
+    "authors": "Eva Barbara Holzer",
+    "article_url": "https://indico.cern.ch/event/279729/contributions/1626379/",
+    "pdf_url": "https://indico.cern.ch/event/279729/contributions/1626379/attachments/512363/707107/e.b.holzer_handout.pdf",
+    "license": "See original CERN material; public PDF, no redistribution license asserted here",
+    "candidate_questions": [
+      1,
+      2
+    ],
+    "reason": "Primary teaching material on OTR at interfaces and interceptive beam diagnostics; general physics, not a DONES-specific design.",
+    "pages": 24,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/DONES-033.pdf",
+    "sha256": "4c433226fecdc2297bd5b8cbad268397432bcacc12c06ad45f9e7efd2cabc4f9",
+    "bytes": 1355114,
+    "accessed_at": "2026-11-08T13:39:19.516979+00:00"
+  },
+  {
+    "id": "DONES-034",
+    "title": "The accomplishment of the Engineering Design Activities of IFMIF/EVEDA: The European-Japanese project towards a Li(d,xn) fusion relevant neutron source",
+    "domain": "DONES",
+    "year": 2015,
+    "authors": "J. Knaster et al.",
+    "article_url": "https://documenta.ciemat.es/server/api/core/bitstreams/7c7b4c47-ac72-44a4-bbc0-044ca4783cd5/content",
+    "pdf_url": "https://documenta.ciemat.es/server/api/core/bitstreams/7c7b4c47-ac72-44a4-bbc0-044ca4783cd5/content",
+    "license": "Accepted manuscript in institutional repository; see original rights statement",
+    "candidate_questions": [
+      9
+    ],
+    "reason": "IFMIF main-building dimensions used in the reference answer. IFMIF and DONES must not be treated as identical facilities.",
+    "resolved_url": "https://documenta.ciemat.es/server/api/core/bitstreams/7c7b4c47-ac72-44a4-bbc0-044ca4783cd5/content",
+    "pages": 43,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/DONES-034.pdf",
+    "sha256": "2e46db4aad44ddb00a21ded5fc936bb8d6952927432053f5b684c999d30786a7",
+    "bytes": 3748798,
+    "accessed_at": "2026-11-08T13:39:25.412008+00:00"
+  },
+  {
+    "id": "DONES-035",
+    "title": "The lithium systems of the IFMIF-DONES facility",
+    "domain": "DONES",
+    "year": 2025,
+    "authors": "F.S. Nitti et al.",
+    "doi": "10.1088/1741-4326/adc284",
+    "article_url": "https://documenta.ciemat.es/items/036b674a-afab-464d-b3c6-795b004f02e8",
+    "pdf_url": "https://documenta.ciemat.es/server/api/core/bitstreams/0b1904e7-1bb4-46b3-bdc0-735c9fe8526e/content",
+    "license": "CC-BY-4.0",
+    "candidate_questions": [
+      3,
+      5,
+      6,
+      7,
+      8
+    ],
+    "reason": "Recent primary design source for lithium flow, impurity-control bypass and activation inventories.",
+    "resolved_url": "https://documenta.ciemat.es/server/api/core/bitstreams/0b1904e7-1bb4-46b3-bdc0-735c9fe8526e/content",
+    "pages": 21,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/DONES-035.pdf",
+    "sha256": "66789c60ef5db644a35903225df464504ad5d2ac39f691b137a1a69f81b374d7",
+    "bytes": 8583864,
+    "accessed_at": "2026-11-08T13:39:25.555205+00:00"
+  },
+  {
+    "id": "AI-029",
+    "title": "Time for a Change: a Tutorial for Comparing Multiple Classifiers Through Bayesian Analysis",
+    "domain": "AI Papers",
+    "year": 2017,
+    "authors": "Alessio Benavoli, Giorgio Corani, Janez Demsar and Marco Zaffalon",
+    "article_url": "https://jmlr.org/papers/v18/16-305.html",
+    "pdf_url": "https://jmlr.org/papers/volume18/16-305/16-305.pdf",
+    "license": "CC-BY-4.0",
+    "candidate_questions": [
+      21
+    ],
+    "reason": "Supporting methodological source for Bayesian comparison and practical equivalence; does not replace the missing ThinkMore paper.",
+    "pages": 36,
+    "status": "success",
+    "relative_path": "data/download_pdfs/public_qa_expansion/AI-029.pdf",
+    "sha256": "92570d221aadee6ab58812cc208eea94463cb1151e3febeab26fb2456622e2ee",
+    "bytes": 2666122,
+    "accessed_at": "2026-11-08T13:39:19.523567+00:00"
+  }
+]

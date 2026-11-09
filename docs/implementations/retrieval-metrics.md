@@ -8,6 +8,11 @@ arquivo de julgamentos de relevância. Usa somente a biblioteca padrão do Pytho
 sem carregar modelos. Ele avalia recuperação de documentos; não atribui uma nota
 à resposta da LLM nem demonstra que um chunk específico contém a evidência certa.
 
+A [base ampliada das 25 perguntas](public-evaluation-dataset.md) está em
+[`public-25-2026-11-08.json`](../../experiments/judgments/public-25-2026-11-08.json).
+Ela inclui 64 documentos, passagens de apoio independentes do chunking e
+classificação de lacunas. As notas 0 são negativas provisórias de triagem.
+
 ## Notas e arquivos de julgamento
 
 | Nota | Rótulo | Critério |
@@ -55,10 +60,10 @@ para avaliações parciais, registrando os IDs sem anotação no resultado.
 
 ```bash
 .venv/bin/python tools/evaluate_retrieval.py \
-  --input experiments/runs/hybrid-relevance-2026-11-07/run/llm_inputs/hybrid.json \
-  --judgments experiments/judgments/selected-five-2026-11-07.json \
+  --input experiments/runs/covered-five-2026-11-08/run/llm_inputs/hybrid.json \
+  --judgments experiments/judgments/selected-five-2026-11-08.json \
   --k 1 3 5 10 \
-  --output experiments/runs/hybrid-relevance-2026-11-07/metrics.json
+  --output experiments/runs/covered-five-2026-11-08/metrics.json
 ```
 
 `--input` também aceita o `*_answers.json` do notebook. Nesse caso, usa somente

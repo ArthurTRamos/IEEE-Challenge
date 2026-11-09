@@ -115,7 +115,7 @@ class LocalRetrievalTests(unittest.TestCase):
             rrf_fuse({"dense": [0, 0]}, {"dense": 1})
 
     def test_runner_never_loads_olmo_or_uses_reference_answers_for_retrieval(self):
-        from src import main as pipeline
+        from src import documents as pipeline
         corpus = self.root / "corpus"
         corpus.mkdir()
         (corpus / "DONES-001.pdf").write_bytes(b"fixture")
@@ -131,17 +131,23 @@ class LocalRetrievalTests(unittest.TestCase):
         encoder.encode.side_effect = encode
         encoder.tokenizer.side_effect = lambda texts, **kwargs: {"input_ids": [[1, 2] for _ in texts]}
         encoder.max_seq_length = 256
-        encoder.get_sentence_embedding_dimension.return_value = 2
+        encoder.get_embedding_dimension.return_value = 2
         args = SimpleNamespace(output=self.root / "run", corpus=corpus, questions=questions, embed_model=self.root / "model",
                                no_cache=True, cache=self.root / "cache", document_ids=None, limit_documents=None, limit_questions=None,
                                embedding_device="cpu", threads=1, batch_size=8, chunk_size=800, chunk_overlap=150, variants=["dense", "hybrid"],
                                top_k=1, candidate_depth=100, rrf_k=60, dense_weight=1, bm25_weight=1, kg_weight=0.5, include_reference_answers=False)
         with patch.object(runner, "tree_fingerprint", return_value="model-hash"), \
-             patch.object(pipeline, "_docling_converter", new=lambda **kwargs: converter), \
-             patch("sentence_transformers.SentenceTransformer", return_value=encoder), \
-             patch.object(pipeline.AutoModelForCausalLM, "from_pretrained", side_effect=AssertionError("OLMo must not load")), \
-             patch.object(pipeline.AutoTokenizer, "from_pretrained", side_effect=AssertionError("OLMo tokenizer must not load")):
+             patch.object(pipeline, "create_converter", new=lambda **kwargs: converter), \
+             patch("sentence_transformers.SentenceTransformer", return_value=encoder) as encoder_factory, \
+             patch("transformers.AutoModelForCausalLM.from_pretrained", side_effect=AssertionError("OLMo must not load")), \
+             patch("transformers.AutoTokenizer.from_pretrained", side_effect=AssertionError("OLMo tokenizer must not load")):
             summary = runner.run(args)
+            encoder_factory.reset_mock()
+            args.output = self.root / "bm25-only"
+            args.variants = ["bm25"]
+            lexical_summary = runner.run(args)
+            encoder_factory.assert_not_called()
+            self.assertFalse(lexical_summary["embedding_audit_performed"])
         self.assertEqual(summary["annotation_status"], "unjudged")
         self.assertIsNone(summary["quality_metrics"])
         self.assertEqual(summary["questions"], 1)

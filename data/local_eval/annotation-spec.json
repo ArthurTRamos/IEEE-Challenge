@@ -1,0 +1,1598 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "status": "assistant_estimate",
+  "official_questions_sha256": "3b779a053a2d5b2027eab1a6d6419c861ff96c9d2b64ca9fbdd82f2852a47390",
+  "method": "Manually curated by the assistant after source inspection. Positive grades are explicit; all unlisted pairs receive provisional 0. Anchors locate selected evidence and do not classify documents.",
+  "base_judgments": [
+    "experiments/judgments/selected-five-2026-11-07.json",
+    "experiments/judgments/selected-five-2026-11-08.json"
+  ],
+  "questions": [
+    {
+      "id": "1",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Deposição de energia no cintilador produz excitações/pares elétron-lacuna.",
+        "OTR é emissão na interface entre meios com constantes dielétricas diferentes."
+      ],
+      "notes": "As novas fontes cobrem os dois mecanismos. Fluorescência de gás residual permanece apenas contexto: não é a mesma técnica que cintilação.",
+      "judgments": [
+        {
+          "document_id": "DONES-018",
+          "grade": 1,
+          "rationale": "Descreve perfilometria por fluorescência de gás residual, mas não compara o mecanismo de cintilação ao de OTR.",
+          "passages": [
+            {
+              "start_char": 8660,
+              "end_char": 9285,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-019",
+          "grade": 1,
+          "rationale": "Apresenta OTR como opção de diagnóstico da pegada do feixe. Ajuda a localizar a aplicação, mas não explica o contraste entre deposição de energia e emissão em interface.",
+          "passages": [
+            {
+              "start_char": 16464,
+              "end_char": 17092,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-020",
+          "grade": 1,
+          "rationale": "Enumera alternativas de diagnóstico óptico, incluindo OTR, sem desenvolver a diferença física pedida.",
+          "passages": [
+            {
+              "start_char": 12136,
+              "end_char": 12766,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-021",
+          "grade": 1,
+          "rationale": "Cita OTR e fluorescência para medir o perfil do feixe, sem explicar a necessidade de deposição de energia na cintilação.",
+          "passages": [
+            {
+              "start_char": 1682,
+              "end_char": 2302,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-025",
+          "grade": 1,
+          "rationale": "Explica excitação e desexcitação de átomos/moléculas na fluorescência induzida por feixe. É uma analogia útil para emissão por excitação, mas não prova a comparação específica cintilação versus OTR.",
+          "passages": [
+            {
+              "start_char": 2277,
+              "end_char": 2897,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-026",
+          "grade": 1,
+          "rationale": "Explica o estado eletrônico excitado e a emissão de fótons após interação do feixe com gás. A pergunta pede cintilação versus OTR; a passagem trata de fluorescência, portanto a nota é conservadora.",
+          "passages": [
+            {
+              "start_char": 2110,
+              "end_char": 2734,
+              "provenance": "selected-five-2026-11-07.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-032",
+          "grade": 2,
+          "rationale": "Descreve deposição de energia que produz pares elétron-lacuna no cintilador.",
+          "passages": [
+            {
+              "anchor": "the energy deposition causing the e-h formation is mainly due to ionization.",
+              "before": 0,
+              "after": 0,
+              "pdf_pages": [
+                1
+              ],
+              "supports": [
+                "scintillation_energy_deposition"
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-033",
+          "grade": 2,
+          "rationale": "Explica OTR pela interface de meios com constantes dielétricas diferentes.",
+          "passages": [
+            {
+              "anchor": "interface of two media with different dielectric constants",
+              "before": 0,
+              "after": 0,
+              "pdf_pages": [
+                18
+              ],
+              "supports": [
+                "otr_interface"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Intercepção/interação física altera o feixe.",
+        "Uso durante comissionamento ou intensidade reduzida; restrição em potência nominal."
+      ],
+      "notes": "Há evidências físicas e operacionais em documentos diferentes. Destruição do detector pelo feixe não é a definição de diagnóstico destrutivo.",
+      "judgments": [
+        {
+          "document_id": "DONES-017",
+          "grade": 2,
+          "rationale": "Descreve o SEM Grid como instrumento interceptivo e a perda de energia do feixe ao atravessar a grade. É evidência direta de interação física e perturbação do feixe.",
+          "passages": [
+            {
+              "start_char": 9196,
+              "end_char": 9872,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 9321,
+              "end_char": 9987,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-018",
+          "grade": 2,
+          "rationale": "Descreve diagnósticos interceptivos, incluindo wire scanners e Faraday cups, usados durante o modo pulsado de comissionamento. Apoia diretamente a parte da referência sobre quando esses diagnósticos são empregados; não explica sozinho toda a definição física.",
+          "passages": [
+            {
+              "start_char": 3680,
+              "end_char": 4369,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-019",
+          "grade": 2,
+          "rationale": "Determina evitar métodos interceptivos em potência nominal e explicita seu uso no comissionamento para caracterizar o feixe. Apoia a diferença operacional entre diagnóstico interceptivo e operação normal.",
+          "passages": [
+            {
+              "start_char": 6340,
+              "end_char": 7023,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 7236,
+              "end_char": 7921,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-022",
+          "grade": 1,
+          "rationale": "Apresenta a combinação de monitores interceptivos e não interceptivos e a implementação de SEM Grid. Dá contexto e exemplos, sem desenvolver a perturbação física do feixe.",
+          "passages": [
+            {
+              "start_char": 9139,
+              "end_char": 9837,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-025",
+          "grade": 1,
+          "rationale": "Motiva diagnósticos não interceptivos e alerta que um diagnóstico interceptivo pode ser destruído pelo feixe. É contexto operacional; a destruição do instrumento não deve ser confundida com a definição de diagnóstico destrutivo para o feixe.",
+          "passages": [
+            {
+              "start_char": 218,
+              "end_char": 910,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-026",
+          "grade": 1,
+          "rationale": "Apresenta diagnóstico de fluorescência não interceptivo, útil como contraste com instrumentos que interceptam o feixe. Não define diretamente o diagnóstico destrutivo.",
+          "passages": [
+            {
+              "start_char": 4937,
+              "end_char": 5634,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-033",
+          "grade": 2,
+          "rationale": "A apresentação descreve instrumentos invasivos como perturbadores do feixe.",
+          "passages": [
+            {
+              "anchor": "more or less perturbing to the beam",
+              "before": 0,
+              "after": 0,
+              "pdf_pages": [
+                16
+              ],
+              "supports": [
+                "beam_perturbation"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Meia-vida de Be-7 que arredonde para 53 dias.",
+        "Aplicar lambda=ln(2)/53 por dia e converter dias em segundos."
+      ],
+      "notes": "DONES-031 e DONES-035 informam 53,2 dias, não os 53,22 da referência. Ambos arredondam a 53; a aritmética deriva 0,01308/dia ou 1,514e-7/s.",
+      "judgments": [
+        {
+          "document_id": "DONES-031",
+          "grade": 2,
+          "rationale": "A seção de fontes no lítio informa meia-vida de Be-7 de 53,2 dias, suficiente para o arredondamento.",
+          "passages": [
+            {
+              "anchor": "Be-7 (53.2 d) is a gamma emitter",
+              "before": 40,
+              "after": 300
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-035",
+          "grade": 2,
+          "rationale": "Informa meia-vida de 53,2 dias por captura eletrônica; permite arredondar a 53.",
+          "passages": [
+            {
+              "anchor": "7 Be decays to 7 Li with a half-life of 53.2 days",
+              "before": 40,
+              "after": 220
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-027",
+          "grade": 1,
+          "rationale": "Contextualiza atividade e decaimento de Be-7; o trecho não fornece o valor de meia-vida necessário.",
+          "passages": [
+            {
+              "start_char": 2100,
+              "end_char": 2450
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "coverage_status": "requires_figure",
+      "required_evidence": [
+        "Figura 8 do modelo básico de corrosão: evolução de atividades no trocador de calor.",
+        "Leitura aproximada do cruzamento da curva Be-7 com outros radionuclídeos."
+      ],
+      "notes": "Figura 8, página PDF 4 de DONES-027, inspecionada visualmente: a perda de dominância ocorre na ordem de 10^7 s. O Markdown só contém a legenda e comentários; não permite inferir sozinho o instante. Não usar como controle exclusivamente textual.",
+      "judgments": [
+        {
+          "document_id": "DONES-027",
+          "grade": 2,
+          "rationale": "Figura 8 mostra a evolução de radionuclídeos no HX. A ordem de grandeza do cruzamento exige leitura do gráfico.",
+          "passages": [
+            {
+              "anchor": "Fig. 8. Radionuclide evolution in time for the Heat exchanger",
+              "before": 20,
+              "after": 140,
+              "pdf_pages": [
+                4
+              ],
+              "modality": "figure",
+              "note": "Figura inspecionada visualmente; a legenda é só o localizador. A curva de Be-7 perde dominância na ordem de 10^7 s, sem resolução para um tempo exato."
+            },
+            {
+              "start_char": 14700,
+              "end_char": 15185,
+              "pdf_pages": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-031",
+          "grade": 1,
+          "rationale": "Discute fonte de Be-7 e deposição no circuito, mas não o cruzamento do gráfico no HX.",
+          "passages": [
+            {
+              "anchor": "3.3.1. Radiation source in Li.",
+              "before": 0,
+              "after": 800
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "coverage_status": "partial_text",
+      "required_evidence": [
+        "Cadeia transporte de partículas/espectros mais código de ativação/inventário.",
+        "Cenários de irradiação e bibliotecas/grupos de energia aplicáveis.",
+        "Produção de Be-7 e trítio e distinção entre estoque e taxa anual."
+      ],
+      "notes": "Há apoio direto ao método geral e a parte do inventário. Não localizei no corpus completo o detalhamento numérico da referência (fluxo 5,53e15, CCFE-162, 1,47 g). DONES-031 usa outro cenário e informa 3,78 g/fpy de trítio; não misturar taxas, estoques e versões.",
+      "judgments": [
+        {
+          "document_id": "DONES-001",
+          "grade": 1,
+          "rationale": "Descreve impurezas, produção de isótopos de hidrogênio e dimensionamento dos traps no circuito. Não apresenta o cálculo completo dos inventários de Be-7 e trítio.",
+          "passages": [
+            {
+              "start_char": 8325,
+              "end_char": 8954,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-008",
+          "grade": 2,
+          "rationale": "Relaciona códigos de inventário FISPACT/ACAB ao transporte MCNP/McDeLicious e às ativações por nêutrons e deutérons. Apoia diretamente o método de cálculo, sem reproduzir todas as condições e valores da referência.",
+          "passages": [
+            {
+              "start_char": 10562,
+              "end_char": 11185,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 9669,
+              "end_char": 10283,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-027",
+          "grade": 1,
+          "rationale": "Usa estimativas de Be-7 e FISPACT para obter espectros de decaimento e doses. Trata de um inventário relacionado, mas não demonstra o cálculo de produção de Be-7 e trítio pedido na pergunta.",
+          "passages": [
+            {
+              "start_char": 8951,
+              "end_char": 9573,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 2841,
+              "end_char": 3474,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-028",
+          "grade": 1,
+          "rationale": "Explica cálculo de inventário com FISPACT e equações de Bateman para outro componente, o suporte de amostras do HFTM. Oferece contexto metodológico indireto, não o inventário do circuito de lítio.",
+          "passages": [
+            {
+              "start_char": 5606,
+              "end_char": 6236,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-029",
+          "grade": 1,
+          "rationale": "Fornece estimativas de Be-7 e trítio e contexto de purificação, mas não detalha a cadeia de cálculo. Valores e cenários de operação não devem ser confundidos com os da resposta de referência.",
+          "passages": [
+            {
+              "start_char": 24654,
+              "end_char": 25286,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 24931,
+              "end_char": 25536,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-031",
+          "grade": 2,
+          "rationale": "Explica a ligação transporte/ativação e fornece fontes em Li; cenário e inventários divergem dos números da referência.",
+          "passages": [
+            {
+              "anchor": "Activation inventory tools FISPACT",
+              "before": 80,
+              "after": 650
+            },
+            {
+              "anchor": "Another important source term is Tritium",
+              "before": 0,
+              "after": 560
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-035",
+          "grade": 2,
+          "rationale": "Apresenta reações de Be-7, inventário e remete à avaliação nuclear; apoio direto a parte do inventário, não a toda a cadeia numérica.",
+          "passages": [
+            {
+              "anchor": "4.2.1. Generation and solubility of 7 Be.",
+              "before": 0,
+              "after": 950
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Vazão do circuito primário/HX1 ou massa por tempo e densidade compatível.",
+        "Converter m³/s para L/s; resultado aproximado de 98 L/s."
+      ],
+      "notes": "DONES-035 informa nominal de 97,5 L/s e 49,7 kg/s no HX1. Isso sustenta o valor aproximado; a densidade 505 kg/m³ usada na conta de referência não foi confirmada separadamente.",
+      "judgments": [
+        {
+          "document_id": "DONES-035",
+          "grade": 2,
+          "rationale": "Tabelas 1 e 2 dão vazão primária nominal e massa por tempo no lado do HX1.",
+          "passages": [
+            {
+              "anchor": "Table 1. Main design requirements of PLO.",
+              "before": 0,
+              "after": 560
+            },
+            {
+              "anchor": "Shell side mass flow",
+              "before": 140,
+              "after": 330
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-006",
+          "grade": 2,
+          "rationale": "Tabela de estado estacionário informa 49,7 kg/s e temperaturas do Li no HX; permite a estimativa se a densidade for conhecida.",
+          "passages": [
+            {
+              "start_char": 10080,
+              "end_char": 10550
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-001",
+          "grade": 2,
+          "rationale": "Fornece nominal de 97,5 L/s no circuito primário, aproximação compatível com os ~98 L/s pedidos.",
+          "passages": [
+            {
+              "anchor": "yielding a flow rate of 97.5 l/s",
+              "before": 70,
+              "after": 300
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-034",
+          "grade": 1,
+          "rationale": "A tabela do HX fornece 49,7 kg/s em IFMIF. É contexto útil para a conversão, com ressalva de instalação/versão; não confirma isoladamente o projeto DONES.",
+          "passages": [
+            {
+              "anchor": "Primary  HX  Shell  Lithium  49.7",
+              "before": 100,
+              "after": 300,
+              "note": "Nota 1 atribuída pelo usuário após revisão dos negativos na execução all_versions_test_25quests."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Corrigir premissa: remoção de nitrogênio off-line/na manutenção.",
+        "Faixa de operação de 500–600 °C da versão de projeto citada."
+      ],
+      "notes": "Preserva os julgamentos anteriores e acrescenta o projeto de 2025, que também situa a purificação de N no comissionamento/manutenção. Não confundir sensores on-line com o trap de N.",
+      "judgments": [
+        {
+          "document_id": "DONES-001",
+          "grade": 2,
+          "rationale": "Descreve a remoção de N no Dump Tank em condição estática antes do arranque/depois da manutenção e informa 500–600 °C. Evidência direta para corrigir a premissa on-line e informar a temperatura.",
+          "passages": [
+            {
+              "start_char": 6887,
+              "end_char": 7494,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 6580,
+              "end_char": 7196,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-013",
+          "grade": 2,
+          "rationale": "Descreve material que liga nitrogênio no Dump Tank, usado durante a manutenção. Sustenta a correção da premissa on-line, embora não complete a faixa de temperatura.",
+          "passages": [
+            {
+              "start_char": 12659,
+              "end_char": 13281,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 12574,
+              "end_char": 13183,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-020",
+          "grade": 1,
+          "rationale": "Discute monitoramento de nitrogênio e pureza do lítio. Pode contextualizar o sistema, mas não estabelece a temperatura nem o modo de operação do trap de N.",
+          "passages": [
+            {
+              "start_char": 7856,
+              "end_char": 8464,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-027",
+          "grade": 1,
+          "rationale": "Apresenta remoção de impurezas no circuito e menciona nitrogênio ao descrever o cold trap. Não demonstra que esse componente seja o hot trap de N; contribuição contextual incerta.",
+          "passages": [
+            {
+              "start_char": 6437,
+              "end_char": 7045,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-029",
+          "grade": 2,
+          "rationale": "Declara explicitamente a mudança do trap de nitrogênio para o Dump Tank como off-line trap. É evidência direta sobre a premissa incorreta da pergunta.",
+          "passages": [
+            {
+              "start_char": 26095,
+              "end_char": 26708,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-035",
+          "grade": 2,
+          "rationale": "Situa a purificação de N no comissionamento/manutenção; o sensor on-line de N é um componente distinto.",
+          "passages": [
+            {
+              "start_char": 47120,
+              "end_char": 47800
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Desvio ICS de aproximadamente 2% da vazão principal.",
+        "Vazões 97,5 L/s e 2,015 L/s, com ramos de 1,95 e 0,065 L/s."
+      ],
+      "notes": "DONES-035, tabela 4 e seção 4.2.2, corresponde aos valores da referência. DONES-001 é um distrator difícil por versão: informa 0,65 L/s (~0,6%), não 2%; recebe nota 1 com conflito explícito.",
+      "judgments": [
+        {
+          "document_id": "DONES-035",
+          "grade": 2,
+          "rationale": "Tabela 4 fornece os ramos 1,95 e 0,065 L/s; texto explicita 2% e tabela 1 o circuito principal.",
+          "passages": [
+            {
+              "anchor": "Table 4. Main design requirements of ICS.",
+              "before": 0,
+              "after": 460
+            },
+            {
+              "anchor": "Flow rate in the ICS (and so in the three CT)",
+              "before": 60,
+              "after": 250
+            },
+            {
+              "anchor": "Table 1. Main design requirements of PLO.",
+              "before": 0,
+              "after": 260
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-031",
+          "grade": 2,
+          "rationale": "Parâmetro QCT de 2% dá apoio à fração desviada no cenário recente; não fornece sozinho todos os ramos da ICS.",
+          "passages": [
+            {
+              "anchor": "QCT = 2%",
+              "before": 130,
+              "after": 330
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-001",
+          "grade": 1,
+          "rationale": "Versão anterior do projeto: ICS=0,65 L/s (~0,6%). É contexto conflitante com 2%, não confirmação da resposta.",
+          "passages": [
+            {
+              "anchor": "The design flow rate of the ICS is 0.65 l/s",
+              "before": 0,
+              "after": 260,
+              "note": "Conflito de versão: o valor antigo não deve ser fundido com a tabela de DONES-035."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "coverage_status": "scope_warning",
+      "required_evidence": [
+        "Dimensões 137 m × 111 m × 40,5 m; 27 m acima do solo.",
+        "Calcular volume total 615883,5 m³ e acima do solo 410589 m³.",
+        "Distinguir IFMIF de IFMIF-DONES."
+      ],
+      "notes": "DONES-034 contém exatamente as dimensões da resposta esperada, mas trata do IFMIF. A pergunta diz DONES. Nota 2 para a evidência dos números da referência, sem validar a transferência dessas dimensões para o DONES.",
+      "judgments": [
+        {
+          "document_id": "DONES-034",
+          "grade": 2,
+          "rationale": "Fonte das dimensões usadas na resposta pública, para IFMIF; não estabelece as dimensões do DONES.",
+          "passages": [
+            {
+              "anchor": "137 m long, 111 m wide, 40.5 m high (27 m high above the ground level).",
+              "before": 0,
+              "after": 0,
+              "note": "Fonte IFMIF. Atribuição ao DONES na pergunta requer revisão."
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-023",
+          "grade": 1,
+          "rationale": "Trata da estrutura e blindagem do prédio do DONES, mas não confirma as três dimensões da referência.",
+          "passages": [
+            {
+              "start_char": 300,
+              "end_char": 1050
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "coverage_status": "partial_text",
+      "required_evidence": [
+        "Limites de dose para acesso humano e manutenção remota.",
+        "Considerar carga de trabalho/tempo de exposição e cenário beam-on/beam-off."
+      ],
+      "notes": "DONES-013 sustenta acesso humano abaixo de aproximadamente 10 µSv/h e áreas proibidas acima de 100 mSv/h. O par de limiares e a classificação de áreas não constituem uma regra universal nem detalham isoladamente a carga de trabalho.",
+      "judgments": [
+        {
+          "document_id": "DONES-013",
+          "grade": 2,
+          "rationale": "Relaciona dose acima de 100 mSv/h a área proibida e doses abaixo de ~10 µSv/h a acesso humano.",
+          "passages": [
+            {
+              "start_char": 25300,
+              "end_char": 26080
+            },
+            {
+              "start_char": 28450,
+              "end_char": 29100
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-010",
+          "grade": 1,
+          "rationale": "Metodologia de manutenção remota e restrições radiológicas; contexto, sem estabelecer sozinho os dois limiares da referência.",
+          "passages": [
+            {
+              "start_char": 3500,
+              "end_char": 4230
+            }
+          ]
+        },
+        {
+          "document_id": "DONES-031",
+          "grade": 1,
+          "rationale": "Fonte recente para doses/ativação e acesso, mas não equivale à regra completa de decisão pedida.",
+          "passages": [
+            {
+              "anchor": "For the accelerator components during maintenance",
+              "before": 20,
+              "after": 650
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Hierarquia residual e codebooks maiores nas primeiras camadas.",
+        "Evitar colapso hierárquico; balanced k-means apenas na última camada."
+      ],
+      "notes": "AI-001 é a fonte primária. As passagens distinguem capacidade das primeiras camadas e balanceamento da última. Não interpretar como prova universal de superioridade de k-means sobre VAE.",
+      "judgments": [
+        {
+          "document_id": "AI-001",
+          "grade": 2,
+          "rationale": "Discussão da tokenização distingue primeiras camadas, colapso da hierarquia e balanced k-means só na terceira.",
+          "passages": [
+            {
+              "start_char": 27040,
+              "end_char": 27800,
+              "supports": [
+                "early_codebooks"
+              ]
+            },
+            {
+              "start_char": 28170,
+              "end_char": 29070,
+              "supports": [
+                "hierarchical_collapse",
+                "last_layer_balancing"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "coverage_status": "partial_text",
+      "required_evidence": [
+        "Projeção de candidatos no subespaço das características imutáveis.",
+        "Verificar restrições dos baselines comparados, em vez de presumir ausência.",
+        "Distinguir uma ablação útil de uma alegação de comparação injusta."
+      ],
+      "notes": "AI-004 descreve projeções e métodos com restrições; AI-006 explicita imutabilidade em FACE. O artigo original de DiCE é contexto e não confirma por si só a configuração de todos os baselines no experimento ONB-MACF. Auditoria dessas configurações permanece necessária.",
+      "judgments": [
+        {
+          "document_id": "AI-004",
+          "grade": 2,
+          "rationale": "Explica as projeções que preservam características imutáveis e descreve baselines baseados em restrições.",
+          "passages": [
+            {
+              "start_char": 27890,
+              "end_char": 28450,
+              "supports": [
+                "projection"
+              ]
+            },
+            {
+              "start_char": 15000,
+              "end_char": 16450,
+              "supports": [
+                "baseline_constraints"
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "AI-006",
+          "grade": 2,
+          "rationale": "FACE explicita características imutáveis e mudanças condicionais no mecanismo de condições.",
+          "passages": [
+            {
+              "start_char": 16260,
+              "end_char": 16820,
+              "supports": [
+                "face_constraints"
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "AI-005",
+          "grade": 1,
+          "rationale": "DiCE discute viabilidade, contexto e restrições, mas o PDF original não demonstra a configuração experimental usada em ONB-MACF.",
+          "passages": [
+            {
+              "start_char": 180,
+              "end_char": 1000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Construção inclui testemunhas em E_(m+1), portanto em Y.",
+        "Pares densos em S_Y × S_Y repetidos infinitamente.",
+        "Índices arbitrariamente grandes permitem epsilon arbitrariamente pequeno e aplicar a equivalência do teorema."
+      ],
+      "notes": "Uma conclusão isolada de que Y é lush não basta: as evidências devem recuperar a construção e a passagem ao limite, em mais de um trecho. Fórmulas perdidas no Markdown continuam sendo uma limitação do extrator.",
+      "judgments": [
+        {
+          "document_id": "AI-007",
+          "grade": 2,
+          "rationale": "É o artigo da pergunta. A construção de Y e a prova registram pares densos repetidos infinitamente, tolerâncias arbitrariamente pequenas e a aplicação do item (ii) do Teorema 4.1.",
+          "passages": [
+            {
+              "start_char": 20523,
+              "end_char": 21134,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 20789,
+              "end_char": 21415,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 19549,
+              "end_char": 20157,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Métricas limitadas com extremos significativos fornecem interpretação absoluta.",
+        "Evitar saturação/igualação artificial e preservar suavidade."
+      ],
+      "notes": "AI-008 explicita interpretação sem baseline e que somente os extremos verdadeiros devem receber 0/1. Estar apenas no intervalo [0,1] não garante essas propriedades.",
+      "judgments": [
+        {
+          "document_id": "AI-008",
+          "grade": 2,
+          "rationale": "Conclusão explica informação absoluta sem baseline; seção 3 descreve extremos bem calibrados e suavidade.",
+          "passages": [
+            {
+              "start_char": 125820,
+              "end_char": 126400,
+              "supports": [
+                "absolute_interpretation"
+              ]
+            },
+            {
+              "start_char": 19220,
+              "end_char": 19980,
+              "supports": [
+                "saturation",
+                "smoothness"
+              ]
+            },
+            {
+              "start_char": 21220,
+              "end_char": 21720,
+              "supports": [
+                "meaningful_extremes"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Heurística de janela entre piso(L/4) e piso(L/3).",
+        "Para 512, calcular 128 a 170 e considerar memória."
+      ],
+      "notes": "A seção 4.4 de AI-010 apresenta a regra e a exceção por memória. A faixa experimental 24–36 para L=96 é descrita como aproximadamente 1/4–1/3, embora 36/96 seja 3/8; preserve a regra explícita e o caráter heurístico.",
+      "judgments": [
+        {
+          "document_id": "AI-010",
+          "grade": 2,
+          "rationale": "Seção 4.4 explicita a regra piso(L/4)..piso(L/3), a motivação e exceções por memória.",
+          "passages": [
+            {
+              "start_char": 45010,
+              "end_char": 46190,
+              "supports": [
+                "window_rule",
+                "memory_constraint"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "coverage_status": "missing_source",
+      "required_evidence": [
+        "Normalizar cada neurônio pelos seus próprios limites viáveis.",
+        "Evidência do classificador qrFCM e dos F1 0,74/0,54/0,69."
+      ],
+      "notes": "AI-011 explica encolhimento dos espaços, mas explicitamente exclui classificadores da experiência. Não localizei fonte primária com a normalização e os resultados da referência. Só contexto, sem documentos nota 2.",
+      "judgments": [
+        {
+          "document_id": "AI-011",
+          "grade": 1,
+          "rationale": "É evidência do encolhimento e dos limites viáveis, mas não da normalização por neurônio nem da melhora de F1 do classificador.",
+          "passages": [
+            {
+              "start_char": 26964,
+              "end_char": 27700
+            },
+            {
+              "start_char": 31900,
+              "end_char": 32420,
+              "note": "O artigo declara que classificadores de padrões não participam deste experimento."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Conhecer W estreita os espaços viáveis e melhora o poder preditivo do covering.",
+        "Caso estável com baixa conectividade/poucos neurônios e covering zero.",
+        "Resultados desejados fora do espaço viável limitam a qualidade alcançável."
+      ],
+      "notes": "AI-011 contém definição e seção Stable FCMs and HW Shrink Function. A evidência de atrator/falhas é dos cenários analisados; não generalizar para qualquer mapa.",
+      "judgments": [
+        {
+          "document_id": "AI-011",
+          "grade": 2,
+          "rationale": "Define covering e mostra o caso estável com W conhecido: espaços compactos, covering zero e limites de desempenho.",
+          "passages": [
+            {
+              "start_char": 26964,
+              "end_char": 27820,
+              "supports": [
+                "covering_definition"
+              ]
+            },
+            {
+              "start_char": 39192,
+              "end_char": 41100,
+              "supports": [
+                "known_weights",
+                "low_connectivity",
+                "zero_covering"
+              ]
+            },
+            {
+              "start_char": 41100,
+              "end_char": 42090,
+              "supports": [
+                "unreachable_outputs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "coverage_status": "missing_source",
+      "required_evidence": [
+        "Artigo Fairness by Brute Force e protocolo de insatisfação por iteração.",
+        "Profissão film camera operator and editor, Grok na iteração 2 e retorno posterior.",
+        "Proporções, intervalos e p-valor específicos."
+      ],
+      "notes": "Não localizei o artigo exato. AI-012 estuda prompts de neutralidade/diversidade em outras profissões, não o mesmo experimento. AI-013 é revisão. Ambos são contexto nota 1 e não sustentam os valores da resposta esperada.",
+      "judgments": [
+        {
+          "document_id": "AI-012",
+          "grade": 1,
+          "rationale": "Estudo diferente sobre mitigação por prompts, outras profissões e protocolo. Não contém os dados específicos de insatisfação/Grok da questão.",
+          "passages": [
+            {
+              "start_char": 75,
+              "end_char": 1400,
+              "note": "Não confundir este artigo com Fairness by Brute Force."
+            }
+          ]
+        },
+        {
+          "document_id": "AI-013",
+          "grade": 1,
+          "rationale": "Revisão do tema viés em texto-para-imagem, útil como contexto; não demonstra os resultados por iteração pedidos.",
+          "passages": [
+            {
+              "start_char": 800,
+              "end_char": 2040
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Softmax aplicada aos pesos aprendidos: exp(w_i)/sum_j exp(w_j).",
+        "Pesos não negativos e soma um; interpretação da mistura."
+      ],
+      "notes": "AI-010 afirma explicitamente Softmax e soma um. A expressão em exponentes é a definição matemática do mecanismo, não OCR recuperado. O PDF local menciona também TPE na composição; não exigir como verdade textual a lista de quatro componentes da referência sem conferir a versão.",
+      "judgments": [
+        {
+          "document_id": "AI-010",
+          "grade": 2,
+          "rationale": "WinStatFlex usa pesos treináveis normalizados por Softmax e soma um; a fórmula geral pode ser escrita a partir dessa definição.",
+          "passages": [
+            {
+              "start_char": 31540,
+              "end_char": 32570,
+              "supports": [
+                "softmax",
+                "sum_one"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "No teste, não há representações reais das classes não vistas.",
+        "DRG R aprende a gerar representações SC em nível de instância a partir do atributo semântico de classe."
+      ],
+      "notes": "AI-014 contém o parágrafo Unseen Representation Generating com a finalidade de R. AI-015 é versão relacionada e não substitui esse parágrafo.",
+      "judgments": [
+        {
+          "document_id": "AI-014",
+          "grade": 2,
+          "rationale": "Parágrafo Unseen Representation Generating explica por que R é necessário no teste e o mapeamento semântico.",
+          "passages": [
+            {
+              "start_char": 21140,
+              "end_char": 21730,
+              "supports": [
+                "unseen_test",
+                "semantic_to_representation"
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "AI-015",
+          "grade": 1,
+          "rationale": "Extensão posterior de ZeroDiff e adaptação no teste; contexto, sem substituir a explicação de R no artigo original.",
+          "passages": [
+            {
+              "start_char": 0,
+              "end_char": 1600
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "coverage_status": "missing_source",
+      "required_evidence": [
+        "Artigo ThinkMore e resultados discretos dos puzzles.",
+        "Modelo Bernoulli/posterior, Monte Carlo e comparação dos modos.",
+        "ROPE epsilon=0,02/delta=0,04 e tamanhos dos conjuntos."
+      ],
+      "notes": "Não localizei o trabalho ThinkMore. AI-029 apoia a metodologia de posteriores e ROPE, mas não os valores nem a arquitetura. AI-010 usa ROPE em outro estudo. Evitar afirmar que testes frequentistas para resultados binários são impossíveis: existem alternativas; a resposta pública é uma referência a auditar, não uma prova estatística geral.",
+      "judgments": [
+        {
+          "document_id": "AI-029",
+          "grade": 1,
+          "rationale": "Tutorial primário sobre testes bayesianos e equivalência prática; apoio metodológico, sem resultados ou protocolo de ThinkMore.",
+          "passages": [
+            {
+              "anchor": "the posterior probability of the rope is larger than 0.95",
+              "before": 130,
+              "after": 550
+            },
+            {
+              "anchor": "independent Bernoulli trial",
+              "before": 70,
+              "after": 450
+            }
+          ]
+        },
+        {
+          "document_id": "AI-010",
+          "grade": 1,
+          "rationale": "Outro estudo aplica teste bayesiano e ROPE=0,05; ilustra a abordagem, mas não valida epsilon=0,02 do ThinkMore.",
+          "passages": [
+            {
+              "anchor": "Bayesian SignedRank Test",
+              "before": 100,
+              "after": 650
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Transformação isolada permite tarefa contrastiva trivial.",
+        "Identificar pares positivos não garante representações úteis; compor augmentations melhora."
+      ],
+      "notes": "AI-016 explicita as duas partes. O documento AI-017 é relacionado, mas não prova por si o resultado da ablação de SimCLR.",
+      "judgments": [
+        {
+          "document_id": "AI-016",
+          "grade": 2,
+          "rationale": "Ablação afirma que transformação isolada não basta e composições dificultam a tarefa mas melhoram as representações.",
+          "passages": [
+            {
+              "start_char": 17100,
+              "end_char": 17840,
+              "supports": [
+                "single_augmentation",
+                "trivial_pairs",
+                "composition"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Definição (alpha,f): alinhamento em esperança e momentos de ordens 2,3,4.",
+        "Distinguir garantia formal de uma regra de agregação específica.",
+        "Comparar hipótese de confiança de FLTrust e outras noções de robustez."
+      ],
+      "notes": "São necessárias a definição de AI-018 e fontes dos comparadores (AI-019/AI-020). A anotação por documento não garante que o chunk selecionado contenha os detalhes formais; as passagens registram essa diferença.",
+      "judgments": [
+        {
+          "document_id": "AI-018",
+          "grade": 2,
+          "rationale": "Apresenta a definição de resiliência (α,f), alinhamento em esperança, controle de momentos e Krum. É evidência direta do critério formal usado na comparação.",
+          "passages": [
+            {
+              "start_char": 13579,
+              "end_char": 14191,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 14077,
+              "end_char": 14692,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "AI-019",
+          "grade": 2,
+          "rationale": "Explica FLTrust e o pequeno root dataset confiável do servidor. Sustenta uma comparação concreta com regras de agregação baseadas no critério (α,f).",
+          "passages": [
+            {
+              "start_char": 1039,
+              "end_char": 1658,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "AI-020",
+          "grade": 2,
+          "rationale": "Discute (α,f)-resiliência, sua relação com (f,κ)-robustez e Krum/MultiKrum. Ajuda a distinguir formalizações e evita atribuir resultados de uma noção à outra.",
+          "passages": [
+            {
+              "start_char": 887,
+              "end_char": 1508,
+              "provenance": "selected-five-2026-11-08.json"
+            },
+            {
+              "start_char": 9692,
+              "end_char": 10310,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        },
+        {
+          "document_id": "AI-028",
+          "grade": 1,
+          "rationale": "Descreve FoggyTrust como extensão hierárquica de FLTrust. Pode ampliar o conjunto de comparadores, mas não fornece a definição de (α,f) nem é um dos exemplos centrais da referência.",
+          "passages": [
+            {
+              "start_char": 400,
+              "end_char": 1033,
+              "provenance": "selected-five-2026-11-08.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Reconhecer limitações/incerteza em tarefas novas do mundo aberto.",
+        "Solicitar feedback/clarificação de usuário ou especialista por supervisão/active learning."
+      ],
+      "notes": "AI-021 explicita autodiagnóstico, confiança e busca de feedback. Active learning aqui é uma capacidade de supervisão; não é simplesmente treinar de novo automaticamente.",
+      "judgments": [
+        {
+          "document_id": "AI-021",
+          "grade": 2,
+          "rationale": "Discute autodiagnóstico, confiança e pedido de feedback em mundo aberto; define active learning com oráculo humano.",
+          "passages": [
+            {
+              "start_char": 24750,
+              "end_char": 25720,
+              "supports": [
+                "open_world",
+                "self_diagnosis",
+                "feedback"
+              ]
+            },
+            {
+              "start_char": 42770,
+              "end_char": 43670,
+              "supports": [
+                "active_learning"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "25",
+      "coverage_status": "supported_text",
+      "required_evidence": [
+        "Kernel de convolução LTI é estático.",
+        "Selective Copying varia espaçamento e exige seleção dependente do conteúdo."
+      ],
+      "notes": "AI-022 fornece a comparação diretamente e explica Variable Spacing. Outros artigos de SSM foram mantidos no corpus como distratores, sem promover similaridade temática a evidência direta.",
+      "judgments": [
+        {
+          "document_id": "AI-022",
+          "grade": 2,
+          "rationale": "Explica que convolução estática não modela espaçamento variável e descreve como seleção filtra tokens irrelevantes.",
+          "passages": [
+            {
+              "start_char": 18140,
+              "end_char": 18900,
+              "supports": [
+                "static_kernel",
+                "variable_spacing"
+              ]
+            },
+            {
+              "start_char": 30730,
+              "end_char": 31400,
+              "supports": [
+                "content_selection"
+              ]
+            }
+          ]
+        },
+        {
+          "document_id": "AI-025",
+          "grade": 1,
+          "rationale": "Revisão que explica a passagem de filtro fixo LTI para seleção dependente da entrada; contexto útil, sem substituir o experimento do artigo original de Mamba.",
+          "passages": [
+            {
+              "anchor": "The transition from S4 to Mamba represents the principal qualitative change in the lineage.",
+              "before": 0,
+              "after": 650,
+              "note": "Nota 1 atribuída pelo usuário após revisão dos negativos na execução all_versions_test_25quests."
+            }
+          ]
+        },
+        {
+          "document_id": "AI-027",
+          "grade": 1,
+          "rationale": "Discussão de Mamba-2 que contextualiza seleção por parâmetros dependentes da entrada. É apoio indireto, sem substituir o experimento original de Selective Copying.",
+          "passages": [
+            {
+              "anchor": "Mamba-2 (Dao and A. Gu 2024), a type of structured state space models",
+              "before": 0,
+              "after": 580,
+              "note": "Nota 1 confirmada pelo usuário após revisão dos negativos na execução all_versions_test_25quests; AI-027 corrigido em lugar de AI-026."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_fingerprints": {
+    "AI-001": {
+      "pdf_sha256": "c5aa16f4b864f5d0ea9be55c7a6d4fb6f887516d66d27dce77b834f837bcd426",
+      "markdown_sha256": "68f05160bf9d5e6deb877f12e4c5667d3abec5fa7df69a58f19091ced494b0dc"
+    },
+    "AI-002": {
+      "pdf_sha256": "f59b0bd8bed24c321020a95be031a835383bc15eb5ff0c9d055f5ffb05231efa",
+      "markdown_sha256": "8271e1092d0a58665ece02d0cfb17129c846433521d4bef4a23b2b3bfb370ce9"
+    },
+    "AI-003": {
+      "pdf_sha256": "97963d4a94649ef9ddfc2567cbeec45d71f38e9ab5d2a70dcdfd77530df395b4",
+      "markdown_sha256": "2509d23bea075a3079af07a639d9174c37fef0d4fa0bdfc62db8264e7937362a"
+    },
+    "AI-004": {
+      "pdf_sha256": "a93ed0f26e15b5c53a495244dd4c857165be684d3bcf3ce98f5287afc4331321",
+      "markdown_sha256": "9076d5edee0f043cea2287d4d39868d9d7f3f71bc5ec90fb9e578ed574dff866"
+    },
+    "AI-005": {
+      "pdf_sha256": "4bfac41f236f1239a0f5ac738e78fffd192c2e42b5290323d94a656610627a01",
+      "markdown_sha256": "87e67850c70c0ac19eb332a5224fbb53273b3eb8751c2eeb938767ef9e6772aa"
+    },
+    "AI-006": {
+      "pdf_sha256": "566d89b33d252d8993b211533ac4d5f7e3ecc65e7c8b635a2b51d0630ac97344",
+      "markdown_sha256": "cb273779900f27720ba3550ad818f76ffe345222f5d853688768d6c9fa2d78de"
+    },
+    "AI-007": {
+      "pdf_sha256": "0b4c102bccd5769c3082149436d957a5c949729227005d8d1fe7f01f04a09e21",
+      "markdown_sha256": "fa1b409aee1ca0ab339ea676df485d7528970f49154979ecf11b1d77f3382158"
+    },
+    "AI-008": {
+      "pdf_sha256": "9b9f8f050ca4eb1188597d24b59e15ba1c0a205e829ef49ebfff0e727f1503aa",
+      "markdown_sha256": "dc85527a8a6fddc5aa1b02f88f24f6b060b0a2fbb338ff22b643917321b8d72b"
+    },
+    "AI-009": {
+      "pdf_sha256": "3cc81439dcf5c90758038340b472d0ddf5c9f222f2911d72fe2e22baa0424f82",
+      "markdown_sha256": "c023eee4ce398f6f14170b2828c7691f6044f04ef05cf74a3b6a120fdf1a00d1"
+    },
+    "AI-010": {
+      "pdf_sha256": "f1ac5d074c3006f0575ef5cfd15f6fba0954bcf359ef601cc42c0a96b799c143",
+      "markdown_sha256": "d8fb0e74b2c075d1a5f928950d6ac4608d4aff626051dab15269fc303fd84ba7"
+    },
+    "AI-011": {
+      "pdf_sha256": "912773595c35daed5bdf238169cb21d1f4a84c1f87b9df0a86c19a9485db44b5",
+      "markdown_sha256": "dfc3ae8450c08355cd6fc88417a15ec9ea9aafa7754a7d6baed5a80f3bab07c4"
+    },
+    "AI-012": {
+      "pdf_sha256": "6dbd451f0fc0b352e8265bf3362ba7e5f1ce9985b5168cbf546d2ebb6adbc1b4",
+      "markdown_sha256": "142499a00eb1f76bb8d65e896c6dadfc0008d922c88f1825c12fe5fc5ed062c5"
+    },
+    "AI-013": {
+      "pdf_sha256": "b7962f0b538c2a36c2ae207af49f6320dc0e14fed731aa33e0dba185e3c0e595",
+      "markdown_sha256": "d06e895d904ad787bd21ed212c03988e7d876512def243d726783918bf413950"
+    },
+    "AI-014": {
+      "pdf_sha256": "7be194da1e97c749d0a3f136eb67c4b3733cff6d77058510e27eb61331449748",
+      "markdown_sha256": "734f07b6fc2e34c32520a8bafceba549834b519fe3cd149f8808c42ec56f859c"
+    },
+    "AI-015": {
+      "pdf_sha256": "4c2fe91d0c9819680c51eb929eb0a76d1b32d45c8d0531b4106dcfc6aa5a1ab5",
+      "markdown_sha256": "0ed63137b75261640b542cb2872ada059e7b5f8f33f3e5364e58a2cedf8cff94"
+    },
+    "AI-016": {
+      "pdf_sha256": "e1b10db76adeb0d21a014b9abcf42f6a6af928540c223f010fa1d8c293d9d105",
+      "markdown_sha256": "1dbe7628df7f422f04856e0e070bb754b95e985c01db0e84abb7c0cfae646840"
+    },
+    "AI-017": {
+      "pdf_sha256": "b6f1f9ed63e6fcc3d387fa069425848d4791e35db1ea5b404441e0fdcab885a6",
+      "markdown_sha256": "d25b1e786d99ed31b66866759905bb521450bf3b15b16df491b532c623e01b4a"
+    },
+    "AI-018": {
+      "pdf_sha256": "df73b5e45e062a2aceeb5ecba0881c6d0d04f382fb29e6ef7324f7cf6bb489c7",
+      "markdown_sha256": "b9334aff16a3a0120bf905413ab75113faa2bbcef57ea3c481028ba61181a534"
+    },
+    "AI-019": {
+      "pdf_sha256": "5b4efd6b3ccdb5e9f97880f76291b5670bb7258b5fe7590914aea88397a93217",
+      "markdown_sha256": "3b6a1081e60c302f0907411cbd772caae1841fec7906fde4cf95a35d0d940444"
+    },
+    "AI-020": {
+      "pdf_sha256": "3a326dd4cd3a57775e0f0ad257f5313c520764e651a11cd342137abe9cda196b",
+      "markdown_sha256": "a35d56127104f3bb445e9e226b9dbf822234932586a8f3c714ce8defb187bc96"
+    },
+    "AI-021": {
+      "pdf_sha256": "289031c08ad9430cf2f3bc6df49d0e7c1b413de97779ddcc0135ed3d2f4e31b3",
+      "markdown_sha256": "4350c2957a54d0cb13618b3fa4f10c476793908f6f54b0cf0d7b86e6891a867c"
+    },
+    "AI-022": {
+      "pdf_sha256": "adf70ed1803c85b1899dec3e21f3af0b124411439e8654b840ea65f7b9f52b2e",
+      "markdown_sha256": "cb444cfefd2924423661127a8b88309be2c3e2f39ff23143994489ca337d075c"
+    },
+    "AI-023": {
+      "pdf_sha256": "872b4ef302312d04ef4d55610613c0e59da32c443a2e38552d7cebb7dc3636fa",
+      "markdown_sha256": "62a57e7d4420db7098613c0b53d7609ad9aff7977d5970d5c9da9666d6139e82"
+    },
+    "AI-024": {
+      "pdf_sha256": "6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f",
+      "markdown_sha256": "889f9819bfbe0b9e16692446b8bd8dd98c60c48b6e48b574064675b4defb6486"
+    },
+    "AI-025": {
+      "pdf_sha256": "0682997d136fd0b2f20129014c8f3d37306d9e25a0c468025bd31483ad6ad6ff",
+      "markdown_sha256": "01e70dd1e7fc60e7d6f16bc0e3f39fe3d150aab4b1a8c0b219879bcba8292872"
+    },
+    "AI-026": {
+      "pdf_sha256": "a6483a2f2a0d4636d2844b36947c9ed74a949ddb56517109270986aa81c07b78",
+      "markdown_sha256": "9df09903c18d7f763bfbe1fbd88265baf1c819f8e82b2028b960d4f103292d30"
+    },
+    "AI-027": {
+      "pdf_sha256": "9eea5a394b9ea6f8026d54adff20543bceb76e738ace18566a0f5801ce7af080",
+      "markdown_sha256": "bddb990310eec060c1e06e5b2f1b5a8f3da5038ef253c5ff884f07a5f397f6e9"
+    },
+    "AI-028": {
+      "pdf_sha256": "2057f7f7497650171b9f9a2411c8a2ccd68a9ae3fd8b53c55337ec122cafa1c7",
+      "markdown_sha256": "33e3ba8c72b3c6394152c53d9a1ec3978cb5c8b6c0986261b8c81112d919ca1e"
+    },
+    "AI-029": {
+      "pdf_sha256": "92570d221aadee6ab58812cc208eea94463cb1151e3febeab26fb2456622e2ee",
+      "markdown_sha256": "5a746b5eb983cccd23aacdaaca4d6a955d7f20ec31d81cf1c03466abc611bd3c"
+    },
+    "DONES-001": {
+      "pdf_sha256": "073d731c4a3d9ade89ca8d78dab0589a7258caba3c1a948e6ee38642faa55a4c",
+      "markdown_sha256": "baaf77127def0cb5b9ed6c4a6a9f2bf19e45fd146aa753c504504f3b75629f99"
+    },
+    "DONES-002": {
+      "pdf_sha256": "fa1cdbd0930ad9f71677c7fd2c57d6d3c8305d78aa53ed37eb54ad7756817ef8",
+      "markdown_sha256": "771a6c1e05263f97306eb378d6a1a563d2697314f62b875466a8694923dcaad9"
+    },
+    "DONES-003": {
+      "pdf_sha256": "bf9118a44ddc58741332c4014a31183821dd70ef7698fa81d97012148ca7e8b2",
+      "markdown_sha256": "de613180ba6465589d53bf768d00eba9611f416bb84d216c3926c6dcd40e1664"
+    },
+    "DONES-004": {
+      "pdf_sha256": "d12119ce999539e13105c7e63c57aaf4a9cd71e3f8cc85a3a8312df14d5afa16",
+      "markdown_sha256": "9a14480162acf7a85cb0aa5c024fc3647a3e24189485183656db2cebecb4ec9d"
+    },
+    "DONES-005": {
+      "pdf_sha256": "03a7f854333512de16e0dff8d8655da33735e22836ddf83d47ab438fc17b995d",
+      "markdown_sha256": "3f6c1b763cf83d0ef444271f83025a82a8a65b4915fcf5713958b4f99e641c71"
+    },
+    "DONES-006": {
+      "pdf_sha256": "188fd399f1fbdd2237727e1f0a7419d8880ed65a4e004dc8173e673bbced22a7",
+      "markdown_sha256": "27c5ea374f6c0a70f0073275ab618a53334ce453f109143937cd8b8173ba90ba"
+    },
+    "DONES-007": {
+      "pdf_sha256": "9f3ec024e799c0e9a3eabeb458a8a3917088a191eaf0033b709a1d759ad57075",
+      "markdown_sha256": "a4225f4bc6ac3e23570fd615bba90542fdf8b5a615ea94c1be5bc81144ee74b8"
+    },
+    "DONES-008": {
+      "pdf_sha256": "10c9b60bc612cc2c30eb6a5b6b9a778eeab48de28bedf81bb6dd38f50fab8d0d",
+      "markdown_sha256": "e0dccc95ca01240758188e1a341dbe83a2721087a60c6c9abb223e1b56909595"
+    },
+    "DONES-009": {
+      "pdf_sha256": "0fd456370b4437984cd90c698de1d1a3d013cf052291fb24399dbe6a06a652d3",
+      "markdown_sha256": "a016b9423b48b205bf4fbc0778ebdb13024f43ae8aa07bab7fd76c58dc7925a8"
+    },
+    "DONES-010": {
+      "pdf_sha256": "18e5514a1877b30d3db41dd0192ccef62dc3bb937eb4d8d3a5e82301b0e6473b",
+      "markdown_sha256": "c9896736c8d9e121d80ac4770238250105403e24b545b0e8715e3da84e679e3a"
+    },
+    "DONES-011": {
+      "pdf_sha256": "8bb9af7042c9fbb34dfc3e02e68d2214ffaeabb97af12a161a9adaea53a5a836",
+      "markdown_sha256": "1ba8c1fe8ec7f4c6ec9144110330d4ee05cb40f9dc63cb963eedeffa74e7cfd8"
+    },
+    "DONES-012": {
+      "pdf_sha256": "e0ba7399b547eb4b58f27424138cfbcbcbfdc88ca0a3f60c0a2224118e6812a7",
+      "markdown_sha256": "499d1bcfe4d3b6be6f238b48c7527d2004ddc8d97183520c7eb2957818676198"
+    },
+    "DONES-013": {
+      "pdf_sha256": "576428d1bd6bca43be39fe20f3ea58cdf3ee29806b4a6ce30a3f5152bbe6a5ee",
+      "markdown_sha256": "2c5bd05453d323873bf93c94e2c3636b92486189989af9a9be93b57b6b76a5cc"
+    },
+    "DONES-014": {
+      "pdf_sha256": "32b53220ce67baba002c82a0adc36dbc329f7eeb94351a182b138a4a7e8f0ab2",
+      "markdown_sha256": "7d001fce3a4e8556d427da0a1b9d3632a969a87abd15202debdeb4c3698bfdd2"
+    },
+    "DONES-015": {
+      "pdf_sha256": "fe66e1bfa674e5d4e30ee7d7af4890544b5480a2ef6ed49d0a226dfff2c71bd2",
+      "markdown_sha256": "6acec3d747cbbc5c184269dd1b5b956670c1910b7c2db3527682d1b469128604"
+    },
+    "DONES-016": {
+      "pdf_sha256": "e87cabd4c8def40453d82100c09cc471adac0c9a95f904c515139fcf0ce02dc1",
+      "markdown_sha256": "e365226a798be4e8e75c3c25cb35ba004f550e55aad98feae7841963b0316ed6"
+    },
+    "DONES-017": {
+      "pdf_sha256": "ae8bf4ae11e0417c3dc6ca1b87f0766d04b9ef8d629f2da1f023efdec00fb286",
+      "markdown_sha256": "418d49f8218f39a9128b6dfea672cade35aadc55f105c4938389a03c0548c744"
+    },
+    "DONES-018": {
+      "pdf_sha256": "c988ce88e2bebfdd22461048006a64424c997a6af43d67a40ba1aff6309e6e5b",
+      "markdown_sha256": "9180c5741343872370f27e33c40654079104266b7eb49bb7be551731cfd2dddf"
+    },
+    "DONES-019": {
+      "pdf_sha256": "de70bc6742f4fbdf8c31fc40ec7e528540090a99e8704a8044bf570bd79dd802",
+      "markdown_sha256": "6090c1198b8fead327fad11105a435b55fa70ae6661c98854f28a7b1ab473d1c"
+    },
+    "DONES-020": {
+      "pdf_sha256": "1cf4a97007581539a1f59606bbd652333bb6db193f540bd019b4508809f5ffe4",
+      "markdown_sha256": "cc1c4fad0f5a6d4a146d3845c9484fa456205ed94f703f7e6a226a255ddf09c1"
+    },
+    "DONES-021": {
+      "pdf_sha256": "56db3802bf9a5d891aaddc964660e4c1791942aa0d75992f64865d3da7fdf9a1",
+      "markdown_sha256": "867d16ee9ae1a5050b30d24e5d65ab047336e80d3d04c87f4af805f5de9fa1ef"
+    },
+    "DONES-022": {
+      "pdf_sha256": "fbf44375aead73dc68b28d32458da73164f57282fe33085aafb4c33af7edda6e",
+      "markdown_sha256": "d4c979e1eff7e3a318bc3b31e744ce0dbb49a61cf1c6dd15f3f07cf736a49852"
+    },
+    "DONES-023": {
+      "pdf_sha256": "9c6c2af1a9f508934d1e8c9e846f053e3916a3ea977d626f7d0ca4ee527fa1ae",
+      "markdown_sha256": "dacadab87ff36762313bcc2ce922db8f63f1bc658c9b2532b5ca4475442d7202"
+    },
+    "DONES-024": {
+      "pdf_sha256": "277f8f36b2776c86ae7d85f88278b07722c631cf1214d73851725ec3132d51ac",
+      "markdown_sha256": "9722bdfc016176b62c49b25e2d2060526ec436c521d790f3afbe14cad0287942"
+    },
+    "DONES-025": {
+      "pdf_sha256": "28b6f2cec237ff5b55551bdebdb049629fb57b84342403fa92897d6ccada030c",
+      "markdown_sha256": "d3db719c6cfc63fd1bf88d2d9939a7458698325e821fb6d6958e1524c8c70662"
+    },
+    "DONES-026": {
+      "pdf_sha256": "19e567056b08292cb32c7e9d21ae004ca5d27ca5b52a641fcab93cbc0ce97d18",
+      "markdown_sha256": "8ce94aa9d6cda4615451bb07405333d508bf7660b69530ec32a407bb2b871cbf"
+    },
+    "DONES-027": {
+      "pdf_sha256": "3f63f3528d773dacd7630315f61123c1360d8d71ada78600990c5b6de90aa1c6",
+      "markdown_sha256": "f8efc2fbc0daa6f8476da9309ba838ecca04365fe3227ee0a8e801220e0ad348"
+    },
+    "DONES-028": {
+      "pdf_sha256": "c5eecb85f15425ca7b52331cda467e325628c3929fea8c705325d9d6a0166654",
+      "markdown_sha256": "9a331494adaba21fef4bd381a0ee6026e03909425afe814d9f57ff09027a4873"
+    },
+    "DONES-029": {
+      "pdf_sha256": "4e7d73e8f2b4a856fe2826d21342c94fc5b9def0bc7e4bccf2bc36f08900c39b",
+      "markdown_sha256": "5fa5d565612e0450a6943ecdc6eb959befcfde2995523074d6ff98b255c779ed"
+    },
+    "DONES-030": {
+      "pdf_sha256": "717e21a2242165faa13d09dc0339ae0e8041eb55b7a1ea11c2773538f8ce45d9",
+      "markdown_sha256": "49984ce0bef5eeda69da3fcc97ffc192e7ad2410a4dc8501ff330fd5a9b5f98a"
+    },
+    "DONES-031": {
+      "pdf_sha256": "2403738aec50e81f22af1d23e644389b935df380ff23236b98a50f01840cf7b6",
+      "markdown_sha256": "3ab88fe2011a742869255eb81aea8aed00e50d6ec944d57c84c036096e5118cb"
+    },
+    "DONES-032": {
+      "pdf_sha256": "16c78d9ac22d811dd67c3434656ecada5be8da36d4e63f0184f016aba5bae8a1",
+      "markdown_sha256": "28e12120739ec515a5f0d710502029f86392a196d0e13ed998fcc05235f53861"
+    },
+    "DONES-033": {
+      "pdf_sha256": "4c433226fecdc2297bd5b8cbad268397432bcacc12c06ad45f9e7efd2cabc4f9",
+      "markdown_sha256": "e7caa5412bb7d1269c5064572a88369d234158e3a76ce74ea8cd6883e5ec0dd6"
+    },
+    "DONES-034": {
+      "pdf_sha256": "2e46db4aad44ddb00a21ded5fc936bb8d6952927432053f5b684c999d30786a7",
+      "markdown_sha256": "bd02b62f352d562699f49f02c58e427a5ee6168364279cedcd78464e186020a9"
+    },
+    "DONES-035": {
+      "pdf_sha256": "66789c60ef5db644a35903225df464504ad5d2ac39f691b137a1a69f81b374d7",
+      "markdown_sha256": "f8a7fc3996aa6c607803b6b47b1e35041a724d3738eab42bb9b83017ed4d925c"
+    }
+  }
+}

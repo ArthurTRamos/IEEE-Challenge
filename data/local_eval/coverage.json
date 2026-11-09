@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "judgment_status": "assistant_estimate",
+  "question_count": 25,
+  "document_count": 64,
+  "document_question_pairs": 1600,
+  "grade_counts": {
+    "0": 1530,
+    "1": 32,
+    "2": 38
+  },
+  "evidence_count": 97,
+  "status_counts": {
+    "supported_text": 17,
+    "requires_figure": 1,
+    "partial_text": 3,
+    "scope_warning": 1,
+    "missing_source": 3
+  },
+  "cohorts": {
+    "all_public": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "has_direct_evidence": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "17",
+      "19",
+      "20",
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "supported_text": [
+      "1",
+      "2",
+      "3",
+      "6",
+      "7",
+      "8",
+      "11",
+      "13",
+      "14",
+      "15",
+      "17",
+      "19",
+      "20",
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "missing_source": [
+      "16",
+      "18",
+      "21"
+    ]
+  },
+  "questions": [
+    {
+      "id": "1",
+      "domain": "DONES",
+      "question": "Both OTR and scintillation are proposed for experimental beam imaging diagnostics, but they produce photons by different mechanisms. Which physical process does scintillation require that OTR does not?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-032",
+        "DONES-033"
+      ],
+      "grade_1_documents": [
+        "DONES-018",
+        "DONES-019",
+        "DONES-020",
+        "DONES-021",
+        "DONES-025",
+        "DONES-026"
+      ],
+      "evidence_count": 8,
+      "notes": "As novas fontes cobrem os dois mecanismos. Fluorescência de gás residual permanece apenas contexto: não é a mesma técnica que cintilação."
+    },
+    {
+      "id": "2",
+      "domain": "DONES",
+      "question": "What does a \"destructive\" beam diagnostic do to the beam it measures?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-017",
+        "DONES-018",
+        "DONES-019",
+        "DONES-033"
+      ],
+      "grade_1_documents": [
+        "DONES-022",
+        "DONES-025",
+        "DONES-026"
+      ],
+      "evidence_count": 9,
+      "notes": "Há evidências físicas e operacionais em documentos diferentes. Destruição do detector pelo feixe não é a definição de diagnóstico destrutivo."
+    },
+    {
+      "id": "3",
+      "domain": "DONES",
+      "question": "What would be the radioactive decay constant of Be7 if we round its half life in days to the nearest integer?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-031",
+        "DONES-035"
+      ],
+      "grade_1_documents": [
+        "DONES-027"
+      ],
+      "evidence_count": 3,
+      "notes": "DONES-031 e DONES-035 informam 53,2 dias, não os 53,22 da referência. Ambos arredondam a 53; a aritmética deriva 0,01308/dia ou 1,514e-7/s."
+    },
+    {
+      "id": "4",
+      "domain": "DONES",
+      "question": "At what point in time does Be7 stop being the main source of activity in the Heat Exchanger of DONES?",
+      "status": "requires_figure",
+      "grade_2_documents": [
+        "DONES-027"
+      ],
+      "grade_1_documents": [
+        "DONES-031"
+      ],
+      "evidence_count": 3,
+      "notes": "Figura 8, página PDF 4 de DONES-027, inspecionada visualmente: a perda de dominância ocorre na ordem de 10^7 s. O Markdown só contém a legenda e comentários; não permite inferir sozinho o instante. Não usar como controle exclusivamente textual."
+    },
+    {
+      "id": "5",
+      "domain": "DONES",
+      "question": "How are the inventories of Be7 and Tritium calculated for DONES Li loop?",
+      "status": "partial_text",
+      "grade_2_documents": [
+        "DONES-008",
+        "DONES-031",
+        "DONES-035"
+      ],
+      "grade_1_documents": [
+        "DONES-001",
+        "DONES-027",
+        "DONES-028",
+        "DONES-029"
+      ],
+      "evidence_count": 11,
+      "notes": "Há apoio direto ao método geral e a parte do inventário. Não localizei no corpus completo o detalhamento numérico da referência (fluxo 5,53e15, CCFE-162, 1,47 g). DONES-031 usa outro cenário e informa 3,78 g/fpy de trítio; não misturar taxas, estoques e versões."
+    },
+    {
+      "id": "6",
+      "domain": "DONES",
+      "question": "In the context of IFMIF-DONES, what is the approximate volumetric flow rate in the primary heat exchanger?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-001",
+        "DONES-006",
+        "DONES-035"
+      ],
+      "grade_1_documents": [
+        "DONES-034"
+      ],
+      "evidence_count": 5,
+      "notes": "DONES-035 informa nominal de 97,5 L/s e 49,7 kg/s no HX1. Isso sustenta o valor aproximado; a densidade 505 kg/m³ usada na conta de referência não foi confirmada separadamente."
+    },
+    {
+      "id": "7",
+      "domain": "DONES",
+      "question": "What is the temperature of the on-line Nitrogen trap in IFMIF-DONES?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-001",
+        "DONES-013",
+        "DONES-029",
+        "DONES-035"
+      ],
+      "grade_1_documents": [
+        "DONES-020",
+        "DONES-027"
+      ],
+      "evidence_count": 8,
+      "notes": "Preserva os julgamentos anteriores e acrescenta o projeto de 2025, que também situa a purificação de N no comissionamento/manutenção. Não confundir sensores on-line com o trap de N."
+    },
+    {
+      "id": "8",
+      "domain": "DONES",
+      "question": "What is the bypass ratio of the ICS Branch of the DONES Li loop?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "DONES-031",
+        "DONES-035"
+      ],
+      "grade_1_documents": [
+        "DONES-001"
+      ],
+      "evidence_count": 5,
+      "notes": "DONES-035, tabela 4 e seção 4.2.2, corresponde aos valores da referência. DONES-001 é um distrator difícil por versão: informa 0,65 L/s (~0,6%), não 2%; recebe nota 1 com conflito explícito."
+    },
+    {
+      "id": "9",
+      "domain": "DONES",
+      "question": "What will be volumen of the main building in the IFMIF DONES facilities?",
+      "status": "scope_warning",
+      "grade_2_documents": [
+        "DONES-034"
+      ],
+      "grade_1_documents": [
+        "DONES-023"
+      ],
+      "evidence_count": 2,
+      "notes": "DONES-034 contém exatamente as dimensões da resposta esperada, mas trata do IFMIF. A pergunta diz DONES. Nota 2 para a evidência dos números da referência, sem validar a transferência dessas dimensões para o DONES."
+    },
+    {
+      "id": "10",
+      "domain": "DONES",
+      "question": "In the context of IFMIF DONES, when would be required hands-on or remote handling maintenance in areas with neutronics activity?",
+      "status": "partial_text",
+      "grade_2_documents": [
+        "DONES-013"
+      ],
+      "grade_1_documents": [
+        "DONES-010",
+        "DONES-031"
+      ],
+      "evidence_count": 4,
+      "notes": "DONES-013 sustenta acesso humano abaixo de aproximadamente 10 µSv/h e áreas proibidas acima de 100 mSv/h. O par de limiares e a classificação de áreas não constituem uma regra universal nem detalham isoladamente a carga de trabalho."
+    },
+    {
+      "id": "11",
+      "domain": "AI Papers",
+      "question": "In the paper 'OneSearch: A preliminary exploration of the unified end-to-end generative framework for e-commerce search'. Comparing RQ-VAE to RQ-Kmeans as a foundational tokenizer for OneSearch. What architectural property of RQ-Kmeans might explain its superiority over the learned reconstruction objective in RQ-VAE for this discrete tokenization task?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-001"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 2,
+      "notes": "AI-001 é a fonte primária. As passagens distinguem capacidade das primeiras camadas e balanceamento da última. Não interpretar como prova universal de superioridade de k-means sobre VAE."
+    },
+    {
+      "id": "12",
+      "domain": "AI Papers",
+      "question": "In ONB-MACF, is the experimental comparison unfair because the proposed method enforces immutability constraints (via projections) while the baselines do not, and should an ablation without constraint satisfaction therefore be included?",
+      "status": "partial_text",
+      "grade_2_documents": [
+        "AI-004",
+        "AI-006"
+      ],
+      "grade_1_documents": [
+        "AI-005"
+      ],
+      "evidence_count": 4,
+      "notes": "AI-004 descreve projeções e métodos com restrições; AI-006 explicita imutabilidade em FACE. O artigo original de DiCE é contexto e não confirma por si só a configuração de todos os baselines no experimento ONB-MACF. Auditoria dessas configurações permanece necessária."
+    },
+    {
+      "id": "13",
+      "domain": "AI Papers",
+      "question": "In the context of properties of lush spaces and applications to Banach spaces with numerical index 1, on Theorem 4.1 \"Let $X$ be a Banach space and le $G \\subset S_{x^*}$ be a norming rounded subset for X. Then the following are equivalent\" , on \n\n(I) X is lush \n\nimply \n\n(II) $_\\mathbb{C}$ For every $x, y \\in S_X$, $n \\in \\mathbb{N}$ and $\\varepsilon > 0$, there exist $\\lambda_1, \\ldots, \\lambda_n \\geq 0$ with $\\sum_{k=1}^{n} \\lambda_k = 1$ and $x_1, \\ldots, x_n \\in B_X$ such that\n\n$$\\left\\| x + \\sum_{k=1}^{n} x_k \\right\\| > n + 1 - \\varepsilon$$\n\n*and*\n\n$$\\left\\| y - \\sum_{k=1}^{n} \\lambda_k \\exp\\left(\\frac{2\\pi i k}{n}\\right) x_k \\right\\| < \\varepsilon + \\frac{2\\pi}{n}$$\n\nWhy can we conclude that $Y$ is lush?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-007"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 3,
+      "notes": "Uma conclusão isolada de que Y é lush não basta: as evidências devem recuperar a construção e a passagem ao limite, em mais de um trecho. Fórmulas perdidas no Markdown continuam sendo uma limitação do extrator."
+    },
+    {
+      "id": "14",
+      "domain": "AI Papers",
+      "question": "In REVEL framework, the authors say it is very important to have a metric between 0 and 1. Why is this?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-008"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 3,
+      "notes": "AI-008 explicita interpretação sem baseline e que somente os extremos verdadeiros devem receber 0/1. Estar apenas no intervalo [0,1] não garante essas propriedades."
+    },
+    {
+      "id": "15",
+      "domain": "AI Papers",
+      "question": "In the paper WinStat. Considering how the window size heuristic is determined based on sequence length: if we have a sequence length of $L=512$, what would be the appropriate window size, $w$?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-010"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 1,
+      "notes": "A seção 4.4 de AI-010 apresenta a regra e a exceção por memória. A faixa experimental 24–36 para L=96 é descrita como aproximadamente 1/4–1/3, embora 36/96 seja 3/8; preserve a regra explícita e o caráter heurístico."
+    },
+    {
+      "id": "16",
+      "domain": "AI Papers",
+      "question": "In the context of classic fuzzy cognitive maps. Why do relative activation values improve classification accuracy?",
+      "status": "missing_source",
+      "grade_2_documents": [],
+      "grade_1_documents": [
+        "AI-011"
+      ],
+      "evidence_count": 2,
+      "notes": "AI-011 explica encolhimento dos espaços, mas explicitamente exclui classificadores da experiência. Não localizei fonte primária com a normalização e os resultados da referência. Só contexto, sem documentos nota 2."
+    },
+    {
+      "id": "17",
+      "domain": "AI Papers",
+      "question": "In Dynamic Behavior of Fuzzy Cognitive Maps. Why study the covering for stable FCMs using the knowledge of the weights? Summarize in a small paragraph.",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-011"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 3,
+      "notes": "AI-011 contém definição e seção Stable FCMs and HW Shrink Function. A evidência de atrator/falhas é dos cenários analisados; não generalizar para qualquer mapa."
+    },
+    {
+      "id": "18",
+      "domain": "AI Papers",
+      "question": "Given the mechanisms attributed to the fairness by brute force phenomenon as described in \"Fairness by Brute Force: Dissatisfaction-Driven Output Modification as De Facto Bias Mitigation in Text-to-Image Generative AI\", is there any model to which, under specific conditions—for example, in a particular profession and in a given iteration or set of iterations—said phenomenon could also be attributed according to the results presented?",
+      "status": "missing_source",
+      "grade_2_documents": [],
+      "grade_1_documents": [
+        "AI-012",
+        "AI-013"
+      ],
+      "evidence_count": 2,
+      "notes": "Não localizei o artigo exato. AI-012 estuda prompts de neutralidade/diversidade em outras profissões, não o mesmo experimento. AI-013 é revisão. Ambos são contexto nota 1 e não sustentam os valores da resposta esperada."
+    },
+    {
+      "id": "19",
+      "domain": "AI Papers",
+      "question": "In WinStat paper. What type of normalized weighting mechanism has been used to adjust the $\\tilde{w}$ weights of the WinStatFlex model to prevent overflow and component dominance? Define it mathematically.",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-010"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 1,
+      "notes": "AI-010 afirma explicitamente Softmax e soma um. A expressão em exponentes é a definição matemática do mecanismo, não OCR recuperado. O PDF local menciona também TPE na composição; não exigir como verdade textual a lista de quatro componentes da referência sem conferir a versão."
+    },
+    {
+      "id": "20",
+      "domain": "AI Papers",
+      "question": "In ZeroDiff (solidified visual-semantic correlation in zero-shot learning), what is the purpose of the other Diffusion-based Representation Generator (R)?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-014"
+      ],
+      "grade_1_documents": [
+        "AI-015"
+      ],
+      "evidence_count": 2,
+      "notes": "AI-014 contém o parágrafo Unseen Representation Generating com a finalidade de R. AI-015 é versão relacionada e não substitui esse parágrafo."
+    },
+    {
+      "id": "21",
+      "domain": "AI Papers",
+      "question": "In the context of method 'ThinkMore' in hierarchical neuro-symbolic search with transformer re-evaluation for efficient chess play. Why are bayesian tests the best way to compare results between 'ThinkMore' options?",
+      "status": "missing_source",
+      "grade_2_documents": [],
+      "grade_1_documents": [
+        "AI-010",
+        "AI-029"
+      ],
+      "evidence_count": 3,
+      "notes": "Não localizei o trabalho ThinkMore. AI-029 apoia a metodologia de posteriores e ROPE, mas não os valores nem a arquitetura. AI-010 usa ROPE em outro estudo. Evitar afirmar que testes frequentistas para resultados binários são impossíveis: existem alternativas; a resposta pública é uma referência a auditar, não uma prova estatística geral."
+    },
+    {
+      "id": "22",
+      "domain": "AI Papers",
+      "question": "In SimCLR's paper, what is the main weakness of using a single fixed data augmentation?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-016"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 1,
+      "notes": "AI-016 explicita as duas partes. O documento AI-017 é relacionado, mas não prova por si o resultado da ablação de SimCLR."
+    },
+    {
+      "id": "23",
+      "domain": "AI Papers",
+      "question": "In the context of federated learning, what are the differences between $(\\alpha,f)$-byzantine resilience method and other approaches?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-018",
+        "AI-019",
+        "AI-020"
+      ],
+      "grade_1_documents": [
+        "AI-028"
+      ],
+      "evidence_count": 6,
+      "notes": "São necessárias a definição de AI-018 e fontes dos comparadores (AI-019/AI-020). A anotação por documento não garante que o chunk selecionado contenha os detalhes formais; as passagens registram essa diferença."
+    },
+    {
+      "id": "24",
+      "domain": "AI Papers",
+      "question": "According to the taxonomy and definition framework of \"General Purpose Artificial Intelligence Systems: Definition and Taxonomy\", what specific capability would an open-world GPAIS gain by incorporating active learning that would move it closer to being classified as an 'advanced GPAIS,' in terms of the supervision mechanism described for handling new tasks at time $t + \\Delta t$?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-021"
+      ],
+      "grade_1_documents": [],
+      "evidence_count": 2,
+      "notes": "AI-021 explicita autodiagnóstico, confiança e busca de feedback. Active learning aqui é uma capacidade de supervisão; não é simplesmente treinar de novo automaticamente."
+    },
+    {
+      "id": "25",
+      "domain": "AI Papers",
+      "question": "In the paper of Mamba, why Linear Time Invariance models struggle with selective Copying?",
+      "status": "supported_text",
+      "grade_2_documents": [
+        "AI-022"
+      ],
+      "grade_1_documents": [
+        "AI-025",
+        "AI-027"
+      ],
+      "evidence_count": 4,
+      "notes": "AI-022 fornece a comparação diretamente e explica Variable Spacing. Outros artigos de SSM foram mantidos no corpus como distratores, sem promover similaridade temática a evidência direta."
+    }
+  ]
+}

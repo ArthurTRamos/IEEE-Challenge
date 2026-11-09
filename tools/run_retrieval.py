@@ -20,7 +20,11 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-VARIANTS = ("dense", "bm25", "hybrid", "mentions", "graph", "dense_mentions", "dense_graph")
+from src.embedding import encode_documents, encode_queries, embedding_inputs, retrieval_prefix
+from src.retrieval_utils import VARIANTS, variant_weights
+from src.retrieval import dense_ranking, lexical_ranking, select_evidence as select_ranked_evidence
+from src.settings import PipelineConfig
+from src.runtime import resolve_device, device_report
 
 
 def digest(path):
@@ -59,7 +63,7 @@ def tree_fingerprint(directory):
         raise FileNotFoundError(f"Missing local model directory: {directory}")
     files = {path.relative_to(directory).as_posix(): digest(path)
              for path in sorted(directory.rglob("*"))
-             if path.is_file() and ".cache" not in path.parts
+             if path.is_file() and ".cache" not in path.relative_to(directory).parts
              and path.suffix in (".json", ".safetensors", ".bin", ".txt", ".onnx")}
     if not files:
         raise ValueError(f"No model files in {directory}")
@@ -192,16 +196,6 @@ def prepare_chunks(documents, output, cache, extraction_key, converter_factory, 
     return chunks, processed
 
 
-def variant_weights(variant, dense_weight=1.0, bm25_weight=1.0, kg_weight=0.5):
-    channels = {"dense": {"dense": dense_weight}, "bm25": {"bm25": bm25_weight},
-                "hybrid": {"dense": dense_weight, "bm25": bm25_weight},
-                "mentions": {"dense": dense_weight, "bm25": bm25_weight, "kg_mentions": kg_weight},
-                "graph": {"dense": dense_weight, "bm25": bm25_weight, "kg_graph": kg_weight},
-                "dense_mentions": {"dense": dense_weight, "kg_mentions": kg_weight},
-                "dense_graph": {"dense": dense_weight, "kg_graph": kg_weight}}
-    return channels[variant]
-
-
 def graph_configuration(args):
     from src.kg_retrieval import GraphConfig
     path = getattr(args, "graph_config", None)
@@ -217,30 +211,11 @@ def graph_configuration(args):
 
 
 def evidence_configuration(args):
-    from src.evidence import EvidenceConfig
-    return EvidenceConfig(
-        reference_weight=getattr(args, "reference_weight", 0.5),
-        front_matter_weight=getattr(args, "front_matter_weight", 0.7),
-        neighbors_before=getattr(args, "neighbors_before", 1),
-        neighbors_after=getattr(args, "neighbors_after", 3),
-        small_section_chunks=getattr(args, "small_section_chunks", 6),
-        max_chunks=args.top_k,
-    )
+    return PipelineConfig.from_namespace(args).evidence_config()
 
 
 def select_evidence(order, scores, chunks, question, args):
-    from src.evidence import penalize_order, continuity_order
-    config = evidence_configuration(args)
-    if getattr(args, "penalize_metadata", True):
-        order, adjusted = penalize_order(order, scores, chunks, question, config)
-    else:
-        adjusted = dict(scores)
-    anchors = order[:args.top_k]
-    if getattr(args, "continuity", True):
-        selected = continuity_order(order, chunks, config)
-    else:
-        selected = anchors
-    return selected, adjusted, set(anchors)
+    return select_ranked_evidence(order, scores, chunks, question, PipelineConfig.from_namespace(args))
 
 
 def document_embeddings(texts, embedder, model_key, cache, batch_size):
@@ -255,12 +230,12 @@ def document_embeddings(texts, embedder, model_key, cache, batch_size):
             raise ValueError("Embedding cache checksum mismatch")
         matrix = np.load(path, allow_pickle=False)
     else:
-        matrix = np.asarray(embedder.encode(texts, normalize_embeddings=True, batch_size=batch_size, show_progress_bar=True), dtype=np.float32)
+        matrix = np.asarray(encode_documents(embedder, texts, normalize_embeddings=True, batch_size=batch_size, show_progress_bar=True), dtype=np.float32)
         if path:
             path.parent.mkdir(parents=True, exist_ok=True)
             np.save(path, matrix, allow_pickle=False)
             save_json(path.with_suffix(".json"), {"sha256": digest(path), "shape": list(matrix.shape)})
-    if matrix.ndim != 2 or matrix.shape != (len(texts), embedder.get_sentence_embedding_dimension()) or not np.isfinite(matrix).all():
+    if matrix.ndim != 2 or matrix.shape != (len(texts), embedder.get_embedding_dimension()) or not np.isfinite(matrix).all():
         raise ValueError("Invalid embedding matrix shape or values")
     return matrix, hit
 
@@ -335,7 +310,8 @@ def run(args):
     import numpy as np
     import torch
     from sentence_transformers import SentenceTransformer
-    from src import main as pipeline
+    from src import documents as pdf_documents
+    from src.evidence import section_chunks, chunk_sources
     from src.kg_retrieval import EntityMatcher, GraphConfig, KGChunkIndex, load_artifact
     from src.retrieval_utils import rrf_fuse
     from src.lexical import LexicalPreprocessor, build_bm25
@@ -351,23 +327,29 @@ def run(args):
     if args.limit_questions:
         questions = questions[:args.limit_questions]
     graph_config = graph_configuration(args)
+    channels = {channel for variant in args.variants
+                for channel, weight in variant_weights(variant, args.dense_weight, args.bm25_weight, args.kg_weight).items() if weight > 0}
+    embedding_device = resolve_device(args.embedding_device) if "dense" in channels else None
+    docling_device = resolve_device(getattr(args, "docling_device", "cpu"))
+    print(f"[devices] embedding requested={args.embedding_device}, effective={embedding_device}; Docling={docling_device}", flush=True)
     started = time.perf_counter()
-    extraction_key = {"docling_version": version("docling"), "device": "cpu", "threads": args.threads,
-                      "converter_source": key_for(inspect.getsource(pipeline._docling_converter)),
+    extraction_key = {"docling_version": version("docling"), "device": docling_device, "threads": args.threads,
+                      "converter_source": key_for(inspect.getsource(pdf_documents.create_converter)),
                       "layout_model_sha256": tree_fingerprint(ROOT / "src/docling_models"),
                       "formula_enrichment": getattr(args, "formula_enrichment", True)}
-    model_key = tree_fingerprint(args.embed_model)
+    model_key = tree_fingerprint(args.embed_model) if "dense" in channels else None
     timings["fingerprint_seconds"] = time.perf_counter() - started
     configuration = {"corpus": str(args.corpus.resolve()), "questions_file": str(args.questions.resolve()),
                      "question_ids": [q["id"] for q in questions],
                      "questions_sha256": digest(args.questions), "embedding_model": str(args.embed_model.resolve()),
-                     "embedding_fingerprint": model_key, "embedding_device": args.embedding_device, "batch_size": args.batch_size,
+                     "embedding_fingerprint": model_key, "embedding_device": embedding_device, "embedding_device_requested": args.embedding_device,
+                     "device_report": device_report(), "channels_enabled": sorted(channels), "batch_size": args.batch_size,
                      "chunk_size": args.chunk_size, "chunk_overlap": args.chunk_overlap, "extraction": extraction_key,
                      "variants": args.variants, "top_k": args.top_k, "candidate_depth": args.candidate_depth, "rrf_k": args.rrf_k,
                      "weights": {v: variant_weights(v, args.dense_weight, args.bm25_weight, args.kg_weight) for v in args.variants},
                      "graph_config": vars(graph_config), "python": sys.version, "platform": platform.platform(),
                      "versions": {name: version(name) for name in ("torch", "numpy", "docling", "sentence-transformers", "rank-bm25")},
-                     "code_sha256": {str(p.relative_to(ROOT)): digest(p) for p in (ROOT / "src/main.py", ROOT / "src/kg_retrieval.py", ROOT / "src/retrieval_utils.py", Path(__file__))},
+                     "code_sha256": {str(p.relative_to(ROOT)): digest(p) for p in (*sorted((ROOT / "src").glob("*.py")), Path(__file__))},
                      "cache_enabled": cache is not None, "missing_catalog_document_ids": missing_ids,
                      "include_reference_answers": args.include_reference_answers,
                      "evidence": {**evidence_configuration(args).to_dict(), "continuity": getattr(args, "continuity", True), "penalize_metadata": getattr(args, "penalize_metadata", True)},
@@ -376,36 +358,48 @@ def run(args):
     save_jsonl(output / "questions.jsonl", [{k: q[k] for k in ("id", "question", "domain", "question_type", *(["answer"] if args.include_reference_answers else [])) if k in q} for q in questions])
     started = time.perf_counter()
     chunks, documents = prepare_chunks(documents, output, cache, extraction_key,
-                                      lambda: pipeline._docling_converter(device="cpu", num_threads=args.threads,
+                                      lambda: pdf_documents.create_converter(device=docling_device, num_threads=args.threads,
                                                                            formula_enrichment=getattr(args, "formula_enrichment", True)),
-                                      lambda text: pipeline._chunk_markdown(text, args.chunk_size, args.chunk_overlap), pipeline._chunk_sources)
+                                      lambda text: section_chunks(text, args.chunk_size, args.chunk_overlap), chunk_sources)
     timings["pdf_and_chunking_seconds"] = time.perf_counter() - started
-    started = time.perf_counter()
-    embedder = SentenceTransformer(str(args.embed_model.resolve()), device=args.embedding_device, local_files_only=True)
-    timings["embedding_model_load_seconds"] = time.perf_counter() - started
     texts = [chunk["text"] for chunk in chunks]
-    started = time.perf_counter()
-    for start in range(0, len(texts), 64):
-        encoded = embedder.tokenizer(texts[start:start + 64], truncation=False, padding=False, verbose=False)["input_ids"]
-        for chunk, ids in zip(chunks[start:start + 64], encoded):
-            chunk.update({"embedding_tokens_untruncated": len(ids), "embedding_truncated": len(ids) > embedder.max_seq_length})
-    timings["embedding_token_audit_seconds"] = time.perf_counter() - started
+    embedder, embeddings = None, None
+    timings.update(embedding_model_load_seconds=0, embedding_token_audit_seconds=0,
+                   document_embeddings_seconds=0, embeddings_cache_hit=None)
+    configuration["embedding_settings"] = None
+    if "dense" in channels:
+        started = time.perf_counter()
+        embedder = SentenceTransformer(str(args.embed_model.resolve()), device=embedding_device, local_files_only=True)
+        timings["embedding_model_load_seconds"] = time.perf_counter() - started
+        configuration["embedding_settings"] = {"max_seq_length": embedder.max_seq_length,
+                                               "dimension": embedder.get_embedding_dimension(),
+                                               "query_prefix": retrieval_prefix(embedder, "query"),
+                                               "document_prefix": retrieval_prefix(embedder, "document")}
+        started = time.perf_counter()
+        for start in range(0, len(texts), 64):
+            encoded = embedder.tokenizer(embedding_inputs(embedder, texts[start:start + 64], "document"), truncation=False, padding=False, verbose=False)["input_ids"]
+            for chunk, ids in zip(chunks[start:start + 64], encoded):
+                chunk.update(embedding_tokens_untruncated=len(ids), embedding_truncated=len(ids) > embedder.max_seq_length)
+        timings["embedding_token_audit_seconds"] = time.perf_counter() - started
+        started = time.perf_counter()
+        embeddings, timings["embeddings_cache_hit"] = document_embeddings(texts, embedder, model_key, cache, args.batch_size)
+        timings["document_embeddings_seconds"] = time.perf_counter() - started
+    else:
+        for chunk in chunks:
+            chunk.update(embedding_tokens_untruncated=None, embedding_truncated=False)
     save_jsonl(output / "chunks.jsonl", chunks)
     started = time.perf_counter()
-    embeddings, embeddings_hit = document_embeddings(texts, embedder, model_key, cache, args.batch_size)
-    timings["document_embeddings_seconds"] = time.perf_counter() - started
-    timings["embeddings_cache_hit"] = embeddings_hit
-    started = time.perf_counter()
-    lexical = LexicalPreprocessor(getattr(args, "bm25_stopwords", False), getattr(args, "bm25_stemming", False),
-                                  getattr(args, "preserve_words", ()), getattr(args, "stopwords_file", None))
-    tokenized = [lexical(text) for text in texts]
-    bm25_parameters = {"k1": getattr(args, "bm25_k1", 1.5), "b": getattr(args, "bm25_b", 0.75), "epsilon": getattr(args, "bm25_epsilon", 0.25)}
-    bm25 = build_bm25(tokenized, **bm25_parameters)
-    configuration["bm25"] = {**bm25_parameters, "preprocessing": lexical.metadata}
-    configuration["code_sha256"]["src/lexical.py"] = digest(ROOT / "src/lexical.py")
+    lexical, bm25 = None, None
+    lexical_config = PipelineConfig.from_namespace(args)
+    bm25_parameters = {"k1": lexical_config.bm25_k1, "b": lexical_config.bm25_b, "epsilon": lexical_config.bm25_epsilon}
+    if "bm25" in channels:
+        lexical = LexicalPreprocessor(getattr(args, "bm25_stopwords", False), getattr(args, "bm25_stemming", False),
+                                      getattr(args, "preserve_words", ()), getattr(args, "stopwords_file", None))
+        bm25 = build_bm25([lexical(text) for text in texts], **bm25_parameters)
+    configuration["bm25"] = {**bm25_parameters, "preprocessing": lexical.metadata if lexical else None}
     timings["bm25_index_seconds"] = time.perf_counter() - started
     kg_indices = {}
-    needed_kg = {mode for mode in ("mentions", "graph") if mode in args.variants or f"dense_{mode}" in args.variants}
+    needed_kg = {mode for mode in ("mentions", "graph") if f"kg_{mode}" in channels}
     if needed_kg:
         started = time.perf_counter()
         manifest, nodes, edges = load_artifact(args.kg)
@@ -417,21 +411,27 @@ def run(args):
                 started = time.perf_counter()
                 kg_indices[mode] = KGChunkIndex(matcher, texts, edges=edges, mode=mode, config=graph_config)
                 timings[f"kg_{mode}_index_seconds"] = time.perf_counter() - started
-    results, query_timings = [], []
+    results, query_timings, query_token_audit = [], [], []
     for question in questions:
         measured = {"question_id": question["id"]}
-        started = time.perf_counter()
-        query_embedding = embedder.encode([question["question"]], normalize_embeddings=True, show_progress_bar=False)[0]
-        measured["query_embedding_seconds"] = time.perf_counter() - started
-        started = time.perf_counter()
-        dense_scores = embeddings @ query_embedding
-        rankings = {"dense": np.argsort(-dense_scores, kind="stable")[:args.candidate_depth].tolist()}
-        measured["dense_search_seconds"] = time.perf_counter() - started
-        started = time.perf_counter()
-        lexical_scores = np.asarray(bm25.get_scores(lexical(question["question"]))) if bm25 else np.zeros(len(chunks))
-        order = np.argsort(-lexical_scores, kind="stable")
-        rankings["bm25"] = order[lexical_scores[order] != 0][:args.candidate_depth].tolist()
-        measured["bm25_search_seconds"] = time.perf_counter() - started
+        rankings = {}
+        dense_scores, lexical_scores = None, None
+        if embedder is not None:
+            started = time.perf_counter()
+            query_embedding = encode_queries(embedder, [question["question"]], normalize_embeddings=True, show_progress_bar=False)[0]
+            measured["query_embedding_seconds"] = time.perf_counter() - started
+            query_tokens = embedder.tokenizer(embedding_inputs(embedder, [question["question"]], "query"), truncation=False, padding=False, verbose=False)["input_ids"][0]
+            query_token_audit.append({"question_id": question["id"], "tokens": len(query_tokens),
+                                      "max_seq_length": embedder.max_seq_length, "truncated": len(query_tokens) > embedder.max_seq_length})
+            started = time.perf_counter()
+            dense_scores = embeddings @ query_embedding
+            rankings["dense"] = dense_ranking(dense_scores, args.candidate_depth)
+            measured["dense_search_seconds"] = time.perf_counter() - started
+        if lexical is not None:
+            started = time.perf_counter()
+            lexical_scores = np.asarray(bm25.get_scores(lexical(question["question"]))) if bm25 else np.zeros(len(chunks))
+            rankings["bm25"] = lexical_ranking(lexical_scores, args.candidate_depth)
+            measured["bm25_search_seconds"] = time.perf_counter() - started
         traces = {}
         for mode, kg_index in kg_indices.items():
             started = time.perf_counter()
@@ -449,7 +449,8 @@ def run(args):
                      "document_id": chunks[index]["document_id"], "section": chunks[index]["section"], "score": adjusted.get(index), "rrf_score": scores.get(index),
                      "content_kind": chunks[index].get("content_kind", "body"),
                      "selection_role": "anchor" if index in anchors else "neighbor",
-                     "dense_score": float(dense_scores[index]), "bm25_score": float(lexical_scores[index]),
+                     "dense_score": float(dense_scores[index]) if dense_scores is not None else None,
+                     "bm25_score": float(lexical_scores[index]) if lexical_scores is not None else None,
                      "channel_ranks": {name: ranks.get(index) for name, ranks in positions.items()}}
                     for rank, index in enumerate(selected, 1)]
             results.append({"question_id": question["id"], "variant": variant, "hits": hits,
@@ -461,6 +462,7 @@ def run(args):
     timings["review_export_seconds"] = time.perf_counter() - started
     save_json(output / "config.json", configuration)
     save_jsonl(output / "query-timings.jsonl", query_timings)
+    save_json(output / "query-embedding-audit.json", query_token_audit)
     timings["total_run_seconds"] = time.perf_counter() - wall_start
     timings["query_stage_summary_seconds"] = {
         name: {"median": float(np.median([row[name] for row in query_timings])),
@@ -476,7 +478,8 @@ def run(args):
                "partial_documents": sum(d["status"] == "partial_success" for d in documents), "chunks": len(chunks),
                "questions": len(questions), "variants": args.variants, "truncated_embedding_chunks": sum(c["embedding_truncated"] for c in chunks),
                "text_cache_hits": sum(d["text_cache_hit"] for d in documents), "missing_catalog_document_ids": missing_ids,
-               "quality_metrics": None, "annotation_status": "unjudged", "output": str(output)}
+               "truncated_embedding_queries": sum(q["truncated"] for q in query_token_audit),
+               "embedding_audit_performed": embedder is not None, "quality_metrics": None, "annotation_status": "unjudged", "output": str(output)}
     save_json(output / "timings.json", timings)
     save_json(output / "summary.json", summary)
     save_json(output / "status.json", {"state": "complete"})
@@ -495,7 +498,8 @@ def parse_args(argv=None):
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--use-cache", dest="no_cache", action="store_false", default=False)
     parser.add_argument("--embed-model", type=Path, default=ROOT / "src/embed_model")
-    parser.add_argument("--embedding-device", choices=("cpu", "cuda"), default="cpu")
+    parser.add_argument("--embedding-device", choices=("auto", "cpu", "cuda"), default="auto")
+    parser.add_argument("--docling-device", choices=("auto", "cpu", "cuda"), default="cpu")
     parser.add_argument("--kg", type=Path, default=ROOT / "src/kg")
     parser.add_argument("--graph-config", type=Path, help="JSON GraphConfig fields; otherwise use KG_GRAPH_* environment variables")
     parser.add_argument("--variants", nargs="+", choices=VARIANTS, default=["hybrid"])
@@ -512,8 +516,8 @@ def parse_args(argv=None):
     parser.add_argument("--bm25-k1", type=float, default=1.2)
     parser.add_argument("--bm25-b", type=float, default=0.75)
     parser.add_argument("--bm25-epsilon", type=float, default=0.25)
-    parser.add_argument("--formula-enrichment", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--continuity", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--formula-enrichment", action=argparse.BooleanOptionalAction, default=False)
+    parser.add_argument("--continuity", action=argparse.BooleanOptionalAction, default=False)
     parser.add_argument("--penalize-metadata", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--reference-weight", type=float, default=0.5)
     parser.add_argument("--front-matter-weight", type=float, default=0.7)

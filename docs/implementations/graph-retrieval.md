@@ -3,7 +3,7 @@
 [Visão geral](../technical-overview.md) · [Índice de implementações](README.md)
 
 Implementação: [src/kg_retrieval.py](../../src/kg_retrieval.py), integrada em
-[_hybrid_order e _load](../../src/main.py). Este módulo usa somente a biblioteca
+[indexing.py](../../src/indexing.py) e [retrieval.py](../../src/retrieval.py). Este módulo usa somente a biblioteca
 padrão do Python; a operação é offline e em CPU.
 
 O padrão atual de submissão é `KG_MODE=off` (híbrido sem KG). Este componente
@@ -131,7 +131,7 @@ em uma redução proporcional no score final do RRF.
 ## Parâmetros
 
 `GraphConfig` é imutável, validada e parte da chave de cache do índice. As variáveis
-abaixo são lidas em `_load()` somente no modo `graph`:
+abaixo são lidas em `main.get_index()` somente quando o canal `kg_graph` está ativo:
 
 | Campo | Padrão | Variável de ambiente |
 | --- | --- | --- |

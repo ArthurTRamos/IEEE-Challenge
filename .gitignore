@@ -9,3 +9,7 @@ __pycache__/
 /hybrid_rag_submission.zip
 *.pdf
 /experiments/runs/
+/data/local_eval/markdown/
+/data/local_eval/page-text/
+/data/local_eval/figures/
+*.zip

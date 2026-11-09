@@ -47,6 +47,7 @@ HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 | [test_kg.py](../../tests/test_kg.py) | Aliases, ambiguidades, identidade canônica, postings, integridade e conversão do artefato |
 | [test_graph_retrieval.py](../../tests/test_graph_retrieval.py) | Um salto, direções, duplicatas/ciclos, filtros, pesos, limites, caminhos compartilhados e configuração |
 | [test_local_retrieval.py](../../tests/test_local_retrieval.py) | Cache, fontes, exportação para revisão, pesos independentes e execução sem OLMo |
+| [test_pipeline_settings.py](../../tests/test_pipeline_settings.py) | Configurações, dispositivos, canais desativados, caches e importação do pacote de submissão |
 
 Os testes unitários não carregam OLMo nem dependem de GPU. A extração de PDFs e
 os modelos usados nos testes do pipeline são simulados. Isso valida o código,
@@ -93,6 +94,7 @@ uma medição do pipeline completo na H100.
 | --- | --- | --- |
 | `INCLUDE_KG` | `0` | Incluir o KG validado; `0` gera pacote sem artefato KG |
 | `REUSE_MODELS` | `0` | `1` reutiliza os diretórios de modelos presentes |
+| `EMBED_MODEL_ID` | `BAAI/bge-small-en-v1.5` | Modelo de embedding que deve corresponder ao manifesto local |
 
 ```bash
 source .venv/bin/activate
@@ -101,8 +103,10 @@ REUSE_MODELS=1 ./src/build.sh
 
 O script verifica se os dados originais e aliases locais ainda correspondem
 ao manifesto. Se estiverem diferentes, pede uma nova preparação. Inclui
-`main.py`, `kg_retrieval.py`, `retrieval_utils.py`, `prompts.py`, `evidence.py`,
-`lexical.py`, Docling layout e MiniLM. O KG e sua
+`main.py`, `settings.py`, `pipeline.json`, `runtime.py`, `documents.py`,
+`indexing.py`, `retrieval.py`, `context.py`, `generation.py`, `kg_retrieval.py`,
+`retrieval_utils.py`, `prompts.py`, `evidence.py`, `lexical.py`, `embedding.py`,
+Docling layout e o encoder selecionado. O KG e sua
 validação entram somente com `INCLUDE_KG=1`. As cópias Transformers e ONNX do
 layout entram no pacote. CodeFormulaV2 foi retirado do build após a execução
 ultrapassar o limite de tempo; a seleção atual está explícita em `src/build.sh`.
@@ -115,8 +119,10 @@ verifica CRC e rejeita arquivos maiores que 1.000.000.000 bytes. A quantidade
 de entidades e arestas não muda com a nova exploração; o custo adicional é
 construir adjacências em RAM e consultar os postings em CPU.
 
-`KG_MODE` controla a **inferência**, não altera o código dentro do ZIP. O padrão
-do código é `off` (híbrido); em execução local, `KG_MODE=mentions` ou `KG_MODE=off`
+`src/pipeline.json` controla a inferência e entra no ZIP. O build valida esse
+arquivo, exige `INCLUDE_KG=1` quando a variante usa KG e rejeita fórmulas enquanto
+os pesos não fazem parte do pacote atual. O padrão é híbrido. `KG_MODE` continua
+como alternativa legada de execução; `KG_MODE=mentions` ou `KG_MODE=off`
 permitem comparar variantes. Definir `KG_MODE=mentions` apenas ao executar o
 build não faz esse valor persistir no avaliador. `INCLUDE_KG=0` gera um ZIP sem
 KG, que usa os dois canais no modo padrão.
@@ -127,7 +133,9 @@ anotar evidências relevantes para medir recall/MRR e avaliar as respostas para
 medir correção. Qualquer conclusão sobre melhoria ou conformidade com os 60
 minutos depende desses experimentos completos.
 
-O build verifica o SHA-256 dos pesos fixados de CodeFormulaV2 pelo
-[preparador de modelos](../../tools/prepare_formula_model.py). O reconhecimento
-de fórmulas não requer instalação de LaTeX; o modelo produz texto LaTeX.
-Configuração, teste real e limites estão em [Evidências e fórmulas](evidence-and-formulas.md).
+O build verifica identidade e SHA-256 dos arquivos do embedding pelo
+[preparador de embeddings](../../tools/prepare_embedding_model.py), incluindo
+prompts e limite de sequência. O manifesto e os arquivos nativos entram no ZIP.
+Detalhes, cache e ciclo de memória estão em [Modelos de embedding](embedding-models.md).
+O reconhecimento opcional de fórmulas tem preparação separada e permanece
+desativado; veja [Evidências e fórmulas](evidence-and-formulas.md).

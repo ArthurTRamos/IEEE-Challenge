@@ -2,6 +2,21 @@
 
 import math
 
+VARIANTS = ("dense", "bm25", "hybrid", "mentions", "graph", "dense_mentions", "dense_graph")
+
+
+def variant_weights(variant, dense_weight=1.0, bm25_weight=1.0, kg_weight=0.5):
+    """A single definition of the channels used by submission and experiments."""
+    channels = {"dense": {"dense": dense_weight}, "bm25": {"bm25": bm25_weight},
+                "hybrid": {"dense": dense_weight, "bm25": bm25_weight},
+                "mentions": {"dense": dense_weight, "bm25": bm25_weight, "kg_mentions": kg_weight},
+                "graph": {"dense": dense_weight, "bm25": bm25_weight, "kg_graph": kg_weight},
+                "dense_mentions": {"dense": dense_weight, "kg_mentions": kg_weight},
+                "dense_graph": {"dense": dense_weight, "kg_graph": kg_weight}}
+    if variant not in channels:
+        raise ValueError(f"Unknown retrieval variant: {variant}")
+    return channels[variant]
+
 
 def rrf_fuse(rankings, weights, k=60):
     """Return chunk order and scores; absent/zero-weight channels contribute nothing."""
